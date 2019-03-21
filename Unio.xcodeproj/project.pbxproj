@@ -1,0 +1,610 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9D2E26832240D18500C9EDF7 /* Unio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2E26792240D18500C9EDF7 /* Unio.framework */; };
+		9D2E268A2240D18500C9EDF7 /* Unio.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D2E267C2240D18500C9EDF7 /* Unio.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9D2E269D2240D1CA00C9EDF7 /* PublishRelayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E26932240D1CA00C9EDF7 /* PublishRelayType.swift */; };
+		9D2E269E2240D1CA00C9EDF7 /* Relay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E26942240D1CA00C9EDF7 /* Relay.swift */; };
+		9D2E269F2240D1CA00C9EDF7 /* LogicType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E26952240D1CA00C9EDF7 /* LogicType.swift */; };
+		9D2E26A02240D1CA00C9EDF7 /* StateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E26962240D1CA00C9EDF7 /* StateType.swift */; };
+		9D2E26A12240D1CA00C9EDF7 /* ExtraType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E26972240D1CA00C9EDF7 /* ExtraType.swift */; };
+		9D2E26A22240D1CA00C9EDF7 /* InputType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E26982240D1CA00C9EDF7 /* InputType.swift */; };
+		9D2E26A32240D1CA00C9EDF7 /* BehaviorRelayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E26992240D1CA00C9EDF7 /* BehaviorRelayType.swift */; };
+		9D2E26A42240D1CA00C9EDF7 /* UnioStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E269A2240D1CA00C9EDF7 /* UnioStream.swift */; };
+		9D2E26A52240D1CA00C9EDF7 /* OutputType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E269B2240D1CA00C9EDF7 /* OutputType.swift */; };
+		9D2E26A62240D1CA00C9EDF7 /* Dependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E269C2240D1CA00C9EDF7 /* Dependency.swift */; };
+		9D2E26AA2240D1F200C9EDF7 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2E26A82240D1F200C9EDF7 /* RxSwift.framework */; };
+		9D2E26AB2240D1F200C9EDF7 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2E26A92240D1F200C9EDF7 /* RxCocoa.framework */; };
+		9DA555CB2241DE8400EC8CC3 /* BehaviorSubjectType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA555CA2241DE8400EC8CC3 /* BehaviorSubjectType.swift */; };
+		9DA555D12241F95400EC8CC3 /* ReadOnly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA555D02241F95400EC8CC3 /* ReadOnly.swift */; };
+		9DA555D32241FC0400EC8CC3 /* AcceptableRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA555D22241FC0400EC8CC3 /* AcceptableRelay.swift */; };
+		9DA555D52241FC6600EC8CC3 /* ValueAccessible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA555D42241FC6600EC8CC3 /* ValueAccessible.swift */; };
+		ED74A63D2243C2EE00D4E99C /* ReadOnlyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74A63C2243C2EE00D4E99C /* ReadOnlyTests.swift */; };
+		ED74A63F2243C3DB00D4E99C /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2E26A92240D1F200C9EDF7 /* RxCocoa.framework */; };
+		ED74A6402243C3DB00D4E99C /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2E26A82240D1F200C9EDF7 /* RxSwift.framework */; };
+		ED74A6422243C43400D4E99C /* RxCocoa.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2E26A92240D1F200C9EDF7 /* RxCocoa.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		ED74A6432243C43400D4E99C /* RxSwift.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2E26A82240D1F200C9EDF7 /* RxSwift.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		ED74A7382243D99D00D4E99C /* RelayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74A7372243D99D00D4E99C /* RelayTests.swift */; };
+		ED74A73A2243E0CC00D4E99C /* DependencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74A7392243E0CC00D4E99C /* DependencyTests.swift */; };
+		ED74A73C2243E43D00D4E99C /* UnioStreamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74A73B2243E43D00D4E99C /* UnioStreamTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9D2E26842240D18500C9EDF7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9D2E26702240D18500C9EDF7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9D2E26782240D18500C9EDF7;
+			remoteInfo = Unio;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		ED74A6412243C42100D4E99C /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				ED74A6422243C43400D4E99C /* RxCocoa.framework in Copy Frameworks */,
+				ED74A6432243C43400D4E99C /* RxSwift.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		9D2E26792240D18500C9EDF7 /* Unio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Unio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D2E267C2240D18500C9EDF7 /* Unio.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Unio.h; sourceTree = "<group>"; };
+		9D2E267D2240D18500C9EDF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9D2E26822240D18500C9EDF7 /* UnioTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D2E26892240D18500C9EDF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9D2E26932240D1CA00C9EDF7 /* PublishRelayType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishRelayType.swift; sourceTree = "<group>"; };
+		9D2E26942240D1CA00C9EDF7 /* Relay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Relay.swift; sourceTree = "<group>"; };
+		9D2E26952240D1CA00C9EDF7 /* LogicType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogicType.swift; sourceTree = "<group>"; };
+		9D2E26962240D1CA00C9EDF7 /* StateType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateType.swift; sourceTree = "<group>"; };
+		9D2E26972240D1CA00C9EDF7 /* ExtraType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtraType.swift; sourceTree = "<group>"; };
+		9D2E26982240D1CA00C9EDF7 /* InputType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputType.swift; sourceTree = "<group>"; };
+		9D2E26992240D1CA00C9EDF7 /* BehaviorRelayType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BehaviorRelayType.swift; sourceTree = "<group>"; };
+		9D2E269A2240D1CA00C9EDF7 /* UnioStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnioStream.swift; sourceTree = "<group>"; };
+		9D2E269B2240D1CA00C9EDF7 /* OutputType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputType.swift; sourceTree = "<group>"; };
+		9D2E269C2240D1CA00C9EDF7 /* Dependency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dependency.swift; sourceTree = "<group>"; };
+		9D2E26A82240D1F200C9EDF7 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		9D2E26A92240D1F200C9EDF7 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
+		9DA555CA2241DE8400EC8CC3 /* BehaviorSubjectType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BehaviorSubjectType.swift; sourceTree = "<group>"; };
+		9DA555D02241F95400EC8CC3 /* ReadOnly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadOnly.swift; sourceTree = "<group>"; };
+		9DA555D22241FC0400EC8CC3 /* AcceptableRelay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptableRelay.swift; sourceTree = "<group>"; };
+		9DA555D42241FC6600EC8CC3 /* ValueAccessible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueAccessible.swift; sourceTree = "<group>"; };
+		ED74A63C2243C2EE00D4E99C /* ReadOnlyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadOnlyTests.swift; sourceTree = "<group>"; };
+		ED74A7372243D99D00D4E99C /* RelayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelayTests.swift; sourceTree = "<group>"; };
+		ED74A7392243E0CC00D4E99C /* DependencyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyTests.swift; sourceTree = "<group>"; };
+		ED74A73B2243E43D00D4E99C /* UnioStreamTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnioStreamTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9D2E26762240D18500C9EDF7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9D2E26AB2240D1F200C9EDF7 /* RxCocoa.framework in Frameworks */,
+				9D2E26AA2240D1F200C9EDF7 /* RxSwift.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9D2E267F2240D18500C9EDF7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED74A63F2243C3DB00D4E99C /* RxCocoa.framework in Frameworks */,
+				ED74A6402243C3DB00D4E99C /* RxSwift.framework in Frameworks */,
+				9D2E26832240D18500C9EDF7 /* Unio.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9D2E266F2240D18500C9EDF7 = {
+			isa = PBXGroup;
+			children = (
+				9D2E26A72240D1F200C9EDF7 /* Frameworks */,
+				9D2E267A2240D18500C9EDF7 /* Products */,
+				9D2E267B2240D18500C9EDF7 /* Unio */,
+				9D2E26862240D18500C9EDF7 /* UnioTests */,
+			);
+			sourceTree = "<group>";
+		};
+		9D2E267A2240D18500C9EDF7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9D2E26792240D18500C9EDF7 /* Unio.framework */,
+				9D2E26822240D18500C9EDF7 /* UnioTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9D2E267B2240D18500C9EDF7 /* Unio */ = {
+			isa = PBXGroup;
+			children = (
+				9DA555C92241DE5F00EC8CC3 /* RxTypes */,
+				9D2E269C2240D1CA00C9EDF7 /* Dependency.swift */,
+				9D2E26972240D1CA00C9EDF7 /* ExtraType.swift */,
+				9D2E267D2240D18500C9EDF7 /* Info.plist */,
+				9D2E26982240D1CA00C9EDF7 /* InputType.swift */,
+				9D2E26952240D1CA00C9EDF7 /* LogicType.swift */,
+				9D2E269B2240D1CA00C9EDF7 /* OutputType.swift */,
+				9DA555D02241F95400EC8CC3 /* ReadOnly.swift */,
+				9D2E26942240D1CA00C9EDF7 /* Relay.swift */,
+				9D2E26962240D1CA00C9EDF7 /* StateType.swift */,
+				9D2E267C2240D18500C9EDF7 /* Unio.h */,
+				9D2E269A2240D1CA00C9EDF7 /* UnioStream.swift */,
+			);
+			path = Unio;
+			sourceTree = "<group>";
+		};
+		9D2E26862240D18500C9EDF7 /* UnioTests */ = {
+			isa = PBXGroup;
+			children = (
+				ED74A63E2243C2F200D4E99C /* TestCases */,
+				9D2E26892240D18500C9EDF7 /* Info.plist */,
+			);
+			path = UnioTests;
+			sourceTree = "<group>";
+		};
+		9D2E26A72240D1F200C9EDF7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9D2E26A92240D1F200C9EDF7 /* RxCocoa.framework */,
+				9D2E26A82240D1F200C9EDF7 /* RxSwift.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9DA555C92241DE5F00EC8CC3 /* RxTypes */ = {
+			isa = PBXGroup;
+			children = (
+				9DA555D22241FC0400EC8CC3 /* AcceptableRelay.swift */,
+				9D2E26992240D1CA00C9EDF7 /* BehaviorRelayType.swift */,
+				9DA555CA2241DE8400EC8CC3 /* BehaviorSubjectType.swift */,
+				9D2E26932240D1CA00C9EDF7 /* PublishRelayType.swift */,
+				9DA555D42241FC6600EC8CC3 /* ValueAccessible.swift */,
+			);
+			path = RxTypes;
+			sourceTree = "<group>";
+		};
+		ED74A63E2243C2F200D4E99C /* TestCases */ = {
+			isa = PBXGroup;
+			children = (
+				ED74A7392243E0CC00D4E99C /* DependencyTests.swift */,
+				ED74A63C2243C2EE00D4E99C /* ReadOnlyTests.swift */,
+				ED74A7372243D99D00D4E99C /* RelayTests.swift */,
+				ED74A73B2243E43D00D4E99C /* UnioStreamTests.swift */,
+			);
+			path = TestCases;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		9D2E26742240D18500C9EDF7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9D2E268A2240D18500C9EDF7 /* Unio.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		9D2E26782240D18500C9EDF7 /* Unio */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9D2E268D2240D18500C9EDF7 /* Build configuration list for PBXNativeTarget "Unio" */;
+			buildPhases = (
+				9D2E26742240D18500C9EDF7 /* Headers */,
+				9D2E26752240D18500C9EDF7 /* Sources */,
+				9D2E26762240D18500C9EDF7 /* Frameworks */,
+				9D2E26772240D18500C9EDF7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Unio;
+			productName = Unio;
+			productReference = 9D2E26792240D18500C9EDF7 /* Unio.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		9D2E26812240D18500C9EDF7 /* UnioTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9D2E26902240D18500C9EDF7 /* Build configuration list for PBXNativeTarget "UnioTests" */;
+			buildPhases = (
+				9D2E267E2240D18500C9EDF7 /* Sources */,
+				9D2E267F2240D18500C9EDF7 /* Frameworks */,
+				9D2E26802240D18500C9EDF7 /* Resources */,
+				ED74A6412243C42100D4E99C /* Copy Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9D2E26852240D18500C9EDF7 /* PBXTargetDependency */,
+			);
+			name = UnioTests;
+			productName = UnioTests;
+			productReference = 9D2E26822240D18500C9EDF7 /* UnioTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9D2E26702240D18500C9EDF7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = tv.abema;
+				TargetAttributes = {
+					9D2E26782240D18500C9EDF7 = {
+						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
+					};
+					9D2E26812240D18500C9EDF7 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
+			};
+			buildConfigurationList = 9D2E26732240D18500C9EDF7 /* Build configuration list for PBXProject "Unio" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 9D2E266F2240D18500C9EDF7;
+			productRefGroup = 9D2E267A2240D18500C9EDF7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9D2E26782240D18500C9EDF7 /* Unio */,
+				9D2E26812240D18500C9EDF7 /* UnioTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9D2E26772240D18500C9EDF7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9D2E26802240D18500C9EDF7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9D2E26752240D18500C9EDF7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9DA555D32241FC0400EC8CC3 /* AcceptableRelay.swift in Sources */,
+				9D2E26A32240D1CA00C9EDF7 /* BehaviorRelayType.swift in Sources */,
+				9DA555CB2241DE8400EC8CC3 /* BehaviorSubjectType.swift in Sources */,
+				9D2E26A62240D1CA00C9EDF7 /* Dependency.swift in Sources */,
+				9D2E26A12240D1CA00C9EDF7 /* ExtraType.swift in Sources */,
+				9D2E26A22240D1CA00C9EDF7 /* InputType.swift in Sources */,
+				9D2E269F2240D1CA00C9EDF7 /* LogicType.swift in Sources */,
+				9D2E26A52240D1CA00C9EDF7 /* OutputType.swift in Sources */,
+				9D2E269D2240D1CA00C9EDF7 /* PublishRelayType.swift in Sources */,
+				9DA555D12241F95400EC8CC3 /* ReadOnly.swift in Sources */,
+				9D2E269E2240D1CA00C9EDF7 /* Relay.swift in Sources */,
+				9D2E26A02240D1CA00C9EDF7 /* StateType.swift in Sources */,
+				9D2E26A42240D1CA00C9EDF7 /* UnioStream.swift in Sources */,
+				9DA555D52241FC6600EC8CC3 /* ValueAccessible.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9D2E267E2240D18500C9EDF7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED74A73A2243E0CC00D4E99C /* DependencyTests.swift in Sources */,
+				ED74A63D2243C2EE00D4E99C /* ReadOnlyTests.swift in Sources */,
+				ED74A7382243D99D00D4E99C /* RelayTests.swift in Sources */,
+				ED74A73C2243E43D00D4E99C /* UnioStreamTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9D2E26852240D18500C9EDF7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9D2E26782240D18500C9EDF7 /* Unio */;
+			targetProxy = 9D2E26842240D18500C9EDF7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		9D2E268B2240D18500C9EDF7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		9D2E268C2240D18500C9EDF7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		9D2E268E2240D18500C9EDF7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = Unio/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = tv.abema.Unio;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9D2E268F2240D18500C9EDF7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = Unio/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = tv.abema.Unio;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		9D2E26912240D18500C9EDF7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = UnioTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = tv.abema.UnioTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9D2E26922240D18500C9EDF7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = UnioTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = tv.abema.UnioTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9D2E26732240D18500C9EDF7 /* Build configuration list for PBXProject "Unio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9D2E268B2240D18500C9EDF7 /* Debug */,
+				9D2E268C2240D18500C9EDF7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9D2E268D2240D18500C9EDF7 /* Build configuration list for PBXNativeTarget "Unio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9D2E268E2240D18500C9EDF7 /* Debug */,
+				9D2E268F2240D18500C9EDF7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9D2E26902240D18500C9EDF7 /* Build configuration list for PBXNativeTarget "UnioTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9D2E26912240D18500C9EDF7 /* Debug */,
+				9D2E26922240D18500C9EDF7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9D2E26702240D18500C9EDF7 /* Project object */;
+}

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Kind</key>
+	<string>Xcode.IDEFoundation.TextSubstitutionFileTemplateKind</string>
+	<key>Description</key>
+	<string>Generates ViewController and ViewStream.</string>
+	<key>Summary</key>
+	<string>Generates ViewController and ViewStream.</string>
+	<key>SortOrder</key>
+	<string>1</string>
+	<key>DefaultCompletionName</key>
+	<string>Unio</string>
+	<key>Platforms</key>
+	<array>
+		<string>com.apple.platform.iphoneos</string>
+	</array>
+	<key>Options</key>
+	<array>
+		<dict>
+			<key>Identifier</key>
+			<string>productName</string>
+			<key>Required</key>
+			<string>true</string>
+			<key>Name</key>
+			<string>Unio name:</string>
+			<key>Description</key>
+			<string>The name of the Unio to create</string>
+			<key>Type</key>
+			<string>text</string>
+			<key>NotPersisted</key>
+			<string>true</string>
+		</dict>
+		<dict>
+			<key>Identifier</key>
+			<string>WithXIB</string>
+			<key>Name</key>
+			<string>Also create XIB file for user interface</string>
+			<key>Description</key>
+			<string>Whether to create a XIB file with the same name</string>
+			<key>Type</key>
+			<string>checkbox</string>
+			<key>RequiredOptions</key>
+			<dict>
+				<key>WithStoryboard</key>
+				<string>false</string>
+			</dict>
+			<key>Default</key>
+			<string>false</string>
+			<key>NotPersisted</key>
+			<string>true</string>
+		</dict>
+		<dict>
+			<key>Identifier</key>
+			<string>WithStoryboard</string>
+			<key>Required</key>
+			<string>true</string>
+			<key>Name</key>
+			<string>Also create Storyboard file for user interface</string>
+			<key>Description</key>
+			<string>Whether to create a Storyboard file with the same name</string>
+			<key>Type</key>
+			<string>checkbox</string>
+			<key>Default</key>
+			<string>false</string>
+			<key>NotPersisted</key>
+			<string>true</string>
+			<key>RequiredOptions</key>
+			<dict>
+				<key>WithXIB</key>
+				<string>false</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Default</key>
+			<string>___VARIABLE_productName:identifier___ViewController</string>
+			<key>Description</key>
+			<string>Be going to create ViewController with this name.</string>
+			<key>Identifier</key>
+			<string>ViewControllerName</string>
+			<key>Name</key>
+			<string>ViewController name:</string>
+			<key>Required</key>
+			<string>false</string>
+			<key>Type</key>
+			<string>static</string>
+		</dict>
+		<dict>
+			<key>Default</key>
+			<string>___VARIABLE_productName:identifier___ViewStream</string>
+			<key>Description</key>
+			<string>Be going to create ViewStream with this name.</string>
+			<key>Identifier</key>
+			<string>ViewSteamName</string>
+			<key>Name</key>
+			<string>ViewStream name:</string>
+			<key>Required</key>
+			<string>false</string>
+			<key>Type</key>
+			<string>static</string>
+		</dict>
+	</array>
+</dict>
+</plist>
