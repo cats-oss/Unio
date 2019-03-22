@@ -1,5 +1,5 @@
 <p align='center'>
-<img src='./Resources/unio_logo.png' width='200px'>
+<img src='https://user-images.githubusercontent.com/2082134/54809507-d9a1b580-4cc6-11e9-93cf-2ffd8e1e952c.png' width='200px'>
 </p>
 <p align='center'>
 <strong>Un</strong>idirectional <strong>I</strong>nput <strong>O</strong>utput framework
@@ -78,7 +78,7 @@ input.accept("query", for: \.searchText)
 input.onEvent(.next(()), for: \.buttonTap)
 ```
 
-![](./Resources/input.jpg)
+![](https://user-images.githubusercontent.com/2082134/54809413-8fb8cf80-4cc6-11e9-9dc2-07cd14f5c2d8.jpg)
 
 ### Output
 
@@ -116,7 +116,7 @@ output.value(for: \.repositories)
 try? output.value(for: \.isEnabled)
 ```
 
-![](./Resources/output.jpg)
+![](https://user-images.githubusercontent.com/2082134/54809443-a2cb9f80-4cc6-11e9-8d10-dfe2403f798b.jpg)
 
 ### State
 
@@ -216,7 +216,7 @@ fianl class GitHubSearchViewStream: UnioStream<GitHubSearchViewStream.Logic> {
 
 Here is an example.
 
-![](./Resources/search.gif)
+![](https://user-images.githubusercontent.com/2082134/54809487-bf67d780-4cc6-11e9-83aa-4fa69060702a.gif)
 
 Define GitHubSearchViewStream for searching GitHub repositories.
 
@@ -307,9 +307,9 @@ final class GitHubSearchViewController: UIViewController {
 
 You can use Xcode Templates for Unio. Let's install with `./Tools/install-xcode-template.sh` command!
 
-![](./Resources/template.png)
+![](https://user-images.githubusercontent.com/2082134/54809497-cdb5f380-4cc6-11e9-97f1-a75bd4439891.png)
 
-![](./Resources/file_gen.gif)
+![](https://user-images.githubusercontent.com/2082134/54809365-6f891080-4cc6-11e9-82c9-444b1fdefc07.gif)
 
 ## Installation
 
