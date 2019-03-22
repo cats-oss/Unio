@@ -324,10 +324,12 @@ github "cats-oss/Unio"
 
 ### CocoaPods
 
-~~Unio is available through [CocoaPods](https://cocoapods.org). To instal
-it, simply add the following line to your Podfile:~~
+Unio is available through [CocoaPods](https://cocoapods.org). To install
+it, simply add the following line to your Podfile:
 
-Coming soon
+```ruby
+pod "Unio"
+```
 
 ## Requirements
 
