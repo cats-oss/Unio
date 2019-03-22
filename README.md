@@ -78,6 +78,8 @@ input.accept("query", for: \.searchText)
 input.onEvent(.next(()), for: \.buttonTap)
 ```
 
+![](./Resources/input.jpg)
+
 ### Output
 
 The rule of Output is having BehaviorRelay (or BehaviorSubject and so on) properties that are defined internal scope.
@@ -113,6 +115,8 @@ output.value(for: \.repositories)
 
 try? output.value(for: \.isEnabled)
 ```
+
+![](./Resources/output.jpg)
 
 ### State
 
