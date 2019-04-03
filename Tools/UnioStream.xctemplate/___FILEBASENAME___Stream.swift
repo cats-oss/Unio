@@ -1,8 +1,8 @@
 //___FILEHEADER___
 
-import Unio
-import RxSwift
 import RxCocoa
+import RxSwift
+import Unio
 
 protocol ___VARIABLE_productName___StreamType: AnyObject {
     var input: Relay<___VARIABLE_productName___Stream.Input> { get }
@@ -51,7 +51,6 @@ extension ___VARIABLE_productName___Stream {
 
     struct Extra: ExtraType {
 
-        let disposeBag = DisposeBag()
     }
 
     struct Logic: LogicType {
@@ -59,6 +58,8 @@ extension ___VARIABLE_productName___Stream {
         typealias Output = ___VARIABLE_productName___Stream.Output
         typealias State = ___VARIABLE_productName___Stream.State
         typealias Extra = ___VARIABLE_productName___Stream.Extra
+
+        let disposeBag = DisposeBag()
     }
 }
 
@@ -67,7 +68,6 @@ extension ___VARIABLE_productName___Stream.Logic {
     func bind(from dependency: Dependency<Input, State, Extra>) -> Output {
 
         let state = dependency.state
-        let disposeBag = dependency.extra.disposeBag
 
         /*
          *  EXAMPLE:

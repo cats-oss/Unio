@@ -135,7 +135,6 @@ The rule of Extra is having other dependencies of [UnioStream](#uniostream).
 ```swift
 struct Extra: ExtraType {
     let apiStream: GitHubSearchAPIStream()
-    let disposeBag = DisposeBag()
 }
 ```
 
@@ -144,6 +143,7 @@ struct Extra: ExtraType {
 The rule of Logic is generating [Output](#output) from Dependency<Input, State, Extra>.
 It generates [Output](#output) to call `func bind(from:)`.
 `func bind(from:)` is called once when [UnioStream](#uniostream) is initialized.
+If you want to use DisposeBags in `func bind(from:)`, define properties of DisposeBag in Logic.
 
 ```swift
 struct Logic: LogicType {
@@ -151,6 +151,8 @@ struct Logic: LogicType {
     typealias Output = GitHubSearchViewStream.Output
     typealias State = GitHubSearchViewStream.State
     typealias Extra = GitHubSearchViewStream.Extra
+
+    let disposeBag = DisposeBag()
 
     func bind(from dependency: Dependency<Input, State, Extra>) -> Output
 }
@@ -169,7 +171,6 @@ Here is a exmaple of implementation.
 extension GitHubSearchViewStream.Logic {
 
     func bind(from dependency: Dependency<Input, State, Extra>) -> Output {
-        let disposeBag = dependency.extra.disposeBag
         let apiStream = dependency.extra.apiStream
 
         dependency.inputObservable(for: \.searchText)
@@ -244,7 +245,6 @@ final class GitHubSearchViewStream: UnioStream<GitHubSearchViewStream.Logic>, Gi
 
     struct Extra: ExtraType {
         let apiStream: GitHubSearchAPIStream()
-        let disposeBag = DisposeBag()
     }
 
     struct Logic: LogicType {
@@ -252,13 +252,14 @@ final class GitHubSearchViewStream: UnioStream<GitHubSearchViewStream.Logic>, Gi
         typealias Output = GitHubSearchViewStream.Output
         typealias State = GitHubSearchViewStream.State
         typealias Extra = GitHubSearchViewStream.Extra
+
+        let disposeBag = DisposeBag()
     }
 }
 
 extension GitHubSearchViewStream.Logic {
 
     func bind(from dependency: Dependency<Input, State, Extra>) -> Output {
-        let disposeBag = dependency.extra.disposeBag
         let apiStream = dependency.extra.apiStream
 
         dependency.inputObservable(for: \.searchText)

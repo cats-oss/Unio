@@ -1,8 +1,8 @@
 //___FILEHEADER___
 
-import Unio
-import UIKit
 import RxSwift
+import UIKit
+import Unio
 
 final class ___VARIABLE_productName___ViewController: UIViewController {
 
