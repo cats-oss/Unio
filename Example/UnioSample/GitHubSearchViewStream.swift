@@ -51,6 +51,8 @@ extension GitHubSearchViewStream {
         typealias Output = GitHubSearchViewStream.Output
         typealias State = GitHubSearchViewStream.State
         typealias Extra = GitHubSearchViewStream.Extra
+
+        let disposeBag = DisposeBag()
     }
 }
 
@@ -58,7 +60,6 @@ extension GitHubSearchViewStream.Logic {
 
     func bind(from dependency: Dependency<Input, State, Extra>) -> Output {
 
-        let disposeBag = dependency.extra.disposeBag
         let logicStream = dependency.extra.logicStream
 
         dependency.inputObservable(for: \.searchText)

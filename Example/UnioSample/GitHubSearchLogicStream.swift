@@ -47,7 +47,6 @@ extension GitHubSearchLogicStream {
 
         let searchAPIStream: GitHubSearchAPIStreamType
         let scheduler: SchedulerType
-        let disposeBag = DisposeBag()
     }
 
     struct Logic: LogicType {
@@ -55,6 +54,8 @@ extension GitHubSearchLogicStream {
         typealias Output = GitHubSearchLogicStream.Output
         typealias State = GitHubSearchLogicStream.State
         typealias Extra = GitHubSearchLogicStream.Extra
+
+        let disposeBag = DisposeBag()
     }
 }
 
@@ -64,7 +65,6 @@ extension GitHubSearchLogicStream.Logic {
 
         let state = dependency.state
         let extra = dependency.extra
-        let disposeBag = extra.disposeBag
         let searchAPIStream = extra.searchAPIStream
 
         searchAPIStream.output

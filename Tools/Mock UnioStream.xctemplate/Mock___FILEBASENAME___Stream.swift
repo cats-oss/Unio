@@ -1,8 +1,8 @@
 //___FILEHEADER___
 
-import Unio
-import RxSwift
 import RxCocoa
+import RxSwift
+import Unio
 
 final class Mock___VARIABLE_productName___Stream: ___VARIABLE_productName___StreamType {
 
