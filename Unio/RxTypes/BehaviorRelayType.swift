@@ -6,7 +6,7 @@
 //  Copyright © 2019 tv.abema. All rights reserved.
 //
 
-import RxCocoa
+import RxRelay
 import RxSwift
 
 /// Represents abstracted `BehaviorRelayType`.

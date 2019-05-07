@@ -26,7 +26,7 @@ public final class Dependency<Input: InputType, State: StateType, Extra: ExtraTy
     }
 
     /// Makes possible to get Observable from `Input`.
-    public func inputObservable<O: ObservableType>(for keyPath: KeyPath<Input, O>) -> Observable<O.E> {
+    public func inputObservable<O: ObservableType>(for keyPath: KeyPath<Input, O>) -> Observable<O.Element> {
 
         return _input[keyPath: keyPath].asObservable()
     }

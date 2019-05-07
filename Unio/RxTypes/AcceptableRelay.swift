@@ -8,6 +8,6 @@
 
 /// Represents acceptable
 public protocol AcceptableRelay {
-    associatedtype E
-    func accept(_ event: E)
+    associatedtype Element
+    func accept(_ event: Element)
 }

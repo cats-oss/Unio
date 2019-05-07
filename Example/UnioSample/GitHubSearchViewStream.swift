@@ -8,7 +8,7 @@
 
 import Unio
 import RxSwift
-import RxCocoa
+import RxRelay
 
 protocol GitHubSearchViewStreamType: AnyObject {
     var input: Relay<GitHubSearchViewStream.Input> { get }

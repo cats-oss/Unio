@@ -8,7 +8,7 @@
 
 import Unio
 import RxSwift
-import RxCocoa
+import RxRelay
 
 protocol GitHubSearchLogicStreamType: AnyObject {
     var input: Relay<GitHubSearchLogicStream.Input> { get }
@@ -74,7 +74,7 @@ extension GitHubSearchLogicStream.Logic {
             .disposed(by: disposeBag)
 
         dependency.inputObservable(for: \.searchText)
-            .debounce(0.3, scheduler: extra.scheduler)
+            .debounce(.milliseconds(300), scheduler: extra.scheduler)
             .flatMap { query -> Observable<String> in
                 guard let query = query, !query.isEmpty else {
                     return .empty()

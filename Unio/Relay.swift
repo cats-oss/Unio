@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RxCocoa
+import RxRelay
 import RxSwift
 
 /// Makes possible to access particular method of property that contained by Input (or Output) even while hides actual properties (PublishRelay, PublishSubject and so on).
@@ -22,17 +22,17 @@ public final class Relay<T> {
         self._dependency = dependency
     }
 
-    private func _observable<O: ObservableConvertibleType>(for keyPath: KeyPath<T, O>) -> Observable<O.E> {
+    private func _observable<O: ObservableConvertibleType>(for keyPath: KeyPath<T, O>) -> Observable<O.Element> {
 
         return _dependency[keyPath: keyPath].asObservable()
     }
 
-    private func _accept<U: AcceptableRelay>(_ value: U.E, for keyPath: KeyPath<T, U>) {
+    private func _accept<U: AcceptableRelay>(_ value: U.Element, for keyPath: KeyPath<T, U>) {
 
         _dependency[keyPath: keyPath].accept(value)
     }
 
-    private func _accept<U: AcceptableRelay>(for keyPath: KeyPath<T, U>) -> AnyObserver<U.E> {
+    private func _accept<U: AcceptableRelay>(for keyPath: KeyPath<T, U>) -> AnyObserver<U.Element> {
 
         return AnyObserver { [weak self] event in
             switch event {
@@ -48,21 +48,21 @@ public final class Relay<T> {
         }
     }
 
-    private func _onEvent<O: ObserverType>(_ event: Event<O.E>, for keyPath: KeyPath<T, O>) {
+    private func _onEvent<O: ObserverType>(_ event: Event<O.Element>, for keyPath: KeyPath<T, O>) {
         _dependency[keyPath: keyPath].on(event)
     }
 
-    private func _onEvent<O: ObserverType>(for keyPath: KeyPath<T, O>) -> AnyObserver<O.E> {
+    private func _onEvent<O: ObserverType>(for keyPath: KeyPath<T, O>) -> AnyObserver<O.Element> {
 
         return _dependency[keyPath: keyPath].asObserver()
     }
 
-    private func _value<U: ValueAccessible>(for keyPath: KeyPath<T, U>) -> U.E {
+    private func _value<U: ValueAccessible>(for keyPath: KeyPath<T, U>) -> U.Element {
 
         return _dependency[keyPath: keyPath].value
     }
 
-    private func _value<U: ThrowableValueAccessible>(for keyPath: KeyPath<T, U>) throws -> U.E {
+    private func _value<U: ThrowableValueAccessible>(for keyPath: KeyPath<T, U>) throws -> U.Element {
         return try _dependency[keyPath: keyPath].throwableValue()
     }
 }
@@ -77,25 +77,25 @@ extension Relay where T: InputType {
     }
 
     /// Accepts `event` and emits it to subscribers via `Input`.
-    public func accept<U: AcceptableRelay>(_ value: U.E, for keyPath: KeyPath<T, U>) {
+    public func accept<U: AcceptableRelay>(_ value: U.Element, for keyPath: KeyPath<T, U>) {
 
         _accept(value, for: keyPath)
     }
 
     /// Send `event` to this observer via `Input`.
-    public func accept<U: AcceptableRelay>(for keyPath: KeyPath<T, U>) -> AnyObserver<U.E> {
+    public func accept<U: AcceptableRelay>(for keyPath: KeyPath<T, U>) -> AnyObserver<U.Element> {
 
         return _accept(for: keyPath)
     }
 
     /// Notify observer about sequence event via `Input`.
-    public func onEvent<O: ObserverType>(_ event: Event<O.E>, for keyPath: KeyPath<T, O>) {
+    public func onEvent<O: ObserverType>(_ event: Event<O.Element>, for keyPath: KeyPath<T, O>) {
 
         _onEvent(event, for: keyPath)
     }
 
     /// Send `event` to this observer via `Input`.
-    public func onEvent<O: ObserverType>(for keyPath: KeyPath<T, O>) -> AnyObserver<O.E> {
+    public func onEvent<O: ObserverType>(for keyPath: KeyPath<T, O>) -> AnyObserver<O.Element> {
 
         return _onEvent(for: keyPath)
     }
@@ -111,19 +111,19 @@ extension Relay where T: OutputType {
     }
 
     /// Makes possible to get Observable from `Output`.
-    public func observable<O: ObservableConvertibleType>(for keyPath: KeyPath<T, O>) -> Observable<O.E> {
+    public func observable<O: ObservableConvertibleType>(for keyPath: KeyPath<T, O>) -> Observable<O.Element> {
 
         return _observable(for: keyPath)
     }
 
     /// Makes possible to get value from Output when generic parameter is `BehaviorRelay`.
-    public func value<U: ValueAccessible>(for keyPath: KeyPath<T, U>) -> U.E {
+    public func value<U: ValueAccessible>(for keyPath: KeyPath<T, U>) -> U.Element {
 
         return _value(for: keyPath)
     }
 
     /// Makes possible to get value from Output when generic parameter is `BehaviorSubject`.
-    public func value<U: ThrowableValueAccessible>(for keyPath: KeyPath<T, U>) throws -> U.E {
+    public func value<U: ThrowableValueAccessible>(for keyPath: KeyPath<T, U>) throws -> U.Element {
 
         return try _value(for: keyPath)
     }
@@ -133,7 +133,7 @@ extension Relay where T: OutputType {
 
 extension Relay where T: ValueAccessibleObservable {
 
-    public var value: T.E {
+    public var value: T.Element {
         return _dependency.value
     }
 
@@ -142,7 +142,7 @@ extension Relay where T: ValueAccessibleObservable {
         self.init(dependency: behaviorRelay)
     }
 
-    public func asObservable() -> Observable<T.E> {
+    public func asObservable() -> Observable<T.Element> {
         return _dependency.asObservable()
     }
 }
@@ -156,11 +156,11 @@ extension Relay where T: ThrowableValueAccessibleObservable {
         self.init(dependency: behaviorSubject)
     }
 
-    public func throwableValue() throws -> T.E {
+    public func throwableValue() throws -> T.Element {
         return try _dependency.throwableValue()
     }
 
-    public func asObservable() -> Observable<T.E> {
+    public func asObservable() -> Observable<T.Element> {
         return _dependency.asObservable()
     }
 }
