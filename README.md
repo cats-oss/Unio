@@ -4,6 +4,23 @@
 <p align='center'>
 <strong>Un</strong>idirectional <strong>I</strong>nput <strong>O</strong>utput framework
 </p>
+<p align='center'>
+  <a href='https://github.com/Carthage/Carthage'>
+    <img src='https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat' alt='Carthage compatible' />
+  </a>
+  <a href='https://travis-ci.org/cats-oss/Unio'>
+    <img src='https://travis-ci.org/cats-oss/Unio.svg?branch=master' alt='Build Status' />
+  </a>
+  <a href='https://cocoapods.org/pods/Unio'>
+    <img src='https://img.shields.io/cocoapods/v/Unio.svg?style=flat' alt='Version' />
+  </a>
+  <a href='https://cocoapods.org/pods/Unio'>
+    <img src='https://img.shields.io/cocoapods/l/Unio.svg?style=flat' alt='License' />
+  </a>
+  <a href='https://cocoapods.org/pods/Unio'>
+    <img src='https://img.shields.io/cocoapods/p/Unio.svg?style=flat' alt='Platform' />
+  </a>
+</p>
 
 ## Introduction
 
