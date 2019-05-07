@@ -23,6 +23,8 @@
 		9D9EEC0B228168F800DF5D97 /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D9EEC0A228168F800DF5D97 /* RxRelay.framework */; };
 		9D9EEC0C2281699000DF5D97 /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D9EEC0A228168F800DF5D97 /* RxRelay.framework */; };
 		9D9EEC0D2281699800DF5D97 /* RxRelay.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D9EEC0A228168F800DF5D97 /* RxRelay.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9D9EEC13228172F400DF5D97 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2E26A92240D1F200C9EDF7 /* RxCocoa.framework */; };
+		9D9EEC14228172F900DF5D97 /* RxCocoa.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2E26A92240D1F200C9EDF7 /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9DA555CB2241DE8400EC8CC3 /* BehaviorSubjectType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA555CA2241DE8400EC8CC3 /* BehaviorSubjectType.swift */; };
 		9DA555D12241F95400EC8CC3 /* ReadOnly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA555D02241F95400EC8CC3 /* ReadOnly.swift */; };
 		9DA555D32241FC0400EC8CC3 /* AcceptableRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA555D22241FC0400EC8CC3 /* AcceptableRelay.swift */; };
@@ -52,6 +54,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				9D9EEC14228172F900DF5D97 /* RxCocoa.framework in Copy Frameworks */,
 				9D9EEC0D2281699800DF5D97 /* RxRelay.framework in Copy Frameworks */,
 				ED74A6432243C43400D4E99C /* RxSwift.framework in Copy Frameworks */,
 			);
@@ -103,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D9EEC13228172F400DF5D97 /* RxCocoa.framework in Frameworks */,
 				9D9EEC0C2281699000DF5D97 /* RxRelay.framework in Frameworks */,
 				ED74A6402243C3DB00D4E99C /* RxSwift.framework in Frameworks */,
 				9D2E26832240D18500C9EDF7 /* Unio.framework in Frameworks */,

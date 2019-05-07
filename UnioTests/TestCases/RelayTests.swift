@@ -7,6 +7,7 @@
 //
 
 import RxCocoa
+import RxRelay
 import RxSwift
 import XCTest
 @testable import Unio
