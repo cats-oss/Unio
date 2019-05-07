@@ -36,7 +36,7 @@ final class GitHubSearchViewController: UIViewController {
             tableView.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(tableView)
             NSLayoutConstraint.activate([.top, .bottom, .right, .left].map {
-                NSLayoutConstraint(item: view,
+                NSLayoutConstraint(item: view!,
                                    attribute: $0,
                                    relatedBy: .equal,
                                    toItem: tableView,
