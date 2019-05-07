@@ -6,9 +6,9 @@
 //  Copyright © 2019 tv.abema. All rights reserved.
 //
 
-import Unio
+import RxRelay
 import RxSwift
-import RxCocoa
+import Unio
 @testable import UnioSample
 
 final class MockGitHubSearchAPIStream: GitHubSearchAPIStreamType {

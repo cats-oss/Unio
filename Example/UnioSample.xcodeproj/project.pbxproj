@@ -12,7 +12,8 @@
 		9D2E26D12240D8EA00C9EDF7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D2E26CF2240D8EA00C9EDF7 /* LaunchScreen.storyboard */; };
 		9D2E26EE2240D96000C9EDF7 /* Unio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2E26ED2240D96000C9EDF7 /* Unio.framework */; };
 		9D2E26F12240D98300C9EDF7 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2E26EF2240D98300C9EDF7 /* RxSwift.framework */; };
-		9D2E26F22240D98300C9EDF7 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2E26F02240D98300C9EDF7 /* RxCocoa.framework */; };
+		9D9EEC0F22816B1700DF5D97 /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D9EEC0E22816B1700DF5D97 /* RxRelay.framework */; };
+		9D9EEC1022816B8700DF5D97 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2E26F02240D98300C9EDF7 /* RxCocoa.framework */; };
 		EDE43F2D22428D1000B157F9 /* GitHubSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE43F2B22428D1000B157F9 /* GitHubSearchViewController.swift */; };
 		EDE43F2E22428D1000B157F9 /* GitHubSearchViewStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE43F2C22428D1000B157F9 /* GitHubSearchViewStream.swift */; };
 		EDE43F3022428EE100B157F9 /* GitHubSearchLogicStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE43F2F22428EE100B157F9 /* GitHubSearchLogicStream.swift */; };
@@ -43,6 +44,7 @@
 		9D2E26ED2240D96000C9EDF7 /* Unio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Unio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D2E26EF2240D98300C9EDF7 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = ../Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		9D2E26F02240D98300C9EDF7 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = ../Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
+		9D9EEC0E22816B1700DF5D97 /* RxRelay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRelay.framework; path = ../Carthage/Build/iOS/RxRelay.framework; sourceTree = "<group>"; };
 		EDE43F2B22428D1000B157F9 /* GitHubSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSearchViewController.swift; sourceTree = "<group>"; };
 		EDE43F2C22428D1000B157F9 /* GitHubSearchViewStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSearchViewStream.swift; sourceTree = "<group>"; };
 		EDE43F2F22428EE100B157F9 /* GitHubSearchLogicStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSearchLogicStream.swift; sourceTree = "<group>"; };
@@ -57,7 +59,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D2E26F22240D98300C9EDF7 /* RxCocoa.framework in Frameworks */,
+				9D9EEC1022816B8700DF5D97 /* RxCocoa.framework in Frameworks */,
+				9D9EEC0F22816B1700DF5D97 /* RxRelay.framework in Frameworks */,
 				9D2E26F12240D98300C9EDF7 /* RxSwift.framework in Frameworks */,
 				9D2E26EE2240D96000C9EDF7 /* Unio.framework in Frameworks */,
 			);
@@ -121,6 +124,7 @@
 		9D2E26EC2240D96000C9EDF7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9D9EEC0E22816B1700DF5D97 /* RxRelay.framework */,
 				9D2E26F02240D98300C9EDF7 /* RxCocoa.framework */,
 				9D2E26EF2240D98300C9EDF7 /* RxSwift.framework */,
 				9D2E26ED2240D96000C9EDF7 /* Unio.framework */,
@@ -236,6 +240,7 @@
 			inputPaths = (
 				"$(SRCROOT)/../Carthage/Build/iOS/RxCocoa.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/RxSwift.framework",
+				"$(SRCROOT)/../Carthage/Build/iOS/RxRelay.framework",
 			);
 			name = "carthage copy-frameworks";
 			outputFileListPaths = (

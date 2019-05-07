@@ -12,14 +12,14 @@ public typealias ValueAccessibleObservable = ValueAccessible & ObservableConvert
 
 /// Represents accessible to value
 public protocol ValueAccessible {
-    associatedtype E
-    var value: E { get }
+    associatedtype Element
+    var value: Element { get }
 }
 
 public typealias ThrowableValueAccessibleObservable = ThrowableValueAccessible & ObservableConvertibleType
 
 /// Represents accessible to throwable value
 public protocol ThrowableValueAccessible {
-    associatedtype E
-    func throwableValue() throws -> E
+    associatedtype Element
+    func throwableValue() throws -> Element
 }

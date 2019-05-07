@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RxCocoa
+import RxRelay
 import RxSwift
 
 /// Makes possible to access particular method of property that contained by ValueAccessibleObservable (or ThrowableValueAccessibleObservable) even while hides actual properties (BehaviorRelay, BehaviorSubject and so on).
@@ -16,20 +16,20 @@ import RxSwift
 ///         On the other hand, when generic parameter is `ThrowableValueAccessibleObservable`, it makes possible to access Observale and throwable via `KeyPath`.
 public final class ReadOnly<T: ObservableConvertibleType>: ObservableConvertibleType {
 
-    private let _value: () -> T.E
-    private let _throwableValue: () throws -> T.E
-    private let _asObservable: () -> Observable<T.E>
+    private let _value: () -> T.Element
+    private let _throwableValue: () throws -> T.Element
+    private let _asObservable: () -> Observable<T.Element>
 
-    private init(value: @escaping () -> T.E,
-                 throwableValue: @escaping () throws -> T.E,
-                 asObservable: @escaping () -> Observable<T.E>) {
+    private init(value: @escaping () -> T.Element,
+                 throwableValue: @escaping () throws -> T.Element,
+                 asObservable: @escaping () -> Observable<T.Element>) {
         self._value = value
         self._throwableValue = throwableValue
         self._asObservable = asObservable
     }
 
     /// Makes possible to get Observable
-    public func asObservable() -> Observable<T.E> {
+    public func asObservable() -> Observable<T.Element> {
         return _asObservable()
     }
 }
@@ -37,7 +37,7 @@ public final class ReadOnly<T: ObservableConvertibleType>: ObservableConvertible
 extension ReadOnly: ValueAccessible where T: ValueAccessibleObservable {
 
     /// Makes possible to get value
-    public var value: T.E {
+    public var value: T.Element {
         return _value()
     }
 
@@ -52,7 +52,7 @@ extension ReadOnly: ValueAccessible where T: ValueAccessibleObservable {
 extension ReadOnly: ThrowableValueAccessible where T: ThrowableValueAccessibleObservable {
 
     /// Makes possible to get throwableValue
-    public func throwableValue() throws -> T.E {
+    public func throwableValue() throws -> T.Element {
         return try _throwableValue()
     }
 
