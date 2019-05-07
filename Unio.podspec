@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "Unio"
-  s.version      = "0.3.0"
+  s.version      = "0.4.1"
   s.summary      = "KeyPath based Unidirectionarl Input / Output framework with RxSwift."
   s.homepage     = "https://github.com/cats-oss/Unio"
   s.license      = { :type => "MIT", :file => "LICENSE" }
@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target  = "9.0"
   s.source       = { :git => "https://github.com/cats-oss/Unio.git", :tag => "#{s.version}" }
   s.source_files = "Unio/**/*.{swift}"
-  s.dependency 'RxSwift', '~> 4.0'
-  s.dependency 'RxCocoa', '~> 4.0'
-  s.swift_version = '4.2'
+  s.dependency 'RxSwift', '~> 5.0'
+  s.dependency 'RxCocoa', '~> 5.0'
+  s.swift_version = '5.0'
 end
