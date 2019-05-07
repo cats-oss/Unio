@@ -334,9 +334,9 @@ pod "Unio"
 
 ## Requirements
 
-- Swift 4.2 or greater
+- Swift 5 or greater
 - iOS 9.0 or greater
-- [RxSwift](https://github.com/ReactiveX/RxSwift) 4.0 or greater
+- [RxSwift](https://github.com/ReactiveX/RxSwift) 5.0 or greater
 
 ## License
 
