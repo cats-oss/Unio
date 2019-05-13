@@ -14,6 +14,8 @@ import RxSwift
 ///
 /// - note: When generic parameter is `InputType`, it makes possible to access Observales via `KeyPath`.
 ///         On the other hand, when generic parameter is `OutType`, it makes possible to access Observers via `KeyPath`.
+#if swift(>=5.1)
+@dynamicMemberLookup
 public final class Relay<T> {
 
     internal let _dependency: T
@@ -21,6 +23,19 @@ public final class Relay<T> {
     private init(dependency: T) {
         self._dependency = dependency
     }
+}
+#else
+public final class Relay<T> {
+
+    internal let _dependency: T
+
+    private init(dependency: T) {
+        self._dependency = dependency
+    }
+}
+#endif
+
+extension Relay {
 
     private func _observable<O: ObservableConvertibleType>(for keyPath: KeyPath<T, O>) -> Observable<O.Element> {
 
@@ -32,20 +47,9 @@ public final class Relay<T> {
         _dependency[keyPath: keyPath].accept(value)
     }
 
-    private func _accept<U: AcceptableRelay>(for keyPath: KeyPath<T, U>) -> AnyObserver<U.Element> {
+    private func _accept<U: AcceptableRelay>(for keyPath: KeyPath<T, U>) -> AcceptableObserver<U.Element> {
 
-        return AnyObserver { [weak self] event in
-            switch event {
-            case let .next(value):
-                guard let me = self else {
-                    return
-                }
-                me._accept(value, for: keyPath)
-
-            case .error, .completed:
-                break
-            }
-        }
+        return AcceptableObserver(_dependency[keyPath: keyPath])
     }
 
     private func _onEvent<O: ObserverType>(_ event: Event<O.Element>, for keyPath: KeyPath<T, O>) {
@@ -83,7 +87,7 @@ extension Relay where T: InputType {
     }
 
     /// Send `event` to this observer via `Input`.
-    public func accept<U: AcceptableRelay>(for keyPath: KeyPath<T, U>) -> AnyObserver<U.Element> {
+    public func accept<U: AcceptableRelay>(for keyPath: KeyPath<T, U>) -> AcceptableObserver<U.Element> {
 
         return _accept(for: keyPath)
     }
@@ -164,3 +168,31 @@ extension Relay where T: ThrowableValueAccessibleObservable {
         return _dependency.asObservable()
     }
 }
+
+#if swift(>=5.1)
+extension Relay where T: OutputType {
+
+    public var observables: DML.Observables<T> {
+        return DML.Observables(_dependency)
+    }
+
+    public var values: DML.Values<T> {
+        return DML.Values(_dependency)
+    }
+
+    public var throwableValues: DML.ThrowableValues<T> {
+        return DML.ThrowableValues(_dependency)
+    }
+}
+
+extension Relay where T: InputType {
+
+    public subscript<U: AcceptableRelay>(dynamicMember member: KeyPath<T, U>) -> AcceptableObserver<U.Element> {
+        return accept(for: member)
+    }
+
+    public subscript<O: ObserverType>(dynamicMember member: KeyPath<T, O>) -> AnyObserver<O.Element> {
+        return onEvent(for: member)
+    }
+}
+#endif

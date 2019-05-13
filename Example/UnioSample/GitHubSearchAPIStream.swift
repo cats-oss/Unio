@@ -57,7 +57,14 @@ extension GitHubSearchAPIStream.Logic {
     func bind(from dependency: Dependency<Input, State, Extra>) -> Output {
 
         let session = dependency.extra.session
-        let searchResponseEvent = dependency.inputObservable(for: \.searchRepository)
+
+        let searchRepository: Observable<String>
+        #if swift(>=5.1)
+        searchRepository = dependency.inputObservables.searchRepository
+        #else
+        searchRepository = dependency.inputObservable(for: \.searchRepository)
+        #endif
+        let searchResponseEvent = searchRepository
             .flatMapLatest { query -> Observable<Event<GitHub.ItemsResponse<GitHub.Repository>>> in
                 guard var components = URLComponents(string: "https://api.github.com/search/repositories") else {
                     return .empty()

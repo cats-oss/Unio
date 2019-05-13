@@ -35,6 +35,9 @@
 		ED74A7382243D99D00D4E99C /* RelayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74A7372243D99D00D4E99C /* RelayTests.swift */; };
 		ED74A73A2243E0CC00D4E99C /* DependencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74A7392243E0CC00D4E99C /* DependencyTests.swift */; };
 		ED74A73C2243E43D00D4E99C /* UnioStreamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74A73B2243E43D00D4E99C /* UnioStreamTests.swift */; };
+		EDD118F62289CFD70055C0AE /* AcceptableObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD118F52289CFD70055C0AE /* AcceptableObserver.swift */; };
+		EDD118F82289E1170055C0AE /* DynamicMemberLookupAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD118F72289E1170055C0AE /* DynamicMemberLookupAdapter.swift */; };
+		EDD118FA2289E1630055C0AE /* AnyThrowableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD118F92289E1630055C0AE /* AnyThrowableValue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +93,9 @@
 		ED74A7372243D99D00D4E99C /* RelayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelayTests.swift; sourceTree = "<group>"; };
 		ED74A7392243E0CC00D4E99C /* DependencyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyTests.swift; sourceTree = "<group>"; };
 		ED74A73B2243E43D00D4E99C /* UnioStreamTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnioStreamTests.swift; sourceTree = "<group>"; };
+		EDD118F52289CFD70055C0AE /* AcceptableObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptableObserver.swift; sourceTree = "<group>"; };
+		EDD118F72289E1170055C0AE /* DynamicMemberLookupAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicMemberLookupAdapter.swift; sourceTree = "<group>"; };
+		EDD118F92289E1630055C0AE /* AnyThrowableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyThrowableValue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,7 +145,10 @@
 			isa = PBXGroup;
 			children = (
 				9DA555C92241DE5F00EC8CC3 /* RxTypes */,
+				EDD118F52289CFD70055C0AE /* AcceptableObserver.swift */,
+				EDD118F92289E1630055C0AE /* AnyThrowableValue.swift */,
 				9D2E269C2240D1CA00C9EDF7 /* Dependency.swift */,
+				EDD118F72289E1170055C0AE /* DynamicMemberLookupAdapter.swift */,
 				9D2E26972240D1CA00C9EDF7 /* ExtraType.swift */,
 				9D2E267D2240D18500C9EDF7 /* Info.plist */,
 				9D2E26982240D1CA00C9EDF7 /* InputType.swift */,
@@ -166,8 +175,8 @@
 		9D2E26A72240D1F200C9EDF7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9D9EEC0A228168F800DF5D97 /* RxRelay.framework */,
 				9D2E26A92240D1F200C9EDF7 /* RxCocoa.framework */,
+				9D9EEC0A228168F800DF5D97 /* RxRelay.framework */,
 				9D2E26A82240D1F200C9EDF7 /* RxSwift.framework */,
 			);
 			name = Frameworks;
@@ -308,10 +317,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDD118F62289CFD70055C0AE /* AcceptableObserver.swift in Sources */,
 				9DA555D32241FC0400EC8CC3 /* AcceptableRelay.swift in Sources */,
+				EDD118FA2289E1630055C0AE /* AnyThrowableValue.swift in Sources */,
 				9D2E26A32240D1CA00C9EDF7 /* BehaviorRelayType.swift in Sources */,
 				9DA555CB2241DE8400EC8CC3 /* BehaviorSubjectType.swift in Sources */,
 				9D2E26A62240D1CA00C9EDF7 /* Dependency.swift in Sources */,
+				EDD118F82289E1170055C0AE /* DynamicMemberLookupAdapter.swift in Sources */,
 				9D2E26A12240D1CA00C9EDF7 /* ExtraType.swift in Sources */,
 				9D2E26A22240D1CA00C9EDF7 /* InputType.swift in Sources */,
 				9D2E269F2240D1CA00C9EDF7 /* LogicType.swift in Sources */,

@@ -7,4 +7,11 @@
    <FileRef
       location = "group:../Unio.xcodeproj">
    </FileRef>
+   <Group
+      location = "container:"
+      name = "Dependencies">
+      <FileRef
+         location = "group:../Carthage/Checkouts/RxSwift/Rx.xcodeproj">
+      </FileRef>
+   </Group>
 </Workspace>

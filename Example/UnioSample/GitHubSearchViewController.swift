@@ -51,22 +51,40 @@ final class GitHubSearchViewController: UIViewController {
         do {
             let input = viewStream.input
 
+            #if swift(>=5.1)
+            searchBar.rx.text
+                .bind(to: input.searchText)
+                .disposed(by: disposeBag)
+            #else
             searchBar.rx.text
                 .bind(to: input.accept(for: \.searchText))
                 .disposed(by: disposeBag)
+            #endif
         }
 
         do {
             let output = viewStream.output
 
-            output.observable(for: \.repositories)
+            let repositories: Observable<[GitHub.Repository]>
+            #if swift(>=5.1)
+            repositories = output.observables.repositories
+            #else
+            repositories = output.observable(for: \.repositories)
+            #endif
+            repositories
                 .bind(to: tableView.rx.items(cellIdentifier: "Cell")) { row, repository, cell in
                     cell.textLabel?.text = repository.fullName
                     cell.detailTextLabel?.text = repository.htmlUrl.absoluteString
                 }
                 .disposed(by: disposeBag)
 
-            output.observable(for: \.errorMessage)
+            let errorMessage: Observable<String>
+            #if swift(>=5.1)
+            errorMessage = output.observables.errorMessage
+            #else
+            errorMessage = output.observable(for: \.errorMessage)
+            #endif
+            errorMessage
                 .bind(to: Binder(self) { me, message in
                     let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))

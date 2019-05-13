@@ -62,11 +62,20 @@ extension GitHubSearchViewStream.Logic {
 
         let logicStream = dependency.extra.logicStream
 
+        #if swift(>=5.1)
+        dependency.inputObservables.searchText
+            .bind(to: logicStream.input.searchText)
+            .disposed(by: disposeBag)
+
+        return Output(repositories: logicStream.output.observables.repositories,
+                      errorMessage: logicStream.output.observables.error.map { $0.localizedDescription })
+        #else
         dependency.inputObservable(for: \.searchText)
             .bind(to: logicStream.input.accept(for: \.searchText))
             .disposed(by: disposeBag)
 
         return Output(repositories: logicStream.output.observable(for: \.repositories),
                       errorMessage: logicStream.output.observable(for: \.error).map { $0.localizedDescription })
+        #endif
     }
 }

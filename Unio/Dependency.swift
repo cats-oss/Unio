@@ -26,7 +26,7 @@ public final class Dependency<Input: InputType, State: StateType, Extra: ExtraTy
     }
 
     /// Makes possible to get Observable from `Input`.
-    public func inputObservable<O: ObservableType>(for keyPath: KeyPath<Input, O>) -> Observable<O.Element> {
+    public func inputObservable<O: ObservableConvertibleType>(for keyPath: KeyPath<Input, O>) -> Observable<O.Element> {
 
         return _input[keyPath: keyPath].asObservable()
     }
@@ -45,3 +45,16 @@ public final class Dependency<Input: InputType, State: StateType, Extra: ExtraTy
         return ReadOnly(output, for: keyPath)
     }
 }
+
+#if swift(>=5.1)
+extension Dependency {
+
+    public var inputObservables: DML.Observables<Input> {
+        return DML.Observables(_input)
+    }
+
+    public func readOnlyReferences<Output: OutputType>(from output: Relay<Output>) -> DML.ReadOnlyReferences<Output> {
+        return DML.ReadOnlyReferences(output)
+    }
+}
+#endif
