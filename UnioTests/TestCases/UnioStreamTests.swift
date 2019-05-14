@@ -69,8 +69,13 @@ final class UnioStreamTests: XCTestCase {
             let expected = "test-input"
             let stack = BehaviorRelay<String?>(value: nil)
 
-            let disposable = value.inputObservable(for: \.relay)
+            #if swift(>=5.1)
+            let disposable = value.inputObservables.relay
                 .bind(to: stack)
+            #else
+            let disposable = value.inputObservables[\.relay]
+                .bind(to: stack)
+            #endif
 
             dependency.input.relay.accept(expected)
 

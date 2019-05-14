@@ -26,8 +26,13 @@ final class DependencyTests: XCTestCase {
         let testTarget = dependency.testTarget
         let stack = BehaviorRelay<String?>(value: nil)
 
-        let disposable = testTarget.inputObservable(for: \.relay)
+        #if swift(>=5.1)
+        let disposable = testTarget.inputObservables.relay
             .bind(to: stack)
+        #else
+        let disposable = testTarget.inputObservables[\.relay]
+            .bind(to: stack)
+        #endif
 
         dependency.inputRelay.accept(expected)
 
@@ -42,8 +47,13 @@ final class DependencyTests: XCTestCase {
         let testTarget = dependency.testTarget
         let stack = BehaviorRelay<String?>(value: nil)
 
-        let disposable = testTarget.inputObservable(for: \.subject)
+        #if swift(>=5.1)
+        let disposable = testTarget.inputObservables.subject
             .bind(to: stack)
+        #else
+        let disposable = testTarget.inputObservables[\.subject]
+            .bind(to: stack)
+        #endif
 
         dependency.inputSubject.onNext(expected)
 
