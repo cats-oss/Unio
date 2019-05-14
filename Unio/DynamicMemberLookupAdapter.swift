@@ -6,13 +6,13 @@
 //  Copyright © 2019 tv.abema. All rights reserved.
 //
 
-#if swift(>=5.1)
 import Foundation
 import RxSwift
 
-public enum DML {}
+#if swift(>=5.1)
+public typealias DMLA = DynamicMemberLookupAdapter
 
-extension DML {
+public enum DynamicMemberLookupAdapter {
 
     @dynamicMemberLookup
     public struct Observables<T> {
@@ -27,9 +27,6 @@ extension DML {
             return object[keyPath: member].asObservable()
         }
     }
-}
-
-extension DML {
 
     @dynamicMemberLookup
     public struct Values<T> {
@@ -44,9 +41,6 @@ extension DML {
             return object[keyPath: member].value
         }
     }
-}
-
-extension DML {
 
     @dynamicMemberLookup
     public struct ThrowableValues<T> {
@@ -61,9 +55,6 @@ extension DML {
             return AnyThrowableValue(object[keyPath: member])
         }
     }
-}
-
-extension DML {
 
     @dynamicMemberLookup
     public struct ReadOnlyReferences<Output: OutputType> {

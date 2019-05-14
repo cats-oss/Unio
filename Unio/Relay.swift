@@ -14,26 +14,37 @@ import RxSwift
 ///
 /// - note: When generic parameter is `InputType`, it makes possible to access Observales via `KeyPath`.
 ///         On the other hand, when generic parameter is `OutType`, it makes possible to access Observers via `KeyPath`.
-#if swift(>=5.1)
 @dynamicMemberLookup
 public final class Relay<T> {
 
     internal let _dependency: T
 
+    #if swift(>=5.1)
+    public let observables: DMLA.Observables<T>
+
+    public let values: DMLA.Values<T>
+
+    public let throwableValues: DMLA.ThrowableValues<T>
+    #endif
+
     private init(dependency: T) {
         self._dependency = dependency
+
+        #if swift(>=5.1)
+        self.observables = DMLA.Observables(dependency)
+        self.values = DMLA.Values(dependency)
+        self.throwableValues = DMLA.ThrowableValues(dependency)
+        #endif
     }
 }
-#else
-public final class Relay<T> {
 
-    internal let _dependency: T
+extension Relay {
 
-    private init(dependency: T) {
-        self._dependency = dependency
+    @available(*, unavailable)
+    subscript(dynamicMember member: String) -> Never {
+        fatalError("must not be accessible")
     }
 }
-#endif
 
 extension Relay {
 
@@ -103,6 +114,16 @@ extension Relay where T: InputType {
 
         return _onEvent(for: keyPath)
     }
+
+    #if swift(>=5.1)
+    public subscript<U: AcceptableRelay>(dynamicMember member: KeyPath<T, U>) -> AcceptableObserver<U.Element> {
+        return accept(for: member)
+    }
+
+    public subscript<O: ObserverType>(dynamicMember member: KeyPath<T, O>) -> AnyObserver<O.Element> {
+        return onEvent(for: member)
+    }
+    #endif
 }
 
 // - MARK: Relay<Output>
@@ -168,31 +189,3 @@ extension Relay where T: ThrowableValueAccessibleObservable {
         return _dependency.asObservable()
     }
 }
-
-#if swift(>=5.1)
-extension Relay where T: OutputType {
-
-    public var observables: DML.Observables<T> {
-        return DML.Observables(_dependency)
-    }
-
-    public var values: DML.Values<T> {
-        return DML.Values(_dependency)
-    }
-
-    public var throwableValues: DML.ThrowableValues<T> {
-        return DML.ThrowableValues(_dependency)
-    }
-}
-
-extension Relay where T: InputType {
-
-    public subscript<U: AcceptableRelay>(dynamicMember member: KeyPath<T, U>) -> AcceptableObserver<U.Element> {
-        return accept(for: member)
-    }
-
-    public subscript<O: ObserverType>(dynamicMember member: KeyPath<T, O>) -> AnyObserver<O.Element> {
-        return onEvent(for: member)
-    }
-}
-#endif
