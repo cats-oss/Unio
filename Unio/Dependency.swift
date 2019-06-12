@@ -44,4 +44,18 @@ public final class Dependency<Input: InputType, State: StateType, Extra: ExtraTy
     public func readOnlyReference<Output: OutputType, T: ThrowableValueAccessible>(from output: Relay<Output>, for keyPath: KeyPath<Output, T>) -> ReadOnly<T> {
         return ReadOnly(output, for: keyPath)
     }
+
+    /// Returns property that accessible to value (e.g. BehaviorRelay).
+    ///
+    /// - note: Object is reference, not copied one.
+    public func property<Output: OutputType, T: ValueAccessibleObservable>(from output: Relay<Output>, for keyPath: KeyPath<Output, T>) -> Property<T.Element> {
+        return Property(output, for: keyPath)
+    }
+
+    /// Returns property that accessible to throwable value (e.g. BehaviorSubject).
+    ///
+    /// - note: Object is reference, not copied one.
+    public func property<Output: OutputType, T: ThrowableValueAccessibleObservable>(from output: Relay<Output>, for keyPath: KeyPath<Output, T>) -> ThrowableProperty<T.Element> {
+        return ThrowableProperty(output, for: keyPath)
+    }
 }
