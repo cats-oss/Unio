@@ -34,6 +34,7 @@ public final class Dependency<Input: InputType, State: StateType, Extra: ExtraTy
     /// Returns read-only value accessible object (e.g. BehaviorRelay).
     ///
     /// - note: Object is reference, not copied one.
+    @available(*, deprecated, renamed: "property(from:for:)")
     public func readOnlyReference<Output: OutputType, T: ValueAccessible>(from output: Relay<Output>, for keyPath: KeyPath<Output, T>) -> ReadOnly<T> {
         return ReadOnly(output, for: keyPath)
     }
@@ -41,6 +42,7 @@ public final class Dependency<Input: InputType, State: StateType, Extra: ExtraTy
     /// Returns read-only value accessible object (e.g. BehaviorSubject).
     ///
     /// - note: Object is reference, not copied one.
+    @available(*, deprecated, renamed: "property(from:for:)")
     public func readOnlyReference<Output: OutputType, T: ThrowableValueAccessible>(from output: Relay<Output>, for keyPath: KeyPath<Output, T>) -> ReadOnly<T> {
         return ReadOnly(output, for: keyPath)
     }

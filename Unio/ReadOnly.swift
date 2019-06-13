@@ -14,6 +14,7 @@ import RxSwift
 ///
 /// - note: When generic parameter is `ValueAccessibleObservable`, it makes possible to access Observale and value via `KeyPath`.
 ///         On the other hand, when generic parameter is `ThrowableValueAccessibleObservable`, it makes possible to access Observale and throwable via `KeyPath`.
+@available(*, deprecated, renamed: "Property")
 public final class ReadOnly<T: ObservableConvertibleType>: ObservableConvertibleType {
 
     private let _value: () -> T.Element
@@ -34,6 +35,7 @@ public final class ReadOnly<T: ObservableConvertibleType>: ObservableConvertible
     }
 }
 
+@available(*, deprecated, renamed: "Property")
 extension ReadOnly: ValueAccessible where T: ValueAccessibleObservable {
 
     /// Makes possible to get value
@@ -49,6 +51,7 @@ extension ReadOnly: ValueAccessible where T: ValueAccessibleObservable {
     }
 }
 
+@available(*, deprecated, renamed: "ThrowableProperty")
 extension ReadOnly: ThrowableValueAccessible where T: ThrowableValueAccessibleObservable {
 
     /// Makes possible to get throwableValue
