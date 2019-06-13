@@ -57,11 +57,11 @@ final class DependencyTests: XCTestCase {
         let expected = "test-ValueAccessible"
         let testTarget = dependency.testTarget
 
-        let readOnly = testTarget.readOnlyReference(from: dependency.output, for: \.relay)
+        let property = testTarget.property(from: dependency.output, for: \.relay)
 
         dependency.outputRelay.accept(expected)
 
-        XCTAssertEqual(readOnly.value, expected)
+        XCTAssertEqual(property.value, expected)
     }
 
     func testRelayOnly_ThrowableValueAccessible() {
@@ -69,11 +69,11 @@ final class DependencyTests: XCTestCase {
         let expected = "test-ThrowableValueAccessible"
         let testTarget = dependency.testTarget
 
-        let readOnly = testTarget.readOnlyReference(from: dependency.output, for: \.subject)
+        let property = testTarget.property(from: dependency.output, for: \.subject)
 
         dependency.outputSubject.onNext(expected)
 
-        XCTAssertEqual(try readOnly.throwableValue(), expected)
+        XCTAssertEqual(try property.throwableValue(), expected)
     }
 
 }
