@@ -12,9 +12,9 @@ open class UnioStream<Logic: LogicType> {
     public let input: Relay<Logic.Input>
     public let output: Relay<Logic.Output>
 
-    private let state: StateType
-    private let extra: ExtraType
-    private let logic: Logic
+    private let _state: Logic.State
+    private let _extra: Logic.Extra
+    private let _logic: Logic
 
     /// - note: initialize parameters are retained in UnioStream
     public init(input: Logic.Input, state: Logic.State, extra: Logic.Extra, logic: Logic) {
@@ -22,8 +22,8 @@ open class UnioStream<Logic: LogicType> {
         let output = logic.bind(from: dependency)
         self.input = Relay(input)
         self.output = Relay(output)
-        self.state = state
-        self.extra = extra
-        self.logic = logic
+        self._state = state
+        self._extra = extra
+        self._logic = logic
     }
 }

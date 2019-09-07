@@ -19,25 +19,19 @@ public final class Relay<T> {
 
     internal let _dependency: T
 
-    #if swift(>=5.1)
-    public let observables: DMLA.Observables<T>
+    private let _observables: DMLA.Observables<T>?
+    private let _values: DMLA.Values<T>?
 
-    public let values: DMLA.Values<T>
-
-    public let throwableValues: DMLA.ThrowableValues<T>
-    #endif
-
-    private init(dependency: T) {
+    private init(dependency: T,
+                 observables: DMLA.Observables<T>?,
+                 values: DMLA.Values<T>?) {
         self._dependency = dependency
-
-        #if swift(>=5.1)
-        self.observables = DMLA.Observables(dependency)
-        self.values = DMLA.Values(dependency)
-        self.throwableValues = DMLA.ThrowableValues(dependency)
-        #endif
+        self._observables = observables
+        self._values = values
     }
 }
 
+#if swift(<5.1)
 extension Relay {
 
     @available(*, unavailable)
@@ -45,42 +39,7 @@ extension Relay {
         fatalError("must not be accessible")
     }
 }
-
-extension Relay {
-
-    private func _observable<O: ObservableConvertibleType>(for keyPath: KeyPath<T, O>) -> Observable<O.Element> {
-
-        return _dependency[keyPath: keyPath].asObservable()
-    }
-
-    private func _accept<U: AcceptableRelay>(_ value: U.Element, for keyPath: KeyPath<T, U>) {
-
-        _dependency[keyPath: keyPath].accept(value)
-    }
-
-    private func _accept<U: AcceptableRelay>(for keyPath: KeyPath<T, U>) -> AcceptableObserver<U.Element> {
-
-        return AcceptableObserver(_dependency[keyPath: keyPath])
-    }
-
-    private func _onEvent<O: ObserverType>(_ event: Event<O.Element>, for keyPath: KeyPath<T, O>) {
-        _dependency[keyPath: keyPath].on(event)
-    }
-
-    private func _onEvent<O: ObserverType>(for keyPath: KeyPath<T, O>) -> AnyObserver<O.Element> {
-
-        return _dependency[keyPath: keyPath].asObserver()
-    }
-
-    private func _value<U: ValueAccessible>(for keyPath: KeyPath<T, U>) -> U.Element {
-
-        return _dependency[keyPath: keyPath].value
-    }
-
-    private func _value<U: ThrowableValueAccessible>(for keyPath: KeyPath<T, U>) throws -> U.Element {
-        return try _dependency[keyPath: keyPath].throwableValue()
-    }
-}
+#endif
 
 // - MARK: Relay<Input>
 
@@ -88,69 +47,77 @@ extension Relay where T: InputType {
 
     /// Initializes with `Input`.
     public convenience init(_ dependency: T) {
-        self.init(dependency: dependency)
+        self.init(dependency: dependency, observables: nil, values: nil)
     }
 
     /// Accepts `event` and emits it to subscribers via `Input`.
     public func accept<U: AcceptableRelay>(_ value: U.Element, for keyPath: KeyPath<T, U>) {
 
-        _accept(value, for: keyPath)
+        accept(for: keyPath).accept(value)
     }
 
     /// Send `event` to this observer via `Input`.
     public func accept<U: AcceptableRelay>(for keyPath: KeyPath<T, U>) -> AcceptableObserver<U.Element> {
 
-        return _accept(for: keyPath)
+        return self[dynamicMember: keyPath]
     }
 
     /// Notify observer about sequence event via `Input`.
     public func onEvent<O: ObserverType>(_ event: Event<O.Element>, for keyPath: KeyPath<T, O>) {
 
-        _onEvent(event, for: keyPath)
+        onEvent(for: keyPath).on(event)
     }
 
     /// Send `event` to this observer via `Input`.
     public func onEvent<O: ObserverType>(for keyPath: KeyPath<T, O>) -> AnyObserver<O.Element> {
 
-        return _onEvent(for: keyPath)
+        return self[dynamicMember: keyPath]
     }
 
-    #if swift(>=5.1)
-    public subscript<U: AcceptableRelay>(dynamicMember member: KeyPath<T, U>) -> AcceptableObserver<U.Element> {
-        return accept(for: member)
+    public subscript<U: AcceptableRelay>(dynamicMember keyPath: KeyPath<T, U>) -> AcceptableObserver<U.Element> {
+        return AcceptableObserver(_dependency[keyPath: keyPath])
     }
 
-    public subscript<O: ObserverType>(dynamicMember member: KeyPath<T, O>) -> AnyObserver<O.Element> {
-        return onEvent(for: member)
+    public subscript<O: ObserverType>(dynamicMember keyPath: KeyPath<T, O>) -> AnyObserver<O.Element> {
+        return _dependency[keyPath: keyPath].asObserver()
     }
-    #endif
 }
 
 // - MARK: Relay<Output>
 
 extension Relay where T: OutputType {
 
+    public var observables: DMLA.Observables<T> {
+        return _observables!
+    }
+
+    public var values: DMLA.Values<T> {
+        return _values!
+    }
+
     /// Initializes with `Output`.
     public convenience init(_ dependency: T) {
-        self.init(dependency: dependency)
+        self.init(dependency: dependency,
+                  observables: .init(dependency),
+                  values: .init(dependency))
     }
 
     /// Makes possible to get Observable from `Output`.
     public func observable<O: ObservableConvertibleType>(for keyPath: KeyPath<T, O>) -> Observable<O.Element> {
 
-        return _observable(for: keyPath)
+        return observables[dynamicMember: keyPath]
     }
 
     /// Makes possible to get value from Output when generic parameter is `BehaviorRelay`.
     public func value<U: ValueAccessible>(for keyPath: KeyPath<T, U>) -> U.Element {
 
-        return _value(for: keyPath)
+        return values[dynamicMember: keyPath]
     }
 
     /// Makes possible to get value from Output when generic parameter is `BehaviorSubject`.
     public func value<U: ThrowableValueAccessible>(for keyPath: KeyPath<T, U>) throws -> U.Element {
 
-        return try _value(for: keyPath)
+        return try values[dynamicMember: keyPath].throwableValue()
     }
 }
 
@@ -164,7 +131,7 @@ extension Relay where T: ValueAccessibleObservable {
 
     internal convenience init<U: OutputType>(_ output: Relay<U>, for keyPath: KeyPath<U, T>) {
         let behaviorRelay = output._dependency[keyPath: keyPath]
-        self.init(dependency: behaviorRelay)
+        self.init(dependency: behaviorRelay, observables: nil, values: nil)
     }
 
     public func asObservable() -> Observable<T.Element> {
@@ -178,7 +145,7 @@ extension Relay where T: ThrowableValueAccessibleObservable {
 
     internal convenience init<U: OutputType>(_ output: Relay<U>, for keyPath: KeyPath<U, T>) {
         let behaviorSubject = output._dependency[keyPath: keyPath]
-        self.init(dependency: behaviorSubject)
+        self.init(dependency: behaviorSubject, observables: nil, values: nil)
     }
 
     public func throwableValue() throws -> T.Element {

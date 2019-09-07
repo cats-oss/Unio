@@ -17,26 +17,18 @@ public final class Dependency<Input: InputType, State: StateType, Extra: ExtraTy
     public let state: State
     public let extra: Extra
 
-    #if swift(>=5.1)
     public let inputObservables: DMLA.Observables<Input>
-    #endif
-
-    private let _input: Input
 
     internal init(input: Input, state: State, extra: Extra) {
-        self._input = input
         self.state = state
         self.extra = extra
-
-        #if swift(>=5.1)
         self.inputObservables = DMLA.Observables(input)
-        #endif
     }
 
     /// Makes possible to get Observable from `Input`.
     public func inputObservable<O: ObservableConvertibleType>(for keyPath: KeyPath<Input, O>) -> Observable<O.Element> {
 
-        return _input[keyPath: keyPath].asObservable()
+        return inputObservables[dynamicMember: keyPath]
     }
 
     /// Returns read-only value accessible object (e.g. BehaviorRelay).
@@ -53,9 +45,7 @@ public final class Dependency<Input: InputType, State: StateType, Extra: ExtraTy
         return ReadOnly(output, for: keyPath)
     }
 
-    #if swift(>=5.1)
     public func readOnlyReferences<Output: OutputType>(from output: Relay<Output>) -> DMLA.ReadOnlyReferences<Output> {
         return DMLA.ReadOnlyReferences(output)
     }
-    #endif
 }

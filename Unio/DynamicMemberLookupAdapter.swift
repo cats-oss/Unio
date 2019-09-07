@@ -9,13 +9,12 @@
 import Foundation
 import RxSwift
 
-#if swift(>=5.1)
 public typealias DMLA = DynamicMemberLookupAdapter
 
 public enum DynamicMemberLookupAdapter {
 
     @dynamicMemberLookup
-    public struct Observables<T> {
+    public final class Observables<T> {
 
         private let object: T
 
@@ -23,13 +22,13 @@ public enum DynamicMemberLookupAdapter {
             self.object = object
         }
 
-        public subscript<O: ObservableConvertibleType>(dynamicMember member: KeyPath<T, O>) -> Observable<O.Element> {
-            return object[keyPath: member].asObservable()
+        public subscript<O: ObservableConvertibleType>(dynamicMember keyPath: KeyPath<T, O>) -> Observable<O.Element> {
+            return object[keyPath: keyPath].asObservable()
         }
     }
 
     @dynamicMemberLookup
-    public struct Values<T> {
+    public final class Values<T> {
 
         private let object: T
 
@@ -37,27 +36,17 @@ public enum DynamicMemberLookupAdapter {
             self.object = object
         }
 
-        public subscript<U: ValueAccessible>(dynamicMember member: KeyPath<T, U>) -> U.Element {
-            return object[keyPath: member].value
+        public subscript<U: ValueAccessible>(dynamicMember keyPath: KeyPath<T, U>) -> U.Element {
+            return object[keyPath: keyPath].value
+        }
+
+        public subscript<U: ThrowableValueAccessible>(dynamicMember keyPath: KeyPath<T, U>) -> AnyThrowableValue<U.Element> {
+            return AnyThrowableValue(object[keyPath: keyPath])
         }
     }
 
     @dynamicMemberLookup
-    public struct ThrowableValues<T> {
-
-        private let object: T
-
-        init(_ object: T) {
-            self.object = object
-        }
-
-        public subscript<U: ThrowableValueAccessible>(dynamicMember member: KeyPath<T, U>) -> AnyThrowableValue<U.Element> {
-            return AnyThrowableValue(object[keyPath: member])
-        }
-    }
-
-    @dynamicMemberLookup
-    public struct ReadOnlyReferences<Output: OutputType> {
+    public final class ReadOnlyReferences<Output: OutputType> {
 
         private let output: Relay<Output>
 
@@ -65,13 +54,38 @@ public enum DynamicMemberLookupAdapter {
             self.output = output
         }
 
-        public subscript<T: ValueAccessible>(dynamicMember member: KeyPath<Output, T>) -> ReadOnly<T> {
-            return ReadOnly(output, for: member)
+        public subscript<T: ValueAccessible>(dynamicMember keyPath: KeyPath<Output, T>) -> ReadOnly<T> {
+            return ReadOnly(output, for: keyPath)
         }
 
-        public subscript<T: ThrowableValueAccessible>(dynamicMember member: KeyPath<Output, T>) -> ReadOnly<T> {
-            return ReadOnly(output, for: member)
+        public subscript<T: ThrowableValueAccessible>(dynamicMember keyPath: KeyPath<Output, T>) -> ReadOnly<T> {
+            return ReadOnly(output, for: keyPath)
         }
+    }
+}
+
+#if swift(<5.1)
+extension DMLA.Observables {
+
+    @available(*, unavailable)
+    subscript(dynamicMember member: String) -> Never {
+        fatalError("must not be accessible")
+    }
+}
+
+extension DMLA.Values {
+
+    @available(*, unavailable)
+    subscript(dynamicMember member: String) -> Never {
+        fatalError("must not be accessible")
+    }
+}
+
+extension DMLA.ReadOnlyReferences {
+
+    @available(*, unavailable)
+    subscript(dynamicMember member: String) -> Never {
+        fatalError("must not be accessible")
     }
 }
 #endif

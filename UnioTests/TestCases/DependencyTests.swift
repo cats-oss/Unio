@@ -26,8 +26,13 @@ final class DependencyTests: XCTestCase {
         let testTarget = dependency.testTarget
         let stack = BehaviorRelay<String?>(value: nil)
 
+        #if swift(>=5.1)
+        let disposable = testTarget.inputObservables.relay
+            .bind(to: stack)
+        #else
         let disposable = testTarget.inputObservable(for: \.relay)
             .bind(to: stack)
+        #endif
 
         dependency.inputRelay.accept(expected)
 
@@ -42,8 +47,13 @@ final class DependencyTests: XCTestCase {
         let testTarget = dependency.testTarget
         let stack = BehaviorRelay<String?>(value: nil)
 
+        #if swift(>=5.1)
+        let disposable = testTarget.inputObservables.subject
+            .bind(to: stack)
+        #else
         let disposable = testTarget.inputObservable(for: \.subject)
             .bind(to: stack)
+        #endif
 
         dependency.inputSubject.onNext(expected)
 
@@ -57,7 +67,11 @@ final class DependencyTests: XCTestCase {
         let expected = "test-ValueAccessible"
         let testTarget = dependency.testTarget
 
+        #if swift(>=5.1)
+        let readOnly = testTarget.readOnlyReferences(from: dependency.output).relay
+        #else
         let readOnly = testTarget.readOnlyReference(from: dependency.output, for: \.relay)
+        #endif
 
         dependency.outputRelay.accept(expected)
 
@@ -69,7 +83,11 @@ final class DependencyTests: XCTestCase {
         let expected = "test-ThrowableValueAccessible"
         let testTarget = dependency.testTarget
 
+        #if swift(>=5.1)
+        let readOnly = testTarget.readOnlyReferences(from: dependency.output).subject
+        #else
         let readOnly = testTarget.readOnlyReference(from: dependency.output, for: \.subject)
+        #endif
 
         dependency.outputSubject.onNext(expected)
 
