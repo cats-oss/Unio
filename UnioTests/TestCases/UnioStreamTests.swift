@@ -48,7 +48,7 @@ final class UnioStreamTests: XCTestCase {
         dependency.output.relay.accept(expected)
 
         #if swift(>=5.1)
-        XCTAssertEqual(expected, testTarget.output.values.relay)
+        XCTAssertEqual(expected, testTarget.output.relay.value)
         #else
         XCTAssertEqual(expected, testTarget.output.value(for: \.relay))
         #endif

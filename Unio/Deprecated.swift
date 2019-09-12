@@ -1,5 +1,5 @@
 //
-//  ReadOnly.swift
+//  Deprecated.swift
 //  Unio
 //
 //  Created by marty-suzuki on 2019/03/20.
@@ -64,5 +64,24 @@ extension ReadOnly: ThrowableValueAccessible where T: ThrowableValueAccessibleOb
         self.init(value: { fatalError("not reached here")  },
                   throwableValue: { try behaviorSubject.throwableValue() },
                   asObservable: { behaviorSubject.asObservable() })
+    }
+}
+
+extension Dependency {
+
+    /// Returns read-only value accessible object (e.g. BehaviorRelay).
+    ///
+    /// - note: Object is reference, not copied one.
+    @available(*, deprecated, renamed: "property(from:for:)")
+    public func readOnlyReference<Output: OutputType, T: ValueAccessible>(from output: Relay<Output>, for keyPath: KeyPath<Output, T>) -> ReadOnly<T> {
+        return ReadOnly(output, for: keyPath)
+    }
+
+    /// Returns read-only value accessible object (e.g. BehaviorSubject).
+    ///
+    /// - note: Object is reference, not copied one.
+    @available(*, deprecated, renamed: "property(from:for:)")
+    public func readOnlyReference<Output: OutputType, T: ThrowableValueAccessible>(from output: Relay<Output>, for keyPath: KeyPath<Output, T>) -> ReadOnly<T> {
+        return ReadOnly(output, for: keyPath)
     }
 }

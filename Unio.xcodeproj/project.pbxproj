@@ -26,7 +26,7 @@
 		9D9EEC13228172F400DF5D97 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2E26A92240D1F200C9EDF7 /* RxCocoa.framework */; };
 		9D9EEC14228172F900DF5D97 /* RxCocoa.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2E26A92240D1F200C9EDF7 /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9DA555CB2241DE8400EC8CC3 /* BehaviorSubjectType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA555CA2241DE8400EC8CC3 /* BehaviorSubjectType.swift */; };
-		9DA555D12241F95400EC8CC3 /* ReadOnly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA555D02241F95400EC8CC3 /* ReadOnly.swift */; };
+		9DA555D12241F95400EC8CC3 /* Deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA555D02241F95400EC8CC3 /* Deprecated.swift */; };
 		9DA555D32241FC0400EC8CC3 /* AcceptableRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA555D22241FC0400EC8CC3 /* AcceptableRelay.swift */; };
 		9DA555D52241FC6600EC8CC3 /* ValueAccessible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA555D42241FC6600EC8CC3 /* ValueAccessible.swift */; };
 		ED6897C122B184EE00B04DA0 /* PrimitiveProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6897C022B184EE00B04DA0 /* PrimitiveProperty.swift */; };
@@ -38,7 +38,6 @@
 		ED74A73C2243E43D00D4E99C /* UnioStreamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74A73B2243E43D00D4E99C /* UnioStreamTests.swift */; };
 		EDD118F62289CFD70055C0AE /* AcceptableObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD118F52289CFD70055C0AE /* AcceptableObserver.swift */; };
 		EDD118F82289E1170055C0AE /* DynamicMemberLookupAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD118F72289E1170055C0AE /* DynamicMemberLookupAdapter.swift */; };
-		EDD118FA2289E1630055C0AE /* AnyThrowableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD118F92289E1630055C0AE /* AnyThrowableValue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,7 +86,7 @@
 		9D2E26A92240D1F200C9EDF7 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		9D9EEC0A228168F800DF5D97 /* RxRelay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRelay.framework; path = Carthage/Build/iOS/RxRelay.framework; sourceTree = "<group>"; };
 		9DA555CA2241DE8400EC8CC3 /* BehaviorSubjectType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BehaviorSubjectType.swift; sourceTree = "<group>"; };
-		9DA555D02241F95400EC8CC3 /* ReadOnly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadOnly.swift; sourceTree = "<group>"; };
+		9DA555D02241F95400EC8CC3 /* Deprecated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deprecated.swift; sourceTree = "<group>"; };
 		9DA555D22241FC0400EC8CC3 /* AcceptableRelay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptableRelay.swift; sourceTree = "<group>"; };
 		9DA555D42241FC6600EC8CC3 /* ValueAccessible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueAccessible.swift; sourceTree = "<group>"; };
 		ED6897C022B184EE00B04DA0 /* PrimitiveProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimitiveProperty.swift; sourceTree = "<group>"; };
@@ -97,7 +96,6 @@
 		ED74A73B2243E43D00D4E99C /* UnioStreamTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnioStreamTests.swift; sourceTree = "<group>"; };
 		EDD118F52289CFD70055C0AE /* AcceptableObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptableObserver.swift; sourceTree = "<group>"; };
 		EDD118F72289E1170055C0AE /* DynamicMemberLookupAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicMemberLookupAdapter.swift; sourceTree = "<group>"; };
-		EDD118F92289E1630055C0AE /* AnyThrowableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyThrowableValue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,8 +146,8 @@
 			children = (
 				9DA555C92241DE5F00EC8CC3 /* RxTypes */,
 				EDD118F52289CFD70055C0AE /* AcceptableObserver.swift */,
-				EDD118F92289E1630055C0AE /* AnyThrowableValue.swift */,
 				9D2E269C2240D1CA00C9EDF7 /* Dependency.swift */,
+				9DA555D02241F95400EC8CC3 /* Deprecated.swift */,
 				EDD118F72289E1170055C0AE /* DynamicMemberLookupAdapter.swift */,
 				9D2E26972240D1CA00C9EDF7 /* ExtraType.swift */,
 				9D2E267D2240D18500C9EDF7 /* Info.plist */,
@@ -157,7 +155,6 @@
 				9D2E26952240D1CA00C9EDF7 /* LogicType.swift */,
 				9D2E269B2240D1CA00C9EDF7 /* OutputType.swift */,
 				ED6897C022B184EE00B04DA0 /* PrimitiveProperty.swift */,
-				9DA555D02241F95400EC8CC3 /* ReadOnly.swift */,
 				9D2E26942240D1CA00C9EDF7 /* Relay.swift */,
 				9D2E26962240D1CA00C9EDF7 /* StateType.swift */,
 				9D2E267C2240D18500C9EDF7 /* Unio.h */,
@@ -322,10 +319,10 @@
 			files = (
 				EDD118F62289CFD70055C0AE /* AcceptableObserver.swift in Sources */,
 				9DA555D32241FC0400EC8CC3 /* AcceptableRelay.swift in Sources */,
-				EDD118FA2289E1630055C0AE /* AnyThrowableValue.swift in Sources */,
 				9D2E26A32240D1CA00C9EDF7 /* BehaviorRelayType.swift in Sources */,
 				9DA555CB2241DE8400EC8CC3 /* BehaviorSubjectType.swift in Sources */,
 				9D2E26A62240D1CA00C9EDF7 /* Dependency.swift in Sources */,
+				9DA555D12241F95400EC8CC3 /* Deprecated.swift in Sources */,
 				EDD118F82289E1170055C0AE /* DynamicMemberLookupAdapter.swift in Sources */,
 				9D2E26A12240D1CA00C9EDF7 /* ExtraType.swift in Sources */,
 				9D2E26A22240D1CA00C9EDF7 /* InputType.swift in Sources */,
@@ -333,7 +330,6 @@
 				9D2E26A52240D1CA00C9EDF7 /* OutputType.swift in Sources */,
 				ED6897C122B184EE00B04DA0 /* PrimitiveProperty.swift in Sources */,
 				9D2E269D2240D1CA00C9EDF7 /* PublishRelayType.swift in Sources */,
-				9DA555D12241F95400EC8CC3 /* ReadOnly.swift in Sources */,
 				9D2E269E2240D1CA00C9EDF7 /* Relay.swift in Sources */,
 				9D2E26A02240D1CA00C9EDF7 /* StateType.swift in Sources */,
 				9D2E26A42240D1CA00C9EDF7 /* UnioStream.swift in Sources */,

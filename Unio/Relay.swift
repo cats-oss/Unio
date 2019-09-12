@@ -19,15 +19,8 @@ public final class Relay<T> {
 
     internal let _dependency: T
 
-    private let _observables: DMLA.Observables<T>?
-    private let _values: DMLA.Values<T>?
-
-    private init(dependency: T,
-                 observables: DMLA.Observables<T>?,
-                 values: DMLA.Values<T>?) {
+    private init(dependency: T) {
         self._dependency = dependency
-        self._observables = observables
-        self._values = values
     }
 }
 
@@ -47,7 +40,7 @@ extension Relay where T: InputType {
 
     /// Initializes with `Input`.
     public convenience init(_ dependency: T) {
-        self.init(dependency: dependency, observables: nil, values: nil)
+        self.init(dependency: dependency)
     }
 
     /// Accepts `event` and emits it to subscribers via `Input`.
@@ -87,37 +80,42 @@ extension Relay where T: InputType {
 
 extension Relay where T: OutputType {
 
-    public var observables: DMLA.Observables<T> {
-        return _observables!
-    }
-
-    public var values: DMLA.Values<T> {
-        return _values!
-    }
-
     /// Initializes with `Output`.
     public convenience init(_ dependency: T) {
-        self.init(dependency: dependency,
-                  observables: .init(dependency),
-                  values: .init(dependency))
+        self.init(dependency: dependency)
     }
 
     /// Makes possible to get Observable from `Output`.
     public func observable<O: ObservableConvertibleType>(for keyPath: KeyPath<T, O>) -> Observable<O.Element> {
 
-        return observables[dynamicMember: keyPath]
+        return self[dynamicMember: keyPath]
     }
 
     /// Makes possible to get value from Output when generic parameter is `BehaviorRelay`.
-    public func value<U: ValueAccessible>(for keyPath: KeyPath<T, U>) -> U.Element {
+    public func value<U: ValueAccessibleObservable>(for keyPath: KeyPath<T, U>) -> U.Element {
 
-        return values[dynamicMember: keyPath]
+        return self[dynamicMember: keyPath].value
     }
 
     /// Makes possible to get value from Output when generic parameter is `BehaviorSubject`.
-    public func value<U: ThrowableValueAccessible>(for keyPath: KeyPath<T, U>) throws -> U.Element {
+    public func value<U: ThrowableValueAccessibleObservable>(for keyPath: KeyPath<T, U>) throws -> U.Element {
 
-        return try values[dynamicMember: keyPath].throwableValue()
+        return try self[dynamicMember: keyPath].throwableValue()
+    }
+
+    public subscript<O: ObservableConvertibleType>(dynamicMember keyPath: KeyPath<T, O>) -> Observable<O.Element> {
+
+        return _dependency[keyPath: keyPath].asObservable()
+    }
+
+    public subscript<O: ValueAccessibleObservable>(dynamicMember keyPath: KeyPath<T, O>) -> Property<O.Element> {
+
+        return Property(self, for: keyPath)
+    }
+
+    public subscript<O: ThrowableValueAccessibleObservable>(dynamicMember keyPath: KeyPath<T, O>) -> ThrowableProperty<O.Element> {
+
+        return ThrowableProperty(self, for: keyPath)
     }
 }
 
@@ -131,7 +129,7 @@ extension Relay where T: ValueAccessibleObservable {
 
     internal convenience init<U: OutputType>(_ output: Relay<U>, for keyPath: KeyPath<U, T>) {
         let behaviorRelay = output._dependency[keyPath: keyPath]
-        self.init(dependency: behaviorRelay, observables: nil, values: nil)
+        self.init(dependency: behaviorRelay)
     }
 
     public func asObservable() -> Observable<T.Element> {
@@ -145,7 +143,7 @@ extension Relay where T: ThrowableValueAccessibleObservable {
 
     internal convenience init<U: OutputType>(_ output: Relay<U>, for keyPath: KeyPath<U, T>) {
         let behaviorSubject = output._dependency[keyPath: keyPath]
-        self.init(dependency: behaviorSubject, observables: nil, values: nil)
+        self.init(dependency: behaviorSubject)
     }
 
     public func throwableValue() throws -> T.Element {

@@ -28,25 +28,7 @@ public enum DynamicMemberLookupAdapter {
     }
 
     @dynamicMemberLookup
-    public final class Values<T> {
-
-        private let object: T
-
-        init(_ object: T) {
-            self.object = object
-        }
-
-        public subscript<U: ValueAccessible>(dynamicMember keyPath: KeyPath<T, U>) -> U.Element {
-            return object[keyPath: keyPath].value
-        }
-
-        public subscript<U: ThrowableValueAccessible>(dynamicMember keyPath: KeyPath<T, U>) -> AnyThrowableValue<U.Element> {
-            return AnyThrowableValue(object[keyPath: keyPath])
-        }
-    }
-
-    @dynamicMemberLookup
-    public final class ReadOnlyReferences<Output: OutputType> {
+    public final class Properties<Output: OutputType> {
 
         private let output: Relay<Output>
 
@@ -54,12 +36,12 @@ public enum DynamicMemberLookupAdapter {
             self.output = output
         }
 
-        public subscript<T: ValueAccessible>(dynamicMember keyPath: KeyPath<Output, T>) -> ReadOnly<T> {
-            return ReadOnly(output, for: keyPath)
+        public subscript<T: ValueAccessibleObservable>(dynamicMember keyPath: KeyPath<Output, T>) -> Property<T.Element> {
+            return Property(output, for: keyPath)
         }
 
-        public subscript<T: ThrowableValueAccessible>(dynamicMember keyPath: KeyPath<Output, T>) -> ReadOnly<T> {
-            return ReadOnly(output, for: keyPath)
+        public subscript<T: ThrowableValueAccessibleObservable>(dynamicMember keyPath: KeyPath<Output, T>) -> ThrowableProperty<T.Element> {
+            return ThrowableProperty(output, for: keyPath)
         }
     }
 }
@@ -73,15 +55,7 @@ extension DMLA.Observables {
     }
 }
 
-extension DMLA.Values {
-
-    @available(*, unavailable)
-    subscript(dynamicMember member: String) -> Never {
-        fatalError("must not be accessible")
-    }
-}
-
-extension DMLA.ReadOnlyReferences {
+extension DMLA.Properties {
 
     @available(*, unavailable)
     subscript(dynamicMember member: String) -> Never {

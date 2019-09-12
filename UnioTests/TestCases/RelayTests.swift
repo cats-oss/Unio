@@ -114,7 +114,7 @@ final class RelayTests: XCTestCase {
         let stack = BehaviorRelay<String?>(value: nil)
 
         #if swift(>=5.1)
-        let disposable = testTarget.observables.relay
+        let disposable = testTarget.relay
             .bind(to: stack)
         #else
         let disposable = testTarget.observable(for: \.relay)
@@ -136,7 +136,7 @@ final class RelayTests: XCTestCase {
         dependency.outputRelay.accept(expected)
 
         #if swift(>=5.1)
-        XCTAssertEqual(testTarget.values.relay, expected)
+        XCTAssertEqual(testTarget.relay.value, expected)
         #else
         XCTAssertEqual(testTarget.value(for: \.relay), expected)
         #endif
@@ -151,7 +151,7 @@ final class RelayTests: XCTestCase {
 
 
         #if swift(>=5.1)
-        XCTAssertEqual(try testTarget.values.subject.throwableValue(), expected)
+        XCTAssertEqual(try testTarget.subject.throwableValue(), expected)
         #else
         XCTAssertEqual(try testTarget.value(for: \.subject), expected)
         #endif

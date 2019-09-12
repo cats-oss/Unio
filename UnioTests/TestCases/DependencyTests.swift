@@ -62,40 +62,32 @@ final class DependencyTests: XCTestCase {
         disposable.dispose()
     }
 
-    func testRelayOnly_ValueAccessible() {
+    func testProperty_ValueAccessible() {
 
         let expected = "test-ValueAccessible"
         let testTarget = dependency.testTarget
 
-<<<<<<< HEAD
         #if swift(>=5.1)
-        let readOnly = testTarget.readOnlyReferences(from: dependency.output).relay
+        let property = testTarget.properties(from: dependency.output).relay
         #else
-        let readOnly = testTarget.readOnlyReference(from: dependency.output, for: \.relay)
-        #endif
-=======
         let property = testTarget.property(from: dependency.output, for: \.relay)
->>>>>>> origin/add-property
+        #endif
 
         dependency.outputRelay.accept(expected)
 
         XCTAssertEqual(property.value, expected)
     }
 
-    func testRelayOnly_ThrowableValueAccessible() {
+    func testProperty_ThrowableValueAccessible() {
 
         let expected = "test-ThrowableValueAccessible"
         let testTarget = dependency.testTarget
 
-<<<<<<< HEAD
         #if swift(>=5.1)
-        let readOnly = testTarget.readOnlyReferences(from: dependency.output).subject
+        let property = testTarget.properties(from: dependency.output).subject
         #else
-        let readOnly = testTarget.readOnlyReference(from: dependency.output, for: \.subject)
-        #endif
-=======
         let property = testTarget.property(from: dependency.output, for: \.subject)
->>>>>>> origin/add-property
+        #endif
 
         dependency.outputSubject.onNext(expected)
 
