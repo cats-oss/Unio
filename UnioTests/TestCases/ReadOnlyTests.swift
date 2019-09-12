@@ -63,16 +63,16 @@ extension ReadOnlyTests {
 
     private struct Dependency {
 
-        let testTargetSubject: ReadOnly<BehaviorSubject<String?>>
-        let testTargetRelay: ReadOnly<BehaviorRelay<String?>>
+        let testTargetSubject: ThrowableProperty<String?>
+        let testTargetRelay: Property<String?>
 
         let subject = BehaviorSubject<String?>(value: nil)
         let relay = BehaviorRelay<String?>(value: nil)
 
         init() {
             let output = Relay(Output(subject: subject, relay: relay))
-            self.testTargetSubject = ReadOnly(output, for: \.subject)
-            self.testTargetRelay = ReadOnly(output, for: \.relay)
+            self.testTargetSubject = ThrowableProperty(output, for: \.subject)
+            self.testTargetRelay = Property(output, for: \.relay)
         }
     }
 }
