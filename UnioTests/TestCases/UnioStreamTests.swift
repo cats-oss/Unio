@@ -30,7 +30,7 @@ final class UnioStreamTests: XCTestCase {
             .bind(to: stack)
 
         #if swift(>=5.1)
-        testTarget.input.relay.accept(expected)
+        testTarget.input.relay.onNext(expected)
         #else
         testTarget.input.accept(expected, for: \.relay)
         #endif

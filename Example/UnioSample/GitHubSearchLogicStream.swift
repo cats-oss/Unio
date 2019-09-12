@@ -11,8 +11,8 @@ import RxSwift
 import RxRelay
 
 protocol GitHubSearchLogicStreamType: AnyObject {
-    var input: Relay<GitHubSearchLogicStream.Input> { get }
-    var output: Relay<GitHubSearchLogicStream.Output> { get }
+    var input: InputWrapper<GitHubSearchLogicStream.Input> { get }
+    var output: OutputWrapper<GitHubSearchLogicStream.Output> { get }
 }
 
 final class GitHubSearchLogicStream: UnioStream<GitHubSearchLogicStream.Logic>, GitHubSearchLogicStreamType {
@@ -69,7 +69,7 @@ extension GitHubSearchLogicStream.Logic {
 
         let searchResponse: Observable<GitHub.ItemsResponse<GitHub.Repository>>
         #if swift(>=5.1)
-        searchResponse = searchAPIStream.output.observables.searchResponse
+        searchResponse = searchAPIStream.output.searchResponse
         #else
         searchResponse = searchAPIStream.output.observable(for: \.searchResponse)
         #endif
@@ -79,7 +79,7 @@ extension GitHubSearchLogicStream.Logic {
             .disposed(by: disposeBag)
 
         let searchText: Observable<String?>
-        let searchRepository: AcceptableObserver<String>
+        let searchRepository: AnyObserver<String>
         #if swift(>=5.1)
         searchText = dependency.inputObservables.searchText
         searchRepository = searchAPIStream.input.searchRepository
@@ -100,7 +100,7 @@ extension GitHubSearchLogicStream.Logic {
 
         #if swift(>=5.1)
         return Output(repositories: state.repositories,
-                      error: searchAPIStream.output.observables.searchError)
+                      error: searchAPIStream.output.searchError)
         #else
         return Output(repositories: state.repositories,
                       error: searchAPIStream.output.observable(for: \.searchError))

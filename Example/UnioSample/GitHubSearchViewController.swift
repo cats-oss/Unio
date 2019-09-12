@@ -67,7 +67,7 @@ final class GitHubSearchViewController: UIViewController {
 
             let repositories: Observable<[GitHub.Repository]>
             #if swift(>=5.1)
-            repositories = output.observables.repositories
+            repositories = output.repositories
             #else
             repositories = output.observable(for: \.repositories)
             #endif
@@ -80,7 +80,7 @@ final class GitHubSearchViewController: UIViewController {
 
             let errorMessage: Observable<String>
             #if swift(>=5.1)
-            errorMessage = output.observables.errorMessage
+            errorMessage = output.errorMessage
             #else
             errorMessage = output.observable(for: \.errorMessage)
             #endif

@@ -1,5 +1,5 @@
 //
-//  Relay.swift
+//  Wrappers.swift
 //  Unio
 //
 //  Created by marty-suzuki on 2019/03/15.
@@ -11,46 +11,24 @@ import RxRelay
 import RxSwift
 
 /// Makes possible to access particular method of property that contained by Input (or Output) even while hides actual properties (PublishRelay, PublishSubject and so on).
-///
-/// - note: When generic parameter is `InputType`, it makes possible to access Observales via `KeyPath`.
-///         On the other hand, when generic parameter is `OutType`, it makes possible to access Observers via `KeyPath`.
 @dynamicMemberLookup
-public final class Relay<T> {
+public final class InputWrapper<T: InputType> {
 
     internal let _dependency: T
 
-    private init(dependency: T) {
-        self._dependency = dependency
-    }
-}
-
-#if swift(<5.1)
-extension Relay {
-
-    @available(*, unavailable)
-    subscript(dynamicMember member: String) -> Never {
-        fatalError("must not be accessible")
-    }
-}
-#endif
-
-// - MARK: Relay<Input>
-
-extension Relay where T: InputType {
-
     /// Initializes with `Input`.
-    public convenience init(_ dependency: T) {
-        self.init(dependency: dependency)
+    public init(_ dependency: T) {
+        self._dependency = dependency
     }
 
     /// Accepts `event` and emits it to subscribers via `Input`.
     public func accept<U: AcceptableRelay>(_ value: U.Element, for keyPath: KeyPath<T, U>) {
 
-        accept(for: keyPath).accept(value)
+        accept(for: keyPath).onNext(value)
     }
 
     /// Send `event` to this observer via `Input`.
-    public func accept<U: AcceptableRelay>(for keyPath: KeyPath<T, U>) -> AcceptableObserver<U.Element> {
+    public func accept<U: AcceptableRelay>(for keyPath: KeyPath<T, U>) -> AnyObserver<U.Element> {
 
         return self[dynamicMember: keyPath]
     }
@@ -67,22 +45,27 @@ extension Relay where T: InputType {
         return self[dynamicMember: keyPath]
     }
 
-    public subscript<U: AcceptableRelay>(dynamicMember keyPath: KeyPath<T, U>) -> AcceptableObserver<U.Element> {
-        return AcceptableObserver(_dependency[keyPath: keyPath])
+    public subscript<U: AcceptableRelay>(dynamicMember keyPath: KeyPath<T, U>) -> AnyObserver<U.Element> {
+
+        let relay = _dependency[keyPath: keyPath]
+        return AnyObserver { $0.element.map(relay.accept) }
     }
 
     public subscript<O: ObserverType>(dynamicMember keyPath: KeyPath<T, O>) -> AnyObserver<O.Element> {
+
         return _dependency[keyPath: keyPath].asObserver()
     }
 }
 
-// - MARK: Relay<Output>
+/// Makes possible to access particular method of property that contained by Output even while hides actual properties (BehaviorRelay, BehaviorSubject and so on).
+@dynamicMemberLookup
+public final class OutputWrapper<T: OutputType> {
 
-extension Relay where T: OutputType {
+    internal let _dependency: T
 
     /// Initializes with `Output`.
-    public convenience init(_ dependency: T) {
-        self.init(dependency: dependency)
+    public init(_ dependency: T) {
+        self._dependency = dependency
     }
 
     /// Makes possible to get Observable from `Output`.
@@ -103,6 +86,16 @@ extension Relay where T: OutputType {
         return try self[dynamicMember: keyPath].throwableValue()
     }
 
+    public func property<U: ValueAccessibleObservable>(for keyPath: KeyPath<T, U>) -> Property<U.Element> {
+
+        return self[dynamicMember: keyPath]
+    }
+
+    public func property<U: ThrowableValueAccessibleObservable>(for keyPath: KeyPath<T, U>) -> ThrowableProperty<U.Element> {
+
+        return self[dynamicMember: keyPath]
+    }
+
     public subscript<O: ObservableConvertibleType>(dynamicMember keyPath: KeyPath<T, O>) -> Observable<O.Element> {
 
         return _dependency[keyPath: keyPath].asObservable()
@@ -117,40 +110,54 @@ extension Relay where T: OutputType {
 
         return ThrowableProperty(self, for: keyPath)
     }
-}
 
-// - MARK: Relay<BehaviorRelay>
+    public subscript<E>(dynamicMember keyPath: KeyPath<T, Property<E>>) -> Property<E> {
 
-extension Relay where T: ValueAccessibleObservable {
-
-    public var value: T.Element {
-        return _dependency.value
+        return _dependency[keyPath: keyPath]
     }
 
-    internal convenience init<U: OutputType>(_ output: Relay<U>, for keyPath: KeyPath<U, T>) {
-        let behaviorRelay = output._dependency[keyPath: keyPath]
-        self.init(dependency: behaviorRelay)
-    }
+    public subscript<E>(dynamicMember keyPath: KeyPath<T, ThrowableProperty<E>>) -> ThrowableProperty<E> {
 
-    public func asObservable() -> Observable<T.Element> {
-        return _dependency.asObservable()
+        return _dependency[keyPath: keyPath]
     }
 }
 
-// - MARK: Relay<BehaviorSubject>
+@dynamicMemberLookup
+public final class ObservableWrapper<T> {
 
-extension Relay where T: ThrowableValueAccessibleObservable {
+    private let object: T
 
-    internal convenience init<U: OutputType>(_ output: Relay<U>, for keyPath: KeyPath<U, T>) {
-        let behaviorSubject = output._dependency[keyPath: keyPath]
-        self.init(dependency: behaviorSubject)
+    internal init(_ object: T) {
+        self.object = object
     }
 
-    public func throwableValue() throws -> T.Element {
-        return try _dependency.throwableValue()
-    }
-
-    public func asObservable() -> Observable<T.Element> {
-        return _dependency.asObservable()
+    public subscript<O: ObservableConvertibleType>(dynamicMember keyPath: KeyPath<T, O>) -> Observable<O.Element> {
+        return object[keyPath: keyPath].asObservable()
     }
 }
+
+#if swift(<5.1)
+extension InputWrapper {
+
+    @available(*, unavailable)
+    subscript(dynamicMember member: String) -> Never {
+        fatalError("must not be accessible")
+    }
+}
+
+extension OutputWrapper {
+
+    @available(*, unavailable)
+    subscript(dynamicMember member: String) -> Never {
+        fatalError("must not be accessible")
+    }
+}
+
+extension ObservableWrapper {
+
+    @available(*, unavailable)
+    subscript(dynamicMember member: String) -> Never {
+        fatalError("must not be accessible")
+    }
+}
+#endif

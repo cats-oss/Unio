@@ -49,7 +49,7 @@ extension PrimitiveProperty: ValueAccessible where Failure == Never {
         return _value()
     }
 
-    internal convenience init<U: OutputType, T: ValueAccessibleObservable>(_ output: Relay<U>, for keyPath: KeyPath<U, T>) where T.Element == Element {
+    internal convenience init<U: OutputType, T: ValueAccessibleObservable>(_ output: OutputWrapper<U>, for keyPath: KeyPath<U, T>) where T.Element == Element {
         let behaviorRelay = output._dependency[keyPath: keyPath]
         self.init(value: { behaviorRelay.value },
                   throwableValue: { fatalError("not reached here") },
@@ -64,7 +64,7 @@ extension PrimitiveProperty: ThrowableValueAccessible where Failure == Error {
         return try _throwableValue()
     }
 
-    internal convenience init<U: OutputType, T: ThrowableValueAccessibleObservable>(_ output: Relay<U>, for keyPath: KeyPath<U, T>) where T.Element == Element {
+    internal convenience init<U: OutputType, T: ThrowableValueAccessibleObservable>(_ output: OutputWrapper<U>, for keyPath: KeyPath<U, T>) where T.Element == Element {
         let behaviorSubject = output._dependency[keyPath: keyPath]
         self.init(value: { fatalError("not reached here")  },
                   throwableValue: { try behaviorSubject.throwableValue() },

@@ -61,39 +61,6 @@ final class DependencyTests: XCTestCase {
 
         disposable.dispose()
     }
-
-    func testProperty_ValueAccessible() {
-
-        let expected = "test-ValueAccessible"
-        let testTarget = dependency.testTarget
-
-        #if swift(>=5.1)
-        let property = testTarget.properties(from: dependency.output).relay
-        #else
-        let property = testTarget.property(from: dependency.output, for: \.relay)
-        #endif
-
-        dependency.outputRelay.accept(expected)
-
-        XCTAssertEqual(property.value, expected)
-    }
-
-    func testProperty_ThrowableValueAccessible() {
-
-        let expected = "test-ThrowableValueAccessible"
-        let testTarget = dependency.testTarget
-
-        #if swift(>=5.1)
-        let property = testTarget.properties(from: dependency.output).subject
-        #else
-        let property = testTarget.property(from: dependency.output, for: \.subject)
-        #endif
-
-        dependency.outputSubject.onNext(expected)
-
-        XCTAssertEqual(try property.throwableValue(), expected)
-    }
-
 }
 
 extension DependencyTests {
@@ -112,7 +79,7 @@ extension DependencyTests {
 
         let testTarget: Unio.Dependency<Input, NoState, NoExtra>
 
-        let output: Relay<Output>
+        let output: OutputWrapper<Output>
         let inputSubject = PublishSubject<String>()
         let inputRelay = PublishRelay<String>()
 
@@ -121,7 +88,7 @@ extension DependencyTests {
 
         init() {
             let input = Input(relay: inputRelay, subject: inputSubject)
-            self.output = Relay(Output(subject: outputSubject, relay: outputRelay))
+            self.output = OutputWrapper(Output(subject: outputSubject, relay: outputRelay))
             self.testTarget = Unio.Dependency(input: input, state: .init(), extra: .init())
         }
     }

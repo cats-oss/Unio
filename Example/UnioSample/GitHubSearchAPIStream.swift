@@ -11,8 +11,8 @@ import RxSwift
 import RxRelay
 
 protocol GitHubSearchAPIStreamType: AnyObject {
-    var input: Relay<GitHubSearchAPIStream.Input> { get }
-    var output: Relay<GitHubSearchAPIStream.Output> { get }
+    var input: InputWrapper<GitHubSearchAPIStream.Input> { get }
+    var output: OutputWrapper<GitHubSearchAPIStream.Output> { get }
 }
 
 final class GitHubSearchAPIStream: UnioStream<GitHubSearchAPIStream.Logic>, GitHubSearchAPIStreamType {
