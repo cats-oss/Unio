@@ -320,7 +320,11 @@ final class GitHubSearchViewController: UIViewController {
 }
 ```
 
-The document which does not use `KeyPath Dynamic Member Lookup` is [here](https://github.com/cats-oss/Unio/tree/0.4.1#about-unio).
+The documentation which does not use `KeyPath Dynamic Member Lookup` is [here](https://github.com/cats-oss/Unio/tree/0.4.1#about-unio).
+
+#### Migration Guides
+
+- [Unio 0.5.0 Migration Guide](./Documentation/Unio0_5_0MigrationGuide.md)
 
 ### Xcode Template
 
