@@ -17,6 +17,9 @@ public final class Dependency<Input: InputType, State: StateType, Extra: ExtraTy
     public let state: State
     public let extra: Extra
 
+    /// Makes possible to get Observable from `Input`.
+    ///
+    /// - note: KeyPath Dynamic Member Lookup is avairable greater than Swift5.1
     public let inputObservables: ObservableWrapper<Input>
 
     internal init(input: Input, state: State, extra: Extra) {

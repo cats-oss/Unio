@@ -45,12 +45,18 @@ public final class InputWrapper<T: InputType> {
         return self[dynamicMember: keyPath]
     }
 
+    /// Send `event` to this observer via `Input`.
+    ///
+    /// - note: KeyPath Dynamic Member Lookup is avairable greater than Swift5.1
     public subscript<U: AcceptableRelay>(dynamicMember keyPath: KeyPath<T, U>) -> AnyObserver<U.Element> {
 
         let relay = _dependency[keyPath: keyPath]
         return AnyObserver { $0.element.map(relay.accept) }
     }
 
+    /// Send `event` to this observer via `Input`.
+    ///
+    /// - note: KeyPath Dynamic Member Lookup is avairable greater than Swift5.1
     public subscript<O: ObserverType>(dynamicMember keyPath: KeyPath<T, O>) -> AnyObserver<O.Element> {
 
         return _dependency[keyPath: keyPath].asObserver()
@@ -86,42 +92,60 @@ public final class OutputWrapper<T: OutputType> {
         return try self[dynamicMember: keyPath].throwableValue()
     }
 
+    /// Makes possible to get `Property<U>` from Output when generic parameter is `BehaviorRelay`.
     public func property<U: ValueAccessibleObservable>(for keyPath: KeyPath<T, U>) -> Property<U.Element> {
 
         return self[dynamicMember: keyPath]
     }
 
+    /// Makes possible to get `ThrowableProperty<U>` from Output when generic parameter is `BehaviorSubject`.
     public func property<U: ThrowableValueAccessibleObservable>(for keyPath: KeyPath<T, U>) -> ThrowableProperty<U.Element> {
 
         return self[dynamicMember: keyPath]
     }
 
+    /// Makes possible to get Observable from `Output`.
+    ///
+    /// - note: KeyPath Dynamic Member Lookup is avairable greater than Swift5.1
     public subscript<O: ObservableConvertibleType>(dynamicMember keyPath: KeyPath<T, O>) -> Observable<O.Element> {
 
         return _dependency[keyPath: keyPath].asObservable()
     }
 
+    /// Makes possible to get `Property<U>` from Output when generic parameter is `BehaviorRelay`.
+    ///
+    /// - note: KeyPath Dynamic Member Lookup is avairable greater than Swift5.1
     public subscript<O: ValueAccessibleObservable>(dynamicMember keyPath: KeyPath<T, O>) -> Property<O.Element> {
 
         return Property(self, for: keyPath)
     }
 
+    /// Makes possible to get `ThrowableProperty<U>` from Output when generic parameter is `BehaviorSubject`.
+    ///
+    /// - note: KeyPath Dynamic Member Lookup is avairable greater than Swift5.1
     public subscript<O: ThrowableValueAccessibleObservable>(dynamicMember keyPath: KeyPath<T, O>) -> ThrowableProperty<O.Element> {
 
         return ThrowableProperty(self, for: keyPath)
     }
 
+    /// Makes possible to get `Property<U>` from Output.
+    ///
+    /// - note: KeyPath Dynamic Member Lookup is avairable greater than Swift5.1
     public subscript<E>(dynamicMember keyPath: KeyPath<T, Property<E>>) -> Property<E> {
 
         return _dependency[keyPath: keyPath]
     }
 
+    /// Makes possible to get `ThrowableProperty<U>` from Output.
+    ///
+    /// - note: KeyPath Dynamic Member Lookup is avairable greater than Swift5.1
     public subscript<E>(dynamicMember keyPath: KeyPath<T, ThrowableProperty<E>>) -> ThrowableProperty<E> {
 
         return _dependency[keyPath: keyPath]
     }
 }
 
+/// Makes possible to access Observable that contained by T even while hides actual properties (BehaviorRelay, BehaviorSubject and so on).
 @dynamicMemberLookup
 public final class ObservableWrapper<T> {
 
@@ -131,6 +155,9 @@ public final class ObservableWrapper<T> {
         self.object = object
     }
 
+    /// Makes possible to get Observable from `T`.
+    ///
+    /// - note: KeyPath Dynamic Member Lookup is avairable greater than Swift5.1
     public subscript<O: ObservableConvertibleType>(dynamicMember keyPath: KeyPath<T, O>) -> Observable<O.Element> {
         return object[keyPath: keyPath].asObservable()
     }
