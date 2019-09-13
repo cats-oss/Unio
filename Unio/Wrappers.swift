@@ -24,7 +24,7 @@ public final class InputWrapper<T: InputType> {
     /// Accepts `event` and emits it to subscribers via `Input`.
     public func accept<U: AcceptableRelay>(_ value: U.Element, for keyPath: KeyPath<T, U>) {
 
-        accept(for: keyPath).onNext(value)
+        self[dynamicMember: keyPath](value)
     }
 
     /// Send `event` to this observer via `Input`.
@@ -43,6 +43,14 @@ public final class InputWrapper<T: InputType> {
     public func onEvent<O: ObserverType>(for keyPath: KeyPath<T, O>) -> AnyObserver<O.Element> {
 
         return self[dynamicMember: keyPath]
+    }
+
+    /// Accepts `event` and emits it to subscribers via `Input`.
+    ///
+    /// - note: KeyPath Dynamic Member Lookup is avairable greater than Swift5.1
+    public subscript<U: AcceptableRelay>(dynamicMember keyPath: KeyPath<T, U>) -> (U.Element) -> Void {
+
+        return _dependency[keyPath: keyPath].accept
     }
 
     /// Send `event` to this observer via `Input`.

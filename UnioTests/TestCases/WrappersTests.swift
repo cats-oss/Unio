@@ -74,7 +74,7 @@ final class WrappersTests: XCTestCase {
             .bind(to: stack)
 
         #if swift(>=5.1)
-        testTarget.relay.onNext(expected)
+        testTarget.relay(expected)
         #else
         testTarget.accept(expected, for: \.relay)
         #endif
