@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RxCocoa
+import RxRelay
 import RxSwift
 
 /// Represents a property that makes possible to access value
