@@ -86,16 +86,16 @@ struct Input: InputType {
 ```
 
 Properties of Input are defined internal scope.
-But these can only access `func accept(_:)` (or `func on(_:)`) via KeyPath if Input is wrapped with `Relay`.
+But these can only access `func accept(_:)` (or `AnyObserver`) via KeyPath if Input is wrapped with `InputWrapper`.
 
 ```swift
-let input: Relay<Input>
+let input: InputWrapper<Input>
 
-input.accept("query", for: \.searchText)
-input.onEvent(.next(()), for: \.buttonTap)
+input.searchText("query")  // accesses `func accept(_:)`
+input.buttonTap.onNext(()) // accesses `AnyObserver`
 ```
 
-![](https://user-images.githubusercontent.com/2082134/54809413-8fb8cf80-4cc6-11e9-9dc2-07cd14f5c2d8.jpg)
+![](https://user-images.githubusercontent.com/2082134/64858916-afbcc080-d663-11e9-8a70-92a9293f7c83.png)
 
 ### Output
 
@@ -110,30 +110,32 @@ struct Output: OutputType {
 ```
 
 Properties of Output are defined internal scope.
-But these can only access `func asObservable()` via KeyPath if Output is wrapped with `Relay`.
+But these can only access `func asObservable()` via KeyPath if Output is wrapped with `OutputWrapper`.
 
 ```swift
-let output: Relay<Output>
+let output: OutputWrapper<Output>
 
-output.observable(for: \.repositories)
+output.repositories
     .subscribe(onNext: { print($0) })
 
-output.observable(for: \.isEnabled)
+output.isEnabled
     .subscribe(onNext: { print($0) })
 
-output.observable(for: \.error)
+output.error
     .subscribe(onNext: { print($0) })
 ```
 
 If a property is BehaviorRelay (or BehaviorSubject), be able to access value via KeyPath.
 
 ```swift
-output.value(for: \.repositories)
+let p: Property<[GitHub.Repository]> = output.repositories
+p.value
 
-try? output.value(for: \.isEnabled)
+let t: ThrowableProperty<Bool> = output.isEnabled
+try? t.throwableValue()
 ```
 
-![](https://user-images.githubusercontent.com/2082134/54809443-a2cb9f80-4cc6-11e9-8d10-dfe2403f798b.jpg)
+![](https://user-images.githubusercontent.com/2082134/64858314-f7dae380-d661-11e9-9a79-3ca5c53fd90a.png)
 
 ### State
 
@@ -179,8 +181,7 @@ Connect sequences and generate [Output](#output) in `func bind(from:)` to use be
 
 - `dependency.state`
 - `dependency.extra`
-- `dependency.inputObservable(for:)` ... returns a Observable that is property of [Input](#input).
-- `dependency.readOnlyReference(from:for:)` ... returns a read only BehaviorRelay (or BehaviorSubject) (that is wrapped by `ReadOnly<T>`) from property of [Output](#output).
+- `dependency.inputObservables` ... returns a Observable that is property of [Input](#input).
 
 Here is a exmaple of implementation.
 
@@ -190,12 +191,11 @@ extension GitHubSearchViewStream.Logic {
     func bind(from dependency: Dependency<Input, State, Extra>) -> Output {
         let apiStream = dependency.extra.apiStream
 
-        dependency.inputObservable(for: \.searchText)
-            .bind(to: apiStream.input.accept(for: \.searchText))
+        dependency.inputObservables.searchText
+            .bind(to: apiStream.searchText)
             .disposed(by: disposeBag)
 
-        let repositories = apiStream.output
-            .observable(for: \.searchResponse)
+        let repositories = apiStream.output.searchResponse
             .map { $0.items }
 
         return Output(repositories: repositories)
@@ -206,14 +206,14 @@ extension GitHubSearchViewStream.Logic {
 ### UnioStream
 
 UnioStream represents ViewModels of MVVM (it can also be used as Models).
-It has `input: Relay<Input>` and `output: Relay<Output>`.
-It automatically generates `input: Relay<Input>` and `output: Relay<Output>` from instances of [Input](#input), [State](#state), [Extra](#extra) and [Logic](#logic).
+It has `input: InputWrapper<Input>` and `output: OutputWrapper<Output>`.
+It automatically generates `input: InputWrapper<Input>` and `output: OutputWrapper<Output>` from instances of [Input](#input), [State](#state), [Extra](#extra) and [Logic](#logic).
 
 ```swift
 class UnioStream<Logic: LogicType> {
 
-    let input: Relay<Logic.Input>
-    let output: Relay<Logic.Output>
+    let input: InputWrapper<Logic.Input>
+    let output: OutputWrapper<Logic.Output>
 
     init(input: Logic.Input, state: Logic.State, extra: Logic.Extra, logic: Logic)
 }
@@ -240,8 +240,8 @@ Define GitHubSearchViewStream for searching GitHub repositories.
 
 ```swift
 protocol GitHubSearchViewStreamType: AnyObject {
-    var input: Relay<GitHubSearchViewStream.Input> { get }
-    var output: Relay<GitHubSearchViewStream.Output> { get }
+    var input: InputWrapper<GitHubSearchViewStream.Input> { get }
+    var output: OutputWrapper<GitHubSearchViewStream.Output> { get }
 }
 
 final class GitHubSearchViewStream: UnioStream<GitHubSearchViewStream.Logic>, GitHubSearchViewStreamType {
@@ -279,12 +279,11 @@ extension GitHubSearchViewStream.Logic {
     func bind(from dependency: Dependency<Input, State, Extra>) -> Output {
         let apiStream = dependency.extra.apiStream
 
-        dependency.inputObservable(for: \.searchText)
-            .bind(to: apiStream.input.accept(for: \.searchText))
+        dependency.inputObservables.searchText
+            .bind(to: apiStream.input.searchText)
             .disposed(by: disposeBag)
 
-        let repositories = apiStream.output
-            .observable(for: \.searchResponse)
+        let repositories = apiStream.output.searchResponse
             .map { $0.items }
 
         return Output(repositories: repositories)
@@ -307,10 +306,10 @@ final class GitHubSearchViewController: UIViewController {
         super.viewDidLoad()
 
         searchBar.rx.text
-            .bind(to: viewStream.input.accept(for: \.searchText))
+            .bind(to: viewStream.input.searchText)
             .disposed(by: disposeBag)
 
-        viewStream.output.observable(for: \.repositories)
+        viewStream.outpu.repositories
             .bind(to: tableView.rx.items(cellIdentifier: "Cell")) {
                 (row, repository, cell) in
                 cell.textLabel?.text = repository.fullName
@@ -320,6 +319,8 @@ final class GitHubSearchViewController: UIViewController {
     }
 }
 ```
+
+The document which does not use `KeyPath Dynamic Member Lookup` is [here](https://github.com/cats-oss/Unio/tree/0.4.1#about-unio).
 
 ### Xcode Template
 
