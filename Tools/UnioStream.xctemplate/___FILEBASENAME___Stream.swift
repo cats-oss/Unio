@@ -5,8 +5,8 @@ import RxSwift
 import Unio
 
 protocol ___VARIABLE_productName___StreamType: AnyObject {
-    var input: Relay<___VARIABLE_productName___Stream.Input> { get }
-    var output: Relay<___VARIABLE_productName___Stream.Output> { get }
+    var input: InputWrapper<___VARIABLE_productName___Stream.Input> { get }
+    var output: OutputWrapper<___VARIABLE_productName___Stream.Output> { get }
 }
 
 final class ___VARIABLE_productName___Stream: UnioStream<___VARIABLE_productName___Stream.Logic>, ___VARIABLE_productName___StreamType {
@@ -47,7 +47,6 @@ extension ___VARIABLE_productName___Stream {
          *  let isEnabled = BehaviorRelay<Bool>(value: true)
          */
     }
-
 
     struct Extra: ExtraType {
 

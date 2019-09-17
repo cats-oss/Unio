@@ -1,5 +1,5 @@
 //
-//  RelayTests.swift
+//  WrappersTests.swift
 //  UnioTests
 //
 //  Created by marty-suzuki on 2019/03/21.
@@ -12,7 +12,7 @@ import RxSwift
 import XCTest
 @testable import Unio
 
-final class RelayTests: XCTestCase {
+final class WrappersTests: XCTestCase {
 
     private var dependency: Dependency!
 
@@ -30,7 +30,11 @@ final class RelayTests: XCTestCase {
         let disposable = dependency.inputSubject
             .bind(to: stack)
 
+        #if swift(>=5.1)
+        testTarget.subject.onNext(expected)
+        #else
         testTarget.onEvent(.next(expected), for: \.subject)
+        #endif
 
         XCTAssertEqual(stack.value, expected)
 
@@ -46,8 +50,13 @@ final class RelayTests: XCTestCase {
         let disposable1 = dependency.inputSubject
             .bind(to: stack)
 
+        #if swift(>=5.1)
+        let disposable2 = Observable.just(expected)
+            .bind(to: testTarget.subject)
+        #else
         let disposable2 = Observable.just(expected)
             .bind(to: testTarget.onEvent(for: \.subject))
+        #endif
 
         XCTAssertEqual(stack.value, expected)
 
@@ -64,7 +73,11 @@ final class RelayTests: XCTestCase {
         let disposable = dependency.inputRelay
             .bind(to: stack)
 
+        #if swift(>=5.1)
+        testTarget.relay(expected)
+        #else
         testTarget.accept(expected, for: \.relay)
+        #endif
 
         XCTAssertEqual(stack.value, expected)
 
@@ -80,8 +93,13 @@ final class RelayTests: XCTestCase {
         let disposable1 = dependency.inputRelay
             .bind(to: stack)
 
+        #if swift(>=5.1)
+        let disposable2 = Observable.just(expected)
+            .bind(to: testTarget.relay)
+        #else
         let disposable2 = Observable.just(expected)
             .bind(to: testTarget.accept(for: \.relay))
+        #endif
 
         XCTAssertEqual(stack.value, expected)
 
@@ -95,10 +113,57 @@ final class RelayTests: XCTestCase {
         let testTarget = dependency.testTargetOutput
         let stack = BehaviorRelay<String?>(value: nil)
 
+        #if swift(>=5.1)
+        let disposable = testTarget._observable
+            .bind(to: stack)
+        #else
+        let disposable = testTarget.observable(for: \._observable)
+            .bind(to: stack)
+        #endif
+
+        dependency.acceptForObservable(expected)
+
+        XCTAssertEqual(stack.value, expected)
+
+        disposable.dispose()
+    }
+
+    func testOutput_observable_as_behavior_relay() {
+
+        let expected = "test-observable-as-behavior-relay"
+        let testTarget = dependency.testTargetOutput
+        let stack = BehaviorRelay<String?>(value: nil)
+
+        #if swift(>=5.1)
+        let disposable = testTarget.relay
+            .bind(to: stack)
+        #else
         let disposable = testTarget.observable(for: \.relay)
             .bind(to: stack)
+        #endif
 
         dependency.outputRelay.accept(expected)
+
+        XCTAssertEqual(stack.value, expected)
+
+        disposable.dispose()
+    }
+
+    func testOutput_observable_as_behavior_subject() {
+
+        let expected = "test-observable-as-behavior-subject"
+        let testTarget = dependency.testTargetOutput
+        let stack = BehaviorRelay<String?>(value: nil)
+
+        #if swift(>=5.1)
+        let disposable = testTarget.subject
+            .bind(to: stack)
+        #else
+        let disposable = testTarget.observable(for: \.subject)
+            .bind(to: stack)
+        #endif
+
+        dependency.outputSubject.onNext(expected)
 
         XCTAssertEqual(stack.value, expected)
 
@@ -112,7 +177,11 @@ final class RelayTests: XCTestCase {
 
         dependency.outputRelay.accept(expected)
 
+        #if swift(>=5.1)
+        XCTAssertEqual(testTarget.relay.value, expected)
+        #else
         XCTAssertEqual(testTarget.value(for: \.relay), expected)
+        #endif
     }
 
     func testOutput_throwable_value() {
@@ -122,67 +191,20 @@ final class RelayTests: XCTestCase {
 
         dependency.outputSubject.onNext(expected)
 
+        #if swift(>=5.1)
+        XCTAssertEqual(try testTarget.subject.throwableValue(), expected)
+        #else
         XCTAssertEqual(try testTarget.value(for: \.subject), expected)
-    }
-
-    func testValueAccessibleObservable_value() {
-
-        let expected = "test-value"
-        let testTarget = dependency.testTargetRelay
-
-        dependency.outputRelay.accept(expected)
-
-        XCTAssertEqual(testTarget.value, expected)
-    }
-
-    func testValueAccessibleObservable_observable() {
-
-        let expected = "test-observable"
-        let testTarget = dependency.testTargetRelay
-        let stack = BehaviorRelay<String?>(value: nil)
-
-        let disposable = testTarget.asObservable()
-            .bind(to: stack)
-
-        dependency.outputRelay.accept(expected)
-
-        XCTAssertEqual(stack.value, expected)
-
-        disposable.dispose()
-    }
-
-    func testThrowableValueAccessibleObservable_value() {
-
-        let expected = "test-value"
-        let testTarget = dependency.testTargetSubject
-
-        dependency.outputSubject.onNext(expected)
-
-        XCTAssertEqual(try testTarget.throwableValue(), expected)
-    }
-
-    func testThrowableValueAccessibleObservable_observable() {
-
-        let expected = "test-observable"
-        let testTarget = dependency.testTargetSubject
-        let stack = BehaviorRelay<String?>(value: nil)
-
-        let disposable = testTarget.asObservable()
-            .bind(to: stack)
-
-        dependency.outputSubject.onNext(expected)
-
-        XCTAssertEqual(stack.value, expected)
-
-        disposable.dispose()
+        #endif
     }
 }
 
-extension RelayTests {
+extension WrappersTests {
 
     private struct Output: OutputType {
         let subject: BehaviorSubject<String?>
         let relay: BehaviorRelay<String?>
+        let _observable: Observable<String>
     }
 
     private struct Input: InputType {
@@ -192,11 +214,8 @@ extension RelayTests {
 
     private struct Dependency {
 
-        let testTargetInput: Relay<Input>
-        let testTargetOutput: Relay<Output>
-
-        let testTargetSubject: Relay<BehaviorSubject<String?>>
-        let testTargetRelay: Relay<BehaviorRelay<String?>>
+        let testTargetInput: InputWrapper<Input>
+        let testTargetOutput: OutputWrapper<Output>
 
         let inputSubject = PublishSubject<String>()
         let inputRelay = PublishRelay<String>()
@@ -204,15 +223,19 @@ extension RelayTests {
         let outputSubject = BehaviorSubject<String?>(value: nil)
         let outputRelay = BehaviorRelay<String?>(value: nil)
 
+        let acceptForObservable: (String) -> Void
+
         init() {
+            let relayForObservable = PublishRelay<String>()
+            self.acceptForObservable = { relayForObservable.accept($0) }
+
             let input = Input(relay: inputRelay, subject: inputSubject)
-            self.testTargetInput = Relay(input)
+            self.testTargetInput = InputWrapper(input)
 
-            let output = Output(subject: outputSubject, relay: outputRelay)
-            self.testTargetOutput = Relay(output)
-
-            self.testTargetSubject = Relay(testTargetOutput, for: \.subject)
-            self.testTargetRelay = Relay(testTargetOutput, for: \.relay)
+            let output = Output(subject: outputSubject,
+                                relay: outputRelay,
+                                _observable: relayForObservable.asObservable())
+            self.testTargetOutput = OutputWrapper(output)
         }
     }
 }

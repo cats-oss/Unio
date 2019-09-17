@@ -29,7 +29,11 @@ final class UnioStreamTests: XCTestCase {
         let disposable = dependency.input.relay
             .bind(to: stack)
 
+        #if swift(>=5.1)
+        testTarget.input.relay.onNext(expected)
+        #else
         testTarget.input.accept(expected, for: \.relay)
+        #endif
 
         XCTAssertEqual(expected, stack.value)
 
@@ -43,7 +47,11 @@ final class UnioStreamTests: XCTestCase {
 
         dependency.output.relay.accept(expected)
 
+        #if swift(>=5.1)
+        XCTAssertEqual(expected, testTarget.output.relay.value)
+        #else
         XCTAssertEqual(expected, testTarget.output.value(for: \.relay))
+        #endif
     }
 
     func testDependency() {
@@ -69,8 +77,13 @@ final class UnioStreamTests: XCTestCase {
             let expected = "test-input"
             let stack = BehaviorRelay<String?>(value: nil)
 
+            #if swift(>=5.1)
+            let disposable = value.inputObservables.relay
+                .bind(to: stack)
+            #else
             let disposable = value.inputObservable(for: \.relay)
                 .bind(to: stack)
+            #endif
 
             dependency.input.relay.accept(expected)
 

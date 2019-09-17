@@ -13,8 +13,8 @@ import Unio
 
 final class MockGitHubSearchAPIStream: GitHubSearchAPIStreamType {
 
-    let input: Relay<GitHubSearchAPIStream.Input>
-    let output: Relay<GitHubSearchAPIStream.Output>
+    let input: InputWrapper<GitHubSearchAPIStream.Input>
+    let output: OutputWrapper<GitHubSearchAPIStream.Output>
 
     let _input = GitHubSearchAPIStream.Input()
 
@@ -22,9 +22,9 @@ final class MockGitHubSearchAPIStream: GitHubSearchAPIStreamType {
     let searchError = BehaviorRelay<Error?>(value: nil)
 
     init() {
-        self.input = Relay(_input)
+        self.input = InputWrapper(_input)
         let _output = GitHubSearchAPIStream.Output(searchResponse: searchResponse.flatMap { $0.map(Observable.just) ?? .empty() },
                                                    searchError: searchError.flatMap { $0.map(Observable.just) ?? .empty() })
-        self.output = Relay(_output)
+        self.output = OutputWrapper(_output)
     }
 }

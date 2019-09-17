@@ -17,31 +17,20 @@ public final class Dependency<Input: InputType, State: StateType, Extra: ExtraTy
     public let state: State
     public let extra: Extra
 
-    private let _input: Input
+    /// Makes possible to get Observable from `Input`.
+    ///
+    /// - note: KeyPath Dynamic Member Lookup is avairable greater than Swift5.1
+    public let inputObservables: ObservableWrapper<Input>
 
     internal init(input: Input, state: State, extra: Extra) {
-        self._input = input
         self.state = state
         self.extra = extra
+        self.inputObservables = ObservableWrapper(input)
     }
 
     /// Makes possible to get Observable from `Input`.
-    public func inputObservable<O: ObservableType>(for keyPath: KeyPath<Input, O>) -> Observable<O.Element> {
+    public func inputObservable<O: ObservableConvertibleType>(for keyPath: KeyPath<Input, O>) -> Observable<O.Element> {
 
-        return _input[keyPath: keyPath].asObservable()
-    }
-
-    /// Returns read-only value accessible object (e.g. BehaviorRelay).
-    ///
-    /// - note: Object is reference, not copied one.
-    public func readOnlyReference<Output: OutputType, T: ValueAccessible>(from output: Relay<Output>, for keyPath: KeyPath<Output, T>) -> ReadOnly<T> {
-        return ReadOnly(output, for: keyPath)
-    }
-
-    /// Returns read-only value accessible object (e.g. BehaviorSubject).
-    ///
-    /// - note: Object is reference, not copied one.
-    public func readOnlyReference<Output: OutputType, T: ThrowableValueAccessible>(from output: Relay<Output>, for keyPath: KeyPath<Output, T>) -> ReadOnly<T> {
-        return ReadOnly(output, for: keyPath)
+        return inputObservables[dynamicMember: keyPath]
     }
 }

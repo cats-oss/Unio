@@ -11,8 +11,8 @@ import RxSwift
 import RxRelay
 
 protocol GitHubSearchAPIStreamType: AnyObject {
-    var input: Relay<GitHubSearchAPIStream.Input> { get }
-    var output: Relay<GitHubSearchAPIStream.Output> { get }
+    var input: InputWrapper<GitHubSearchAPIStream.Input> { get }
+    var output: OutputWrapper<GitHubSearchAPIStream.Output> { get }
 }
 
 final class GitHubSearchAPIStream: UnioStream<GitHubSearchAPIStream.Logic>, GitHubSearchAPIStreamType {
@@ -57,7 +57,14 @@ extension GitHubSearchAPIStream.Logic {
     func bind(from dependency: Dependency<Input, State, Extra>) -> Output {
 
         let session = dependency.extra.session
-        let searchResponseEvent = dependency.inputObservable(for: \.searchRepository)
+
+        let searchRepository: Observable<String>
+        #if swift(>=5.1)
+        searchRepository = dependency.inputObservables.searchRepository
+        #else
+        searchRepository = dependency.inputObservable(for: \.searchRepository)
+        #endif
+        let searchResponseEvent = searchRepository
             .flatMapLatest { query -> Observable<Event<GitHub.ItemsResponse<GitHub.Repository>>> in
                 guard var components = URLComponents(string: "https://api.github.com/search/repositories") else {
                     return .empty()

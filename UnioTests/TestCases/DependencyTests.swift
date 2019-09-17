@@ -26,8 +26,13 @@ final class DependencyTests: XCTestCase {
         let testTarget = dependency.testTarget
         let stack = BehaviorRelay<String?>(value: nil)
 
+        #if swift(>=5.1)
+        let disposable = testTarget.inputObservables.relay
+            .bind(to: stack)
+        #else
         let disposable = testTarget.inputObservable(for: \.relay)
             .bind(to: stack)
+        #endif
 
         dependency.inputRelay.accept(expected)
 
@@ -42,8 +47,13 @@ final class DependencyTests: XCTestCase {
         let testTarget = dependency.testTarget
         let stack = BehaviorRelay<String?>(value: nil)
 
+        #if swift(>=5.1)
+        let disposable = testTarget.inputObservables.subject
+            .bind(to: stack)
+        #else
         let disposable = testTarget.inputObservable(for: \.subject)
             .bind(to: stack)
+        #endif
 
         dependency.inputSubject.onNext(expected)
 
@@ -51,31 +61,6 @@ final class DependencyTests: XCTestCase {
 
         disposable.dispose()
     }
-
-    func testRelayOnly_ValueAccessible() {
-
-        let expected = "test-ValueAccessible"
-        let testTarget = dependency.testTarget
-
-        let readOnly = testTarget.readOnlyReference(from: dependency.output, for: \.relay)
-
-        dependency.outputRelay.accept(expected)
-
-        XCTAssertEqual(readOnly.value, expected)
-    }
-
-    func testRelayOnly_ThrowableValueAccessible() {
-
-        let expected = "test-ThrowableValueAccessible"
-        let testTarget = dependency.testTarget
-
-        let readOnly = testTarget.readOnlyReference(from: dependency.output, for: \.subject)
-
-        dependency.outputSubject.onNext(expected)
-
-        XCTAssertEqual(try readOnly.throwableValue(), expected)
-    }
-
 }
 
 extension DependencyTests {
@@ -94,7 +79,7 @@ extension DependencyTests {
 
         let testTarget: Unio.Dependency<Input, NoState, NoExtra>
 
-        let output: Relay<Output>
+        let output: OutputWrapper<Output>
         let inputSubject = PublishSubject<String>()
         let inputRelay = PublishRelay<String>()
 
@@ -103,7 +88,7 @@ extension DependencyTests {
 
         init() {
             let input = Input(relay: inputRelay, subject: inputSubject)
-            self.output = Relay(Output(subject: outputSubject, relay: outputRelay))
+            self.output = OutputWrapper(Output(subject: outputSubject, relay: outputRelay))
             self.testTarget = Unio.Dependency(input: input, state: .init(), extra: .init())
         }
     }

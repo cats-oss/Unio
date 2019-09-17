@@ -11,8 +11,8 @@ import RxSwift
 import RxRelay
 
 protocol GitHubSearchViewStreamType: AnyObject {
-    var input: Relay<GitHubSearchViewStream.Input> { get }
-    var output: Relay<GitHubSearchViewStream.Output> { get }
+    var input: InputWrapper<GitHubSearchViewStream.Input> { get }
+    var output: OutputWrapper<GitHubSearchViewStream.Output> { get }
 }
 
 final class GitHubSearchViewStream: UnioStream<GitHubSearchViewStream.Logic>, GitHubSearchViewStreamType {
@@ -62,11 +62,20 @@ extension GitHubSearchViewStream.Logic {
 
         let logicStream = dependency.extra.logicStream
 
+        #if swift(>=5.1)
+        dependency.inputObservables.searchText
+            .bind(to: logicStream.input.searchText)
+            .disposed(by: disposeBag)
+        
+        return Output(repositories: logicStream.output.repositories,
+                      errorMessage: logicStream.output.error.map { $0.localizedDescription })
+        #else
         dependency.inputObservable(for: \.searchText)
             .bind(to: logicStream.input.accept(for: \.searchText))
             .disposed(by: disposeBag)
 
         return Output(repositories: logicStream.output.observable(for: \.repositories),
                       errorMessage: logicStream.output.observable(for: \.error).map { $0.localizedDescription })
+        #endif
     }
 }

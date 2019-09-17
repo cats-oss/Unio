@@ -10,7 +10,7 @@
 		9D2E26832240D18500C9EDF7 /* Unio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2E26792240D18500C9EDF7 /* Unio.framework */; };
 		9D2E268A2240D18500C9EDF7 /* Unio.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D2E267C2240D18500C9EDF7 /* Unio.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9D2E269D2240D1CA00C9EDF7 /* PublishRelayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E26932240D1CA00C9EDF7 /* PublishRelayType.swift */; };
-		9D2E269E2240D1CA00C9EDF7 /* Relay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E26942240D1CA00C9EDF7 /* Relay.swift */; };
+		9D2E269E2240D1CA00C9EDF7 /* Wrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E26942240D1CA00C9EDF7 /* Wrappers.swift */; };
 		9D2E269F2240D1CA00C9EDF7 /* LogicType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E26952240D1CA00C9EDF7 /* LogicType.swift */; };
 		9D2E26A02240D1CA00C9EDF7 /* StateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E26962240D1CA00C9EDF7 /* StateType.swift */; };
 		9D2E26A12240D1CA00C9EDF7 /* ExtraType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E26972240D1CA00C9EDF7 /* ExtraType.swift */; };
@@ -26,13 +26,13 @@
 		9D9EEC13228172F400DF5D97 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2E26A92240D1F200C9EDF7 /* RxCocoa.framework */; };
 		9D9EEC14228172F900DF5D97 /* RxCocoa.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2E26A92240D1F200C9EDF7 /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9DA555CB2241DE8400EC8CC3 /* BehaviorSubjectType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA555CA2241DE8400EC8CC3 /* BehaviorSubjectType.swift */; };
-		9DA555D12241F95400EC8CC3 /* ReadOnly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA555D02241F95400EC8CC3 /* ReadOnly.swift */; };
 		9DA555D32241FC0400EC8CC3 /* AcceptableRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA555D22241FC0400EC8CC3 /* AcceptableRelay.swift */; };
 		9DA555D52241FC6600EC8CC3 /* ValueAccessible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA555D42241FC6600EC8CC3 /* ValueAccessible.swift */; };
-		ED74A63D2243C2EE00D4E99C /* ReadOnlyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74A63C2243C2EE00D4E99C /* ReadOnlyTests.swift */; };
+		ED6897C122B184EE00B04DA0 /* PrimitiveProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6897C022B184EE00B04DA0 /* PrimitiveProperty.swift */; };
+		ED74A63D2243C2EE00D4E99C /* PrimitivePropertyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74A63C2243C2EE00D4E99C /* PrimitivePropertyTests.swift */; };
 		ED74A6402243C3DB00D4E99C /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2E26A82240D1F200C9EDF7 /* RxSwift.framework */; };
 		ED74A6432243C43400D4E99C /* RxSwift.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2E26A82240D1F200C9EDF7 /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		ED74A7382243D99D00D4E99C /* RelayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74A7372243D99D00D4E99C /* RelayTests.swift */; };
+		ED74A7382243D99D00D4E99C /* WrappersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74A7372243D99D00D4E99C /* WrappersTests.swift */; };
 		ED74A73A2243E0CC00D4E99C /* DependencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74A7392243E0CC00D4E99C /* DependencyTests.swift */; };
 		ED74A73C2243E43D00D4E99C /* UnioStreamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74A73B2243E43D00D4E99C /* UnioStreamTests.swift */; };
 /* End PBXBuildFile section */
@@ -70,7 +70,7 @@
 		9D2E26822240D18500C9EDF7 /* UnioTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D2E26892240D18500C9EDF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D2E26932240D1CA00C9EDF7 /* PublishRelayType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishRelayType.swift; sourceTree = "<group>"; };
-		9D2E26942240D1CA00C9EDF7 /* Relay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Relay.swift; sourceTree = "<group>"; };
+		9D2E26942240D1CA00C9EDF7 /* Wrappers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wrappers.swift; sourceTree = "<group>"; };
 		9D2E26952240D1CA00C9EDF7 /* LogicType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogicType.swift; sourceTree = "<group>"; };
 		9D2E26962240D1CA00C9EDF7 /* StateType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateType.swift; sourceTree = "<group>"; };
 		9D2E26972240D1CA00C9EDF7 /* ExtraType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtraType.swift; sourceTree = "<group>"; };
@@ -83,11 +83,11 @@
 		9D2E26A92240D1F200C9EDF7 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		9D9EEC0A228168F800DF5D97 /* RxRelay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRelay.framework; path = Carthage/Build/iOS/RxRelay.framework; sourceTree = "<group>"; };
 		9DA555CA2241DE8400EC8CC3 /* BehaviorSubjectType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BehaviorSubjectType.swift; sourceTree = "<group>"; };
-		9DA555D02241F95400EC8CC3 /* ReadOnly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadOnly.swift; sourceTree = "<group>"; };
 		9DA555D22241FC0400EC8CC3 /* AcceptableRelay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptableRelay.swift; sourceTree = "<group>"; };
 		9DA555D42241FC6600EC8CC3 /* ValueAccessible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueAccessible.swift; sourceTree = "<group>"; };
-		ED74A63C2243C2EE00D4E99C /* ReadOnlyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadOnlyTests.swift; sourceTree = "<group>"; };
-		ED74A7372243D99D00D4E99C /* RelayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelayTests.swift; sourceTree = "<group>"; };
+		ED6897C022B184EE00B04DA0 /* PrimitiveProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimitiveProperty.swift; sourceTree = "<group>"; };
+		ED74A63C2243C2EE00D4E99C /* PrimitivePropertyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimitivePropertyTests.swift; sourceTree = "<group>"; };
+		ED74A7372243D99D00D4E99C /* WrappersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrappersTests.swift; sourceTree = "<group>"; };
 		ED74A7392243E0CC00D4E99C /* DependencyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyTests.swift; sourceTree = "<group>"; };
 		ED74A73B2243E43D00D4E99C /* UnioStreamTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnioStreamTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -145,11 +145,11 @@
 				9D2E26982240D1CA00C9EDF7 /* InputType.swift */,
 				9D2E26952240D1CA00C9EDF7 /* LogicType.swift */,
 				9D2E269B2240D1CA00C9EDF7 /* OutputType.swift */,
-				9DA555D02241F95400EC8CC3 /* ReadOnly.swift */,
-				9D2E26942240D1CA00C9EDF7 /* Relay.swift */,
+				ED6897C022B184EE00B04DA0 /* PrimitiveProperty.swift */,
 				9D2E26962240D1CA00C9EDF7 /* StateType.swift */,
 				9D2E267C2240D18500C9EDF7 /* Unio.h */,
 				9D2E269A2240D1CA00C9EDF7 /* UnioStream.swift */,
+				9D2E26942240D1CA00C9EDF7 /* Wrappers.swift */,
 			);
 			path = Unio;
 			sourceTree = "<group>";
@@ -166,8 +166,8 @@
 		9D2E26A72240D1F200C9EDF7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9D9EEC0A228168F800DF5D97 /* RxRelay.framework */,
 				9D2E26A92240D1F200C9EDF7 /* RxCocoa.framework */,
+				9D9EEC0A228168F800DF5D97 /* RxRelay.framework */,
 				9D2E26A82240D1F200C9EDF7 /* RxSwift.framework */,
 			);
 			name = Frameworks;
@@ -189,9 +189,9 @@
 			isa = PBXGroup;
 			children = (
 				ED74A7392243E0CC00D4E99C /* DependencyTests.swift */,
-				ED74A63C2243C2EE00D4E99C /* ReadOnlyTests.swift */,
-				ED74A7372243D99D00D4E99C /* RelayTests.swift */,
+				ED74A63C2243C2EE00D4E99C /* PrimitivePropertyTests.swift */,
 				ED74A73B2243E43D00D4E99C /* UnioStreamTests.swift */,
+				ED74A7372243D99D00D4E99C /* WrappersTests.swift */,
 			);
 			path = TestCases;
 			sourceTree = "<group>";
@@ -316,12 +316,12 @@
 				9D2E26A22240D1CA00C9EDF7 /* InputType.swift in Sources */,
 				9D2E269F2240D1CA00C9EDF7 /* LogicType.swift in Sources */,
 				9D2E26A52240D1CA00C9EDF7 /* OutputType.swift in Sources */,
+				ED6897C122B184EE00B04DA0 /* PrimitiveProperty.swift in Sources */,
 				9D2E269D2240D1CA00C9EDF7 /* PublishRelayType.swift in Sources */,
-				9DA555D12241F95400EC8CC3 /* ReadOnly.swift in Sources */,
-				9D2E269E2240D1CA00C9EDF7 /* Relay.swift in Sources */,
 				9D2E26A02240D1CA00C9EDF7 /* StateType.swift in Sources */,
 				9D2E26A42240D1CA00C9EDF7 /* UnioStream.swift in Sources */,
 				9DA555D52241FC6600EC8CC3 /* ValueAccessible.swift in Sources */,
+				9D2E269E2240D1CA00C9EDF7 /* Wrappers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,9 +330,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED74A73A2243E0CC00D4E99C /* DependencyTests.swift in Sources */,
-				ED74A63D2243C2EE00D4E99C /* ReadOnlyTests.swift in Sources */,
-				ED74A7382243D99D00D4E99C /* RelayTests.swift in Sources */,
+				ED74A63D2243C2EE00D4E99C /* PrimitivePropertyTests.swift in Sources */,
 				ED74A73C2243E43D00D4E99C /* UnioStreamTests.swift in Sources */,
+				ED74A7382243D99D00D4E99C /* WrappersTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

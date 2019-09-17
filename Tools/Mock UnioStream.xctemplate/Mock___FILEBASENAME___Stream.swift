@@ -6,8 +6,8 @@ import Unio
 
 final class Mock___VARIABLE_productName___Stream: ___VARIABLE_productName___StreamType {
 
-    let input: Relay<___VARIABLE_productName___Stream.Input>
-    let output: Relay<___VARIABLE_productName___Stream.Output>
+    let input: InputWrapper<___VARIABLE_productName___Stream.Input>
+    let output: OutputWrapper<___VARIABLE_productName___Stream.Output>
 
     let _input = ___VARIABLE_productName___Stream.Input()
 
@@ -16,8 +16,8 @@ final class Mock___VARIABLE_productName___Stream: ___VARIABLE_productName___Stre
      */
 
     init() {
-        self.input = Relay(_input)
+        self.input = InputWrapper(_input)
         let _output = ___VARIABLE_productName___Stream.Output(/* inject output dependencies */)
-        self.output = Relay(_output)
+        self.output = OutputWrapper(_output)
     }
 }

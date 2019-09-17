@@ -1,5 +1,5 @@
 //
-//  ReadOnlyTests.swift
+//  PrimitivePropertyTests.swift
 //  UnioTests
 //
 //  Created by marty-suzuki on 2019/03/21.
@@ -11,7 +11,7 @@ import RxSwift
 import XCTest
 @testable import Unio
 
-final class ReadOnlyTests: XCTestCase {
+final class PrimitivePropertyTests: XCTestCase {
 
     private var dependency: Dependency!
 
@@ -53,7 +53,7 @@ final class ReadOnlyTests: XCTestCase {
     }
 }
 
-extension ReadOnlyTests {
+extension PrimitivePropertyTests {
 
     private struct Output: OutputType {
         
@@ -63,16 +63,16 @@ extension ReadOnlyTests {
 
     private struct Dependency {
 
-        let testTargetSubject: ReadOnly<BehaviorSubject<String?>>
-        let testTargetRelay: ReadOnly<BehaviorRelay<String?>>
+        let testTargetSubject: ThrowableProperty<String?>
+        let testTargetRelay: Property<String?>
 
         let subject = BehaviorSubject<String?>(value: nil)
         let relay = BehaviorRelay<String?>(value: nil)
 
         init() {
-            let output = Relay(Output(subject: subject, relay: relay))
-            self.testTargetSubject = ReadOnly(output, for: \.subject)
-            self.testTargetRelay = ReadOnly(output, for: \.relay)
+            let output = OutputWrapper(Output(subject: subject, relay: relay))
+            self.testTargetSubject = ThrowableProperty(output, for: \.subject)
+            self.testTargetRelay = Property(output, for: \.relay)
         }
     }
 }

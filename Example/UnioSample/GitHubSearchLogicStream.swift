@@ -11,8 +11,8 @@ import RxSwift
 import RxRelay
 
 protocol GitHubSearchLogicStreamType: AnyObject {
-    var input: Relay<GitHubSearchLogicStream.Input> { get }
-    var output: Relay<GitHubSearchLogicStream.Output> { get }
+    var input: InputWrapper<GitHubSearchLogicStream.Input> { get }
+    var output: OutputWrapper<GitHubSearchLogicStream.Output> { get }
 }
 
 final class GitHubSearchLogicStream: UnioStream<GitHubSearchLogicStream.Logic>, GitHubSearchLogicStreamType {
@@ -67,13 +67,27 @@ extension GitHubSearchLogicStream.Logic {
         let extra = dependency.extra
         let searchAPIStream = extra.searchAPIStream
 
-        searchAPIStream.output
-            .observable(for: \.searchResponse)
+        let searchResponse: Observable<GitHub.ItemsResponse<GitHub.Repository>>
+        #if swift(>=5.1)
+        searchResponse = searchAPIStream.output.searchResponse
+        #else
+        searchResponse = searchAPIStream.output.observable(for: \.searchResponse)
+        #endif
+        searchResponse
             .map { $0.items }
             .bind(to: state.repositories)
             .disposed(by: disposeBag)
 
-        dependency.inputObservable(for: \.searchText)
+        let searchText: Observable<String?>
+        let searchRepository: AnyObserver<String>
+        #if swift(>=5.1)
+        searchText = dependency.inputObservables.searchText
+        searchRepository = searchAPIStream.input.searchRepository
+        #else
+        searchText = dependency.inputObservable(for: \.searchText)
+        searchRepository = searchAPIStream.input.accept(for: \.searchRepository)
+        #endif
+        searchText
             .debounce(.milliseconds(300), scheduler: extra.scheduler)
             .flatMap { query -> Observable<String> in
                 guard let query = query, !query.isEmpty else {
@@ -81,10 +95,15 @@ extension GitHubSearchLogicStream.Logic {
                 }
                 return .just(query)
             }
-            .bind(to: searchAPIStream.input.accept(for: \.searchRepository))
+            .bind(to: searchRepository)
             .disposed(by: disposeBag)
 
+        #if swift(>=5.1)
+        return Output(repositories: state.repositories,
+                      error: searchAPIStream.output.searchError)
+        #else
         return Output(repositories: state.repositories,
                       error: searchAPIStream.output.observable(for: \.searchError))
+        #endif
     }
 }
