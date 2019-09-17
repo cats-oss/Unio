@@ -309,7 +309,7 @@ final class GitHubSearchViewController: UIViewController {
             .bind(to: viewStream.input.searchText)
             .disposed(by: disposeBag)
 
-        viewStream.outpu.repositories
+        viewStream.output.repositories
             .bind(to: tableView.rx.items(cellIdentifier: "Cell")) {
                 (row, repository, cell) in
                 cell.textLabel?.text = repository.fullName
