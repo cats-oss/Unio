@@ -22,13 +22,13 @@ public final class InputWrapper<T: InputType> {
     }
 
     /// Accepts `event` and emits it to subscribers via `Input`.
-    public func accept<U: AcceptableRelay>(_ value: U.Element, for keyPath: KeyPath<T, U>) {
+    public func accept<U: PublishRelayType>(_ value: U.Element, for keyPath: KeyPath<T, U>) {
 
         self[dynamicMember: keyPath](value)
     }
 
     /// Send `event` to this observer via `Input`.
-    public func accept<U: AcceptableRelay>(for keyPath: KeyPath<T, U>) -> AnyObserver<U.Element> {
+    public func accept<U: PublishRelayType>(for keyPath: KeyPath<T, U>) -> AnyObserver<U.Element> {
 
         return self[dynamicMember: keyPath]
     }
@@ -48,7 +48,7 @@ public final class InputWrapper<T: InputType> {
     /// Accepts `event` and emits it to subscribers via `Input`.
     ///
     /// - note: KeyPath Dynamic Member Lookup is avairable greater than Swift5.1
-    public subscript<U: AcceptableRelay>(dynamicMember keyPath: KeyPath<T, U>) -> (U.Element) -> Void {
+    public subscript<U: PublishRelayType>(dynamicMember keyPath: KeyPath<T, U>) -> (U.Element) -> Void {
 
         return _dependency[keyPath: keyPath].accept
     }
@@ -56,7 +56,7 @@ public final class InputWrapper<T: InputType> {
     /// Send `event` to this observer via `Input`.
     ///
     /// - note: KeyPath Dynamic Member Lookup is avairable greater than Swift5.1
-    public subscript<U: AcceptableRelay>(dynamicMember keyPath: KeyPath<T, U>) -> AnyObserver<U.Element> {
+    public subscript<U: PublishRelayType>(dynamicMember keyPath: KeyPath<T, U>) -> AnyObserver<U.Element> {
 
         let relay = _dependency[keyPath: keyPath]
         return AnyObserver { $0.element.map(relay.accept) }
