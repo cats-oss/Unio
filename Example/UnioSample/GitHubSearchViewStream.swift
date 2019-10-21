@@ -15,13 +15,12 @@ protocol GitHubSearchViewStreamType: AnyObject {
     var output: OutputWrapper<GitHubSearchViewStream.Output> { get }
 }
 
-final class GitHubSearchViewStream: UnioStream<GitHubSearchViewStream.Logic>, GitHubSearchViewStreamType {
+final class GitHubSearchViewStream: UnioStream<GitHubSearchViewStream>, GitHubSearchViewStreamType {
 
     init(extra: Extra = .init(logicStream: GitHubSearchLogicStream())) {
         super.init(input: Input(),
                    state: State(),
-                   extra: extra,
-                   logic: Logic())
+                   extra: extra)
     }
 }
 
@@ -46,19 +45,7 @@ extension GitHubSearchViewStream {
         let disposeBag = DisposeBag()
     }
 
-    struct Logic: LogicType {
-        typealias Input = GitHubSearchViewStream.Input
-        typealias Output = GitHubSearchViewStream.Output
-        typealias State = GitHubSearchViewStream.State
-        typealias Extra = GitHubSearchViewStream.Extra
-
-        let disposeBag = DisposeBag()
-    }
-}
-
-extension GitHubSearchViewStream.Logic {
-
-    func bind(from dependency: Dependency<Input, State, Extra>) -> Output {
+    static func bind(from dependency: Dependency<Input, State, Extra>, disposeBag: DisposeBag) -> Output {
 
         let logicStream = dependency.extra.logicStream
 

@@ -15,13 +15,12 @@ protocol GitHubSearchAPIStreamType: AnyObject {
     var output: OutputWrapper<GitHubSearchAPIStream.Output> { get }
 }
 
-final class GitHubSearchAPIStream: UnioStream<GitHubSearchAPIStream.Logic>, GitHubSearchAPIStreamType {
+final class GitHubSearchAPIStream: UnioStream<GitHubSearchAPIStream>, GitHubSearchAPIStreamType {
 
     init(extra: Extra = .init()) {
         super.init(input: Input(),
                    state: State(),
-                   extra: extra,
-                   logic: Logic())
+                   extra: extra)
     }
 }
 
@@ -44,17 +43,7 @@ extension GitHubSearchAPIStream {
         let session = URLSession.shared
     }
 
-    struct Logic: LogicType {
-        typealias Input = GitHubSearchAPIStream.Input
-        typealias Output = GitHubSearchAPIStream.Output
-        typealias State = GitHubSearchAPIStream.State
-        typealias Extra = GitHubSearchAPIStream.Extra
-    }
-}
-
-extension GitHubSearchAPIStream.Logic {
-
-    func bind(from dependency: Dependency<Input, State, Extra>) -> Output {
+    static func bind(from dependency: Dependency<Input, State, Extra>, disposeBag: DisposeBag) -> Output {
 
         let session = dependency.extra.session
 
