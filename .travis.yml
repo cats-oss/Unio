@@ -1,12 +1,24 @@
 language: objective-c
 os: osx
 osx_image: xcode11
+env:
+  - CI_USE_SWIFTPM=true
+  - CI_USE_SWIFTPM=false
 before_install:
   - gem install xcpretty
-  - carthage update --no-use-binaries --platform ios
+  - |
+    if ! $CI_USE_SWIFTPM ; then
+      carthage update --no-use-binaries --platform ios
+    fi
 before_script:
   - set -o pipefail
-script:
-  - xcodebuild test -project ./Unio.xcodeproj -scheme Unio -configuration Debug -sdk iphonesimulator -destination 'platform=iOS Simulator,OS=12.2,name=iPhone 8' | xcpretty -c
+script: |
+  PROJECT_ARG=
+  if $CI_USE_SWIFTPM ; then
+    rm -rf *.xcodeproj
+  else
+    PROJECT_ARG="-project ./Unio.xcodeproj"
+  fi
+  xcodebuild test $PROJECT_ARG -scheme Unio -configuration Debug -sdk iphonesimulator -destination 'platform=iOS Simulator,OS=12.2,name=iPhone 8' | xcpretty -c
 notifications:
   email: false
