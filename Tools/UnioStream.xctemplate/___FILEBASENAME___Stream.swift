@@ -4,22 +4,21 @@ import RxCocoa
 import RxSwift
 import Unio
 
-protocol ___VARIABLE_productName___StreamType: AnyObject {
-    var input: InputWrapper<___VARIABLE_productName___Stream.Input> { get }
-    var output: OutputWrapper<___VARIABLE_productName___Stream.Output> { get }
+protocol ___VARIABLE_productName___ViewStreamType: AnyObject {
+    var input: InputWrapper<___VARIABLE_productName___ViewStream.Input> { get }
+    var output: OutputWrapper<___VARIABLE_productName___ViewStream.Output> { get }
 }
 
-final class ___VARIABLE_productName___Stream: UnioStream<___VARIABLE_productName___Stream.Logic>, ___VARIABLE_productName___StreamType {
+final class ___VARIABLE_productName___ViewStream: UnioStream<___VARIABLE_productName___ViewStream>, ___VARIABLE_productName___ViewStreamType {
 
     init(extra: Extra = .init()) {
         super.init(input: Input(),
                    state: State(),
-                   extra: extra,
-                   logic: Logic())
+                   extra: extra)
     }
 }
 
-extension ___VARIABLE_productName___Stream {
+extension ___VARIABLE_productName___ViewStream {
 
     struct Input: InputType {
 
@@ -52,19 +51,8 @@ extension ___VARIABLE_productName___Stream {
 
     }
 
-    struct Logic: LogicType {
-        typealias Input = ___VARIABLE_productName___Stream.Input
-        typealias Output = ___VARIABLE_productName___Stream.Output
-        typealias State = ___VARIABLE_productName___Stream.State
-        typealias Extra = ___VARIABLE_productName___Stream.Extra
 
-        let disposeBag = DisposeBag()
-    }
-}
-
-extension ___VARIABLE_productName___Stream.Logic {
-
-    func bind(from dependency: Dependency<Input, State, Extra>) -> Output {
+    static func bind(from dependency: Dependency<Input, State, Extra>, disposeBag: DisposeBag) -> Output {
 
         let state = dependency.state
 

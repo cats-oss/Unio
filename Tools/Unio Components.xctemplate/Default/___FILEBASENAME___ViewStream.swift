@@ -9,13 +9,12 @@ protocol ___VARIABLE_productName___ViewStreamType: AnyObject {
     var output: OutputWrapper<___VARIABLE_productName___ViewStream.Output> { get }
 }
 
-final class ___VARIABLE_productName___ViewStream: UnioStream<___VARIABLE_productName___ViewStream.Logic>, ___VARIABLE_productName___ViewStreamType {
+final class ___VARIABLE_productName___ViewStream: UnioStream<___VARIABLE_productName___ViewStream>, ___VARIABLE_productName___ViewStreamType {
 
     init(extra: Extra = .init()) {
         super.init(input: Input(),
                    state: State(),
-                   extra: extra,
-                   logic: Logic())
+                   extra: extra)
     }
 }
 
@@ -52,19 +51,8 @@ extension ___VARIABLE_productName___ViewStream {
 
     }
 
-    struct Logic: LogicType {
-        typealias Input = ___VARIABLE_productName___ViewStream.Input
-        typealias Output = ___VARIABLE_productName___ViewStream.Output
-        typealias State = ___VARIABLE_productName___ViewStream.State
-        typealias Extra = ___VARIABLE_productName___ViewStream.Extra
 
-        let disposeBag = DisposeBag()
-    }
-}
-
-extension ___VARIABLE_productName___ViewStream.Logic {
-
-    func bind(from dependency: Dependency<Input, State, Extra>) -> Output {
+    static func bind(from dependency: Dependency<Input, State, Extra>, disposeBag: DisposeBag) -> Output {
 
         let state = dependency.state
 
