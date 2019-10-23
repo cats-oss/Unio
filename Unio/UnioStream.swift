@@ -8,6 +8,24 @@
 
 import RxSwift
 
+/// Makes possible to implement Unidirectional input / output stream and be able to implement LogicType to  its self.
+///
+/// ```
+/// // Usage Example
+/// class GithubSearchStream: UnioStream<GithubSearchStream> {
+///     struct Input: InputType {}
+///
+///     struct Output: OutputType {}
+///
+///     struct State: StateType {}
+///
+///     struct Extra: ExtraType {}
+///
+///     static func bind(from dependency: Dependency<Input, State, Extra>, disposeBag: DisposeBag) -> Output {
+///         return Output()
+///     }
+/// }
+/// ```
 public typealias UnioStream<Logic: LogicType> = PrimitiveStream<Logic> & LogicType
 
 /// Makes possible to implement Unidirectional input / output stream.
