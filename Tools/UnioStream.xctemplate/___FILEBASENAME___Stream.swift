@@ -4,12 +4,12 @@ import RxCocoa
 import RxSwift
 import Unio
 
-protocol ___VARIABLE_productName___ViewStreamType: AnyObject {
-    var input: InputWrapper<___VARIABLE_productName___ViewStream.Input> { get }
-    var output: OutputWrapper<___VARIABLE_productName___ViewStream.Output> { get }
+protocol ___VARIABLE_productName___StreamType: AnyObject {
+    var input: InputWrapper<___VARIABLE_productName___Stream.Input> { get }
+    var output: OutputWrapper<___VARIABLE_productName___Stream.Output> { get }
 }
 
-final class ___VARIABLE_productName___ViewStream: UnioStream<___VARIABLE_productName___ViewStream>, ___VARIABLE_productName___ViewStreamType {
+final class ___VARIABLE_productName___Stream: UnioStream<___VARIABLE_productName___Stream>, ___VARIABLE_productName___StreamType {
 
     init(extra: Extra = .init()) {
         super.init(input: Input(),
@@ -18,7 +18,7 @@ final class ___VARIABLE_productName___ViewStream: UnioStream<___VARIABLE_product
     }
 }
 
-extension ___VARIABLE_productName___ViewStream {
+extension ___VARIABLE_productName___Stream {
 
     struct Input: InputType {
 
@@ -50,7 +50,6 @@ extension ___VARIABLE_productName___ViewStream {
     struct Extra: ExtraType {
 
     }
-
 
     static func bind(from dependency: Dependency<Input, State, Extra>, disposeBag: DisposeBag) -> Output {
 

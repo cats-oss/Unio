@@ -51,7 +51,6 @@ extension ___VARIABLE_productName___ViewStream {
 
     }
 
-
     static func bind(from dependency: Dependency<Input, State, Extra>, disposeBag: DisposeBag) -> Output {
 
         let state = dependency.state
