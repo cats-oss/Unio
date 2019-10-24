@@ -110,40 +110,39 @@ extension UnioStreamTests {
 
     fileprivate struct Extra: ExtraType {
         let id = UUID().uuidString
+        let bindCalled: PublishRelay<Unio.Dependency<Input, State, Extra>>
+        let bindResponse: BehaviorRelay<Output>
     }
 
-    fileprivate struct Logic: LogicType {
+    fileprivate enum Logic: LogicType {
         typealias Input = UnioStreamTests.Input
         typealias Output = UnioStreamTests.Output
         typealias State = UnioStreamTests.State
         typealias Extra = UnioStreamTests.Extra
-
-        let bindCalled: PublishRelay<Unio.Dependency<Input, State, Extra>>
-        let bindResponse: BehaviorRelay<Output?>
     }
 
     private struct Dependency {
 
-        let testTarget: UnioStream<Logic>
+        let testTarget: PrimitiveStream<Logic>
 
         let output: Output
         let input = Input()
         let state = State()
-        let extra = Extra()
+        let extra: Extra
 
         init(bindCalled: PublishRelay<Unio.Dependency<Input, State, Extra>> = .init()) {
             let output = Output()
-            let logic = Logic(bindCalled: bindCalled, bindResponse: BehaviorRelay(value: output))
             self.output = output
-            self.testTarget = UnioStream(input: input, state: state, extra: extra, logic: logic)
+            self.extra = Extra(bindCalled: bindCalled, bindResponse: BehaviorRelay(value: output))
+            self.testTarget = PrimitiveStream(input: input, state: state, extra: extra)
         }
     }
 }
 
 extension UnioStreamTests.Logic {
 
-    func bind(from dependency: Unio.Dependency<Input, State, Extra>) -> Output {
-        bindCalled.accept(dependency)
-        return bindResponse.value ?? Output()
+    static func bind(from dependency: Unio.Dependency<Input, State, Extra>, disposeBag: DisposeBag) -> Output {
+        dependency.extra.bindCalled.accept(dependency)
+        return dependency.extra.bindResponse.value
     }
 }

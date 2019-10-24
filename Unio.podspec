@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "Unio"
-  s.version      = "0.5.0"
+  s.version      = "0.6.0"
   s.summary      = "KeyPath based Unidirectionarl Input / Output framework with RxSwift."
   s.homepage     = "https://github.com/cats-oss/Unio"
   s.license      = { :type => "MIT", :file => "LICENSE" }

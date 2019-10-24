@@ -160,35 +160,33 @@ struct Extra: ExtraType {
 ### Logic
 
 The rule of Logic is generating [Output](#output) from Dependency<Input, State, Extra>.
-It generates [Output](#output) to call `func bind(from:)`.
-`func bind(from:)` is called once when [UnioStream](#uniostream) is initialized.
-If you want to use DisposeBags in `func bind(from:)`, define properties of DisposeBag in Logic.
+It generates [Output](#output) to call `static func bind(from:disposeBag:)`.
+`static func bind(from:disposeBag:)` is called once when [UnioStream](#uniostream) is initialized.
 
 ```swift
-struct Logic: LogicType {
+enum Logic: LogicType {
     typealias Input = GitHubSearchViewStream.Input
     typealias Output = GitHubSearchViewStream.Output
     typealias State = GitHubSearchViewStream.State
     typealias Extra = GitHubSearchViewStream.Extra
 
-    let disposeBag = DisposeBag()
-
-    func bind(from dependency: Dependency<Input, State, Extra>) -> Output
+    static func bind(from dependency: Dependency<Input, State, Extra>, disposeBag: DisposeBag) -> Output
 }
 ```
 
-Connect sequences and generate [Output](#output) in `func bind(from:)` to use below properties and methods.
+Connect sequences and generate [Output](#output) in `static func bind(from:disposeBag:)` to use below properties and methods.
 
 - `dependency.state`
 - `dependency.extra`
-- `dependency.inputObservables` ... returns a Observable that is property of [Input](#input).
+- `dependency.inputObservables` ... Returns a Observable that is property of [Input](#input).
+- `disposeBag` ... Same lifecycle with UnioStream.
 
 Here is a exmaple of implementation.
 
 ```swift
-extension GitHubSearchViewStream.Logic {
+extension Logic {
 
-    func bind(from dependency: Dependency<Input, State, Extra>) -> Output {
+    static func bind(from dependency: Dependency<Input, State, Extra>, disposeBag: DisposeBag) -> Output {
         let apiStream = dependency.extra.apiStream
 
         dependency.inputObservables.searchText
@@ -210,22 +208,24 @@ It has `input: InputWrapper<Input>` and `output: OutputWrapper<Output>`.
 It automatically generates `input: InputWrapper<Input>` and `output: OutputWrapper<Output>` from instances of [Input](#input), [State](#state), [Extra](#extra) and [Logic](#logic).
 
 ```swift
-class UnioStream<Logic: LogicType> {
+typealias UnioStream<Logic: LogicType> = PrimitiveStream<Logic> & LogicType
+
+class PrimitiveStream<Logic: LogicType> {
 
     let input: InputWrapper<Logic.Input>
     let output: OutputWrapper<Logic.Output>
 
-    init(input: Logic.Input, state: Logic.State, extra: Logic.Extra, logic: Logic)
+    init(input: Logic.Input, state: Logic.State, extra: Logic.Extra)
 }
 ```
 
 Be able to define a subclass of UnioStream like this.
 
 ```swift
-fianl class GitHubSearchViewStream: UnioStream<GitHubSearchViewStream.Logic> {
+fianl class GitHubSearchViewStream: UnioStream<GitHubSearchViewStream> {
 
     init() {
-        super.init(input: Input(), state: State(), extra: Extra(), logic: Logic())
+        super.init(input: Input(), state: State(), extra: Extra())
     }
 }
 ```
@@ -244,10 +244,10 @@ protocol GitHubSearchViewStreamType: AnyObject {
     var output: OutputWrapper<GitHubSearchViewStream.Output> { get }
 }
 
-final class GitHubSearchViewStream: UnioStream<GitHubSearchViewStream.Logic>, GitHubSearchViewStreamType {
+final class GitHubSearchViewStream: UnioStream<GitHubSearchViewStream>, GitHubSearchViewStreamType {
 
     init() {
-        super.init(input: Input(), state: State(), extra: Extra(), logic: Logic())
+        super.init(input: Input(), state: State(), extra: Extra())
     }
 
     typealias State = NoState
@@ -264,19 +264,7 @@ final class GitHubSearchViewStream: UnioStream<GitHubSearchViewStream.Logic>, Gi
         let apiStream: GitHubSearchAPIStream()
     }
 
-    struct Logic: LogicType {
-        typealias Input = GitHubSearchViewStream.Input
-        typealias Output = GitHubSearchViewStream.Output
-        typealias State = GitHubSearchViewStream.State
-        typealias Extra = GitHubSearchViewStream.Extra
-
-        let disposeBag = DisposeBag()
-    }
-}
-
-extension GitHubSearchViewStream.Logic {
-
-    func bind(from dependency: Dependency<Input, State, Extra>) -> Output {
+    static func bind(from dependency: Dependency<Input, State, Extra>, disposeBag: DisposeBag) -> Output {
         let apiStream = dependency.extra.apiStream
 
         dependency.inputObservables.searchText
@@ -299,7 +287,7 @@ final class GitHubSearchViewController: UIViewController {
     let searchBar = UISearchBar(frame: .zero)
     let tableView = UITableView(frame: .zero)
 
-    private let viewStream = GitHubSearchViewStream()
+    private let viewStream: GitHubSearchViewStreamType = GitHubSearchViewStream()
     private let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
@@ -325,6 +313,7 @@ The documentation which does not use `KeyPath Dynamic Member Lookup` is [here](h
 #### Migration Guides
 
 - [Unio 0.5.0 Migration Guide](./Documentation/Unio0_5_0MigrationGuide.md)
+- [Unio 0.6.0 Migration Guide](./Documentation/Unio0_6_0MigrationGuide.md)
 
 ### Xcode Template
 
