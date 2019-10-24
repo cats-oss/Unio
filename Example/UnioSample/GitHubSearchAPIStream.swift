@@ -17,7 +17,7 @@ protocol GitHubSearchAPIStreamType: AnyObject {
 
 final class GitHubSearchAPIStream: UnioStream<GitHubSearchAPIStream>, GitHubSearchAPIStreamType {
 
-    init(extra: Extra = .init()) {
+    init(extra: Extra = .init(session: .shared)) {
         super.init(input: Input(),
                    state: State(),
                    extra: extra)
@@ -25,7 +25,6 @@ final class GitHubSearchAPIStream: UnioStream<GitHubSearchAPIStream>, GitHubSear
 }
 
 extension GitHubSearchAPIStream {
-    typealias State = NoState
 
     struct Input: InputType {
 
@@ -40,10 +39,10 @@ extension GitHubSearchAPIStream {
 
     struct Extra: ExtraType {
 
-        let session = URLSession.shared
+        let session: URLSession
     }
 
-    static func bind(from dependency: Dependency<Input, State, Extra>, disposeBag: DisposeBag) -> Output {
+    static func bind(from dependency: Dependency<Input, NoState, Extra>, disposeBag: DisposeBag) -> Output {
 
         let session = dependency.extra.session
 

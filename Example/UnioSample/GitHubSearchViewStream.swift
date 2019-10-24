@@ -26,8 +26,6 @@ final class GitHubSearchViewStream: UnioStream<GitHubSearchViewStream>, GitHubSe
 
 extension GitHubSearchViewStream {
 
-    typealias State = NoState
-
     struct Input: InputType {
 
         let searchText = PublishRelay<String?>()
@@ -42,10 +40,9 @@ extension GitHubSearchViewStream {
     struct Extra: ExtraType {
         
         let logicStream: GitHubSearchLogicStreamType
-        let disposeBag = DisposeBag()
     }
 
-    static func bind(from dependency: Dependency<Input, State, Extra>, disposeBag: DisposeBag) -> Output {
+    static func bind(from dependency: Dependency<Input, NoState, Extra>, disposeBag: DisposeBag) -> Output {
 
         let logicStream = dependency.extra.logicStream
 
