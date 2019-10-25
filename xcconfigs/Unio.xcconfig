@@ -1,0 +1,19 @@
+SUPPORTED_PLATFORMS = macosx iphoneos iphonesimulator watchos watchsimulator appletvos appletvsimulator
+
+VALID_ARCHS[sdk=macosx*]               = i386 x86_64
+VALID_ARCHS[sdk=iphoneos*]             = arm64 armv7 armv7s
+VALID_ARCHS[sdk=iphonesimulator*]      = i386 x86_64
+VALID_ARCHS[sdk=watchos*]              = armv7k
+VALID_ARCHS[sdk=watchsimulator*]       = i386
+VALID_ARCHS[sdk=appletvos*]            = arm64
+VALID_ARCHS[sdk=appletvsimulator*]     = x86_64
+
+FRAMEWORK_SEARCH_PATHS[sdk=macosx*] = $(inherited) '$(PROJECT_DIR)/Carthage/Build/Mac'
+FRAMEWORK_SEARCH_PATHS[sdk=iphone*] = $(inherited) '$(PROJECT_DIR)/Carthage/Build/iOS'
+FRAMEWORK_SEARCH_PATHS[sdk=watch*] = $(inherited) '$(PROJECT_DIR)/Carthage/Build/watchOS'
+FRAMEWORK_SEARCH_PATHS[sdk=appletv*] = $(inherited) '$(PROJECT_DIR)/Carthage/Build/tvOS'
+
+LD_RUNPATH_SEARCH_PATHS[sdk=macosx*] = $(inherited) '@executable_path/../Frameworks' '@loader_path/../Frameworks'
+LD_RUNPATH_SEARCH_PATHS[sdk=iphone*] = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
+LD_RUNPATH_SEARCH_PATHS[sdk=watch*] = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
+LD_RUNPATH_SEARCH_PATHS[sdk=appletv*] = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'

@@ -6,7 +6,6 @@
 //  Copyright © 2019 tv.abema. All rights reserved.
 //
 
-import RxCocoa
 import RxRelay
 import RxSwift
 import XCTest
@@ -52,10 +51,10 @@ final class WrappersTests: XCTestCase {
 
         #if swift(>=5.1)
         let disposable2 = Observable.just(expected)
-            .bind(to: testTarget.subject)
+            .subscribe(testTarget.subject.on)
         #else
         let disposable2 = Observable.just(expected)
-            .bind(to: testTarget.onEvent(for: \.subject))
+            .subscribe(testTarget.onEvent(for: \.subject).on)
         #endif
 
         XCTAssertEqual(stack.value, expected)
@@ -95,10 +94,10 @@ final class WrappersTests: XCTestCase {
 
         #if swift(>=5.1)
         let disposable2 = Observable.just(expected)
-            .bind(to: testTarget.relay)
+            .subscribe(onNext: testTarget.relay)
         #else
         let disposable2 = Observable.just(expected)
-            .bind(to: testTarget.accept(for: \.relay))
+            .subscribe(onNext: { testTarget.accept($0, for: \.relay) })
         #endif
 
         XCTAssertEqual(stack.value, expected)
