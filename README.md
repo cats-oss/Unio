@@ -5,20 +5,25 @@
 <strong>Un</strong>idirectional <strong>I</strong>nput <strong>O</strong>utput framework
 </p>
 <p align='center'>
-  <a href='https://github.com/Carthage/Carthage'>
-    <img src='https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat' alt='Carthage compatible' />
-  </a>
   <a href='https://travis-ci.org/cats-oss/Unio'>
     <img src='https://travis-ci.org/cats-oss/Unio.svg?branch=master' alt='Build Status' />
   </a>
-  <a href='https://cocoapods.org/pods/Unio'>
-    <img src='https://img.shields.io/cocoapods/v/Unio.svg?style=flat' alt='Version' />
-  </a>
+
   <a href='https://cocoapods.org/pods/Unio'>
     <img src='https://img.shields.io/cocoapods/l/Unio.svg?style=flat' alt='License' />
   </a>
   <a href='https://cocoapods.org/pods/Unio'>
     <img src='https://img.shields.io/cocoapods/p/Unio.svg?style=flat' alt='Platform' />
+  </a>
+  <br/>
+  <a href='https://github.com/Carthage/Carthage'>
+    <img src='https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat' alt='Carthage compatible' />
+  </a>
+  <a href='https://cocoapods.org/pods/Unio'>
+    <img src='https://img.shields.io/cocoapods/v/Unio.svg?style=flat' alt='Version' />
+  </a>
+  <a href='https://swift.org/package-manager/'>
+    <img src='https://img.shields.io/badge/Swift%20Package%20Manager-compatible-4BC51D.svg?style=flat' alt='Carthage compatible' />
   </a>
 </p>
 
@@ -222,7 +227,7 @@ class PrimitiveStream<Logic: LogicType> {
 Be able to define a subclass of UnioStream like this.
 
 ```swift
-fianl class GitHubSearchViewStream: UnioStream<GitHubSearchViewStream> {
+final class GitHubSearchViewStream: UnioStream<GitHubSearchViewStream> {
 
     init() {
         super.init(input: Input(), state: State(), extra: Extra())
@@ -343,10 +348,21 @@ it, simply add the following line to your Podfile:
 pod "Unio"
 ```
 
+### Swift Package Manager
+
+Simply add the following line to your `Package.swift`:
+
+```
+.package(url: "https://github.com/cats-oss/Unio.git", from: "version")
+```
+
 ## Requirements
 
 - Swift 5 or greater
 - iOS 9.0 or greater
+- tvOS 10.0 or greater
+- watchOS 3.0 or greater
+- macOS 10.10 or greater
 - [RxSwift](https://github.com/ReactiveX/RxSwift) 5.0 or greater
 
 ## License
