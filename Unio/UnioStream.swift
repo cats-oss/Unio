@@ -8,6 +8,14 @@
 
 import RxSwift
 
+/// A type which have unidirectional input and output.
+public protocol UnioStreamType: AnyObject {
+    associatedtype Input: InputType
+    associatedtype Output: OutputType
+    var input: InputWrapper<Input> { get }
+    var output: OutputWrapper<Output> { get }
+}
+
 /// Makes possible to implement Unidirectional input / output stream and be able to implement LogicType to  its self.
 ///
 /// ```
@@ -26,7 +34,7 @@ import RxSwift
 ///     }
 /// }
 /// ```
-public typealias UnioStream<Logic: LogicType> = PrimitiveStream<Logic> & LogicType
+public typealias UnioStream<Logic: LogicType> = PrimitiveStream<Logic> & LogicType & UnioStreamType
 
 /// Makes possible to implement Unidirectional input / output stream.
 open class PrimitiveStream<Logic: LogicType> {
