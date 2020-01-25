@@ -82,10 +82,10 @@ final class AdderStream<T: AdditiveArithmetic>: UnioStream<AdderStream>, AdderSt
         let result: PublishRelay<T>
     }
 
-    init() {
-        super.init(input: Input(),
-                   state: State(),
-                   extra: Extra())
+    convenience init() {
+        self.init(input: Input(),
+                  state: State(),
+                  extra: Extra())
     }
 
     deinit {
