@@ -11,10 +11,10 @@ protocol ___VARIABLE_productName___StreamType: AnyObject {
 
 final class ___VARIABLE_productName___Stream: UnioStream<___VARIABLE_productName___Stream>, ___VARIABLE_productName___StreamType {
 
-    init(extra: Extra = .init()) {
-        super.init(input: Input(),
-                   state: State(),
-                   extra: extra)
+    convenience init(extra: Extra = .init()) {
+        self.init(input: Input(),
+                  state: State(),
+                  extra: extra)
     }
 }
 
