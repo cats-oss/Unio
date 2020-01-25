@@ -7,8 +7,11 @@
 #
 
 Pod::Spec.new do |s|
+  last_commit = `git rev-list --tags --max-count=1`.strip
+  last_tag = `git describe --tags #{last_commit}`.strip
+
   s.name         = "Unio"
-  s.version      = "0.8.0"
+  s.version      = last_tag
   s.summary      = "KeyPath based Unidirectionarl Input / Output framework with RxSwift."
   s.homepage     = "https://github.com/cats-oss/Unio"
   s.license      = { :type => "MIT", :file => "LICENSE" }
