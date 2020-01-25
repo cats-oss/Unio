@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Unio
 
 enum GitHub {
 
@@ -20,3 +21,5 @@ enum GitHub {
         let htmlUrl: URL
     }
 }
+
+typealias UnioStream<Logic: LogicType> = SR12081.UnioStream<Logic>
