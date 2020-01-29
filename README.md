@@ -229,8 +229,8 @@ Be able to define a subclass of UnioStream like this.
 ```swift
 final class GitHubSearchViewStream: UnioStream<GitHubSearchViewStream> {
 
-    init() {
-        super.init(input: Input(), state: State(), extra: Extra())
+    convenience init() {
+        self.init(input: Input(), state: State(), extra: Extra())
     }
 }
 ```
@@ -251,8 +251,8 @@ protocol GitHubSearchViewStreamType: AnyObject {
 
 final class GitHubSearchViewStream: UnioStream<GitHubSearchViewStream>, GitHubSearchViewStreamType {
 
-    init() {
-        super.init(input: Input(), state: State(), extra: Extra())
+    convenience init() {
+        self.init(input: Input(), state: State(), extra: Extra())
     }
 
     typealias State = NoState
@@ -319,6 +319,7 @@ The documentation which does not use `KeyPath Dynamic Member Lookup` is [here](h
 
 - [Unio 0.5.0 Migration Guide](./Documentation/Unio0_5_0MigrationGuide.md)
 - [Unio 0.6.0 Migration Guide](./Documentation/Unio0_6_0MigrationGuide.md)
+- [Unio 0.9.0 Migration Guide](./Documentation/Unio0_9_0MigrationGuide.md)
 
 ### Xcode Template
 

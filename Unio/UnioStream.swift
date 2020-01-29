@@ -16,25 +16,35 @@ public protocol UnioStreamType: AnyObject {
     var output: OutputWrapper<Output> { get }
 }
 
-/// Makes possible to implement Unidirectional input / output stream and be able to implement LogicType to  its self.
-///
-/// ```
-/// // Usage Example
-/// class GithubSearchStream: UnioStream<GithubSearchStream> {
-///     struct Input: InputType {}
-///
-///     struct Output: OutputType {}
-///
-///     struct State: StateType {}
-///
-///     struct Extra: ExtraType {}
-///
-///     static func bind(from dependency: Dependency<Input, State, Extra>, disposeBag: DisposeBag) -> Output {
-///         return Output()
-///     }
-/// }
-/// ```
-public typealias UnioStream<Logic: LogicType> = PrimitiveStream<Logic> & LogicType & UnioStreamType
+/// A namespace of a swift bug.
+/// - seealso: https://bugs.swift.org/browse/SR-12081
+@available(*, deprecated, message: "These is a possibility of runtime crash on greater than iOS 13 if defined hundreds of SR12081.UnioStream subclasses.")
+public enum SR12081 {
+
+    /// Makes possible to implement Unidirectional input / output stream and be able to implement LogicType to  its self.
+    ///
+    /// ```
+    /// // Usage Example
+    /// class GithubSearchStream: UnioStream<GithubSearchStream> {
+    ///     struct Input: InputType {}
+    ///
+    ///     struct Output: OutputType {}
+    ///
+    ///     struct State: StateType {}
+    ///
+    ///     struct Extra: ExtraType {}
+    ///
+    ///     init() {
+    ///         super.init(input: Input(), state: State(), extra: Extra())
+    ///     }
+    ///
+    ///     static func bind(from dependency: Dependency<Input, State, Extra>, disposeBag: DisposeBag) -> Output {
+    ///         return Output()
+    ///     }
+    /// }
+    /// ```
+    public typealias UnioStream<Logic: LogicType> = PrimitiveStream<Logic> & LogicType & UnioStreamType
+}
 
 /// Makes possible to implement Unidirectional input / output stream.
 open class PrimitiveStream<Logic: LogicType> {
