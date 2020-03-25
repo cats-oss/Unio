@@ -29,6 +29,7 @@ public final class Dependency<Input: InputType, State: StateType, Extra: ExtraTy
     }
 
     /// Makes possible to get Observable from `Input`.
+    @available(*, deprecated, message: "Use `inputObservables.xxx` on Swift5.1 or greater. If Swift4.2, use `inputObservables[dynamicMember: \\.xxx]`.")
     public func inputObservable<O: ObservableConvertibleType>(for keyPath: KeyPath<Input, O>) -> Observable<O.Element> {
 
         return inputObservables[dynamicMember: keyPath]
