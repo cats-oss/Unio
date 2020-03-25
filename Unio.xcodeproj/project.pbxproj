@@ -26,6 +26,7 @@
 		9DA555CB2241DE8400EC8CC3 /* BehaviorSubjectType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA555CA2241DE8400EC8CC3 /* BehaviorSubjectType.swift */; };
 		9DA555D32241FC0400EC8CC3 /* AcceptableRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA555D22241FC0400EC8CC3 /* AcceptableRelay.swift */; };
 		9DA555D52241FC6600EC8CC3 /* ValueAccessible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA555D42241FC6600EC8CC3 /* ValueAccessible.swift */; };
+		9DF9334B23FD1091003C564C /* Computed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF9334A23FD1091003C564C /* Computed.swift */; };
 		E9A6617E23839933007D4AEC /* AnyUnioStreamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A6617D23839933007D4AEC /* AnyUnioStreamTests.swift */; };
 		E9A6618223839952007D4AEC /* AnyUnioStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A6618123839952007D4AEC /* AnyUnioStream.swift */; };
 		ED4D482A23DC1B01004868D9 /* AnyLogicBasedStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4D482923DC1B01004868D9 /* AnyLogicBasedStream.swift */; };
@@ -88,6 +89,7 @@
 		9DA555D22241FC0400EC8CC3 /* AcceptableRelay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptableRelay.swift; sourceTree = "<group>"; };
 		9DA555D42241FC6600EC8CC3 /* ValueAccessible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueAccessible.swift; sourceTree = "<group>"; };
 		9DA5623F2362DB760048F2B9 /* Unio.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Unio.xcconfig; sourceTree = "<group>"; };
+		9DF9334A23FD1091003C564C /* Computed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Computed.swift; sourceTree = "<group>"; };
 		E9A6617D23839933007D4AEC /* AnyUnioStreamTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyUnioStreamTests.swift; sourceTree = "<group>"; };
 		E9A6618123839952007D4AEC /* AnyUnioStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyUnioStream.swift; sourceTree = "<group>"; };
 		ED4D482923DC1B01004868D9 /* AnyLogicBasedStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyLogicBasedStream.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				9DA555C92241DE5F00EC8CC3 /* RxTypes */,
 				ED4D482923DC1B01004868D9 /* AnyLogicBasedStream.swift */,
 				E9A6618123839952007D4AEC /* AnyUnioStream.swift */,
+				9DF9334A23FD1091003C564C /* Computed.swift */,
 				9D2E269C2240D1CA00C9EDF7 /* Dependency.swift */,
 				9D2E26972240D1CA00C9EDF7 /* ExtraType.swift */,
 				9D2E267D2240D18500C9EDF7 /* Info.plist */,
@@ -330,11 +333,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DA555D32241FC0400EC8CC3 /* AcceptableRelay.swift in Sources */,
+				ED4D482A23DC1B01004868D9 /* AnyLogicBasedStream.swift in Sources */,
+				E9A6618223839952007D4AEC /* AnyUnioStream.swift in Sources */,
 				9D2E26A32240D1CA00C9EDF7 /* BehaviorRelayType.swift in Sources */,
 				9DA555CB2241DE8400EC8CC3 /* BehaviorSubjectType.swift in Sources */,
+				9DF9334B23FD1091003C564C /* Computed.swift in Sources */,
 				9D2E26A62240D1CA00C9EDF7 /* Dependency.swift in Sources */,
 				9D2E26A12240D1CA00C9EDF7 /* ExtraType.swift in Sources */,
-				ED4D482A23DC1B01004868D9 /* AnyLogicBasedStream.swift in Sources */,
 				9D2E26A22240D1CA00C9EDF7 /* InputType.swift in Sources */,
 				9D2E269F2240D1CA00C9EDF7 /* LogicType.swift in Sources */,
 				9D2E26A52240D1CA00C9EDF7 /* OutputType.swift in Sources */,
@@ -342,7 +347,6 @@
 				9D2E269D2240D1CA00C9EDF7 /* PublishRelayType.swift in Sources */,
 				9D2E26A02240D1CA00C9EDF7 /* StateType.swift in Sources */,
 				9D2E26A42240D1CA00C9EDF7 /* UnioStream.swift in Sources */,
-				E9A6618223839952007D4AEC /* AnyUnioStream.swift in Sources */,
 				9DA555D52241FC6600EC8CC3 /* ValueAccessible.swift in Sources */,
 				9D2E269E2240D1CA00C9EDF7 /* Wrappers.swift in Sources */,
 			);
@@ -352,11 +356,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED82DE2C23DC2FF9003B6855 /* SR12081Tests.swift in Sources */,
-				ED4D482C23DC2BC2004868D9 /* SR12081Check.Streams.swift in Sources */,
-				ED74A73A2243E0CC00D4E99C /* DependencyTests.swift in Sources */,
 				E9A6617E23839933007D4AEC /* AnyUnioStreamTests.swift in Sources */,
+				ED74A73A2243E0CC00D4E99C /* DependencyTests.swift in Sources */,
 				ED74A63D2243C2EE00D4E99C /* PrimitivePropertyTests.swift in Sources */,
+				ED4D482C23DC2BC2004868D9 /* SR12081Check.Streams.swift in Sources */,
+				ED82DE2C23DC2FF9003B6855 /* SR12081Tests.swift in Sources */,
 				ED74A73C2243E43D00D4E99C /* UnioStreamTests.swift in Sources */,
 				ED74A7382243D99D00D4E99C /* WrappersTests.swift in Sources */,
 			);

@@ -196,6 +196,19 @@ final class WrappersTests: XCTestCase {
         XCTAssertEqual(try testTarget.value(for: \.subject), expected)
         #endif
     }
+
+    func testOutput_computed() {
+
+        let expected = Int(arc4random())
+        dependency.outputComputed.accept(expected)
+        let testTarget = dependency.testTargetOutput
+
+        #if swift(>=5.1)
+        XCTAssertEqual(testTarget.computed, expected)
+        #else
+        XCTAssertEqual(testTarget[dynamicMember: \.computed], expected)
+        #endif
+    }
 }
 
 extension WrappersTests {
@@ -204,6 +217,7 @@ extension WrappersTests {
         let subject: BehaviorSubject<String?>
         let relay: BehaviorRelay<String?>
         let _observable: Observable<String>
+        let computed: Computed<Int?>
     }
 
     private struct Input: InputType {
@@ -221,6 +235,7 @@ extension WrappersTests {
 
         let outputSubject = BehaviorSubject<String?>(value: nil)
         let outputRelay = BehaviorRelay<String?>(value: nil)
+        let outputComputed: BehaviorRelay<Int?>
 
         let acceptForObservable: (String) -> Void
 
@@ -231,9 +246,13 @@ extension WrappersTests {
             let input = Input(relay: inputRelay, subject: inputSubject)
             self.testTargetInput = InputWrapper(input)
 
+            let computed = BehaviorRelay<Int?>(value: nil)
+            self.outputComputed = computed
+
             let output = Output(subject: outputSubject,
                                 relay: outputRelay,
-                                _observable: relayForObservable.asObservable())
+                                _observable: relayForObservable.asObservable(),
+                                computed: .init(getter: { computed.value }))
             self.testTargetOutput = OutputWrapper(output)
         }
     }

@@ -160,6 +160,11 @@ public final class OutputWrapper<T: OutputType> {
 
         return _dependency[keyPath: keyPath]
     }
+
+    public subscript<E>(dynamicMember keyPath: KeyPath<T, Computed<E>>) -> E {
+
+        return _dependency[keyPath: keyPath].value
+    }
 }
 
 /// Makes possible to access Observable that contained by T even while hides actual properties (BehaviorRelay, BehaviorSubject and so on).
