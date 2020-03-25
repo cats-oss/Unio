@@ -22,24 +22,28 @@ public final class InputWrapper<T: InputType> {
     }
 
     /// Accepts `event` and emits it to subscribers via `Input`.
+    @available(swift, deprecated: 5.1, message: "Use `input.xxx(value)`")
     public func accept<U: PublishRelayType>(_ value: U.Element, for keyPath: KeyPath<T, U>) {
 
         self[dynamicMember: keyPath](value)
     }
 
     /// Send `event` to this observer via `Input`.
+    @available(swift, deprecated: 5.1, message: "Use `input.xxx`")
     public func accept<U: PublishRelayType>(for keyPath: KeyPath<T, U>) -> AnyObserver<U.Element> {
 
         return self[dynamicMember: keyPath]
     }
 
     /// Notify observer about sequence event via `Input`.
+    @available(swift, deprecated: 5.1, message: "Use `input.xxx.onEvent(event)`")
     public func onEvent<O: ObserverType>(_ event: Event<O.Element>, for keyPath: KeyPath<T, O>) {
 
         onEvent(for: keyPath).on(event)
     }
 
     /// Send `event` to this observer via `Input`.
+    @available(swift, deprecated: 5.1, message: "Use `input.xxx.onEvent(event)`")
     public func onEvent<O: ObserverType>(for keyPath: KeyPath<T, O>) -> AnyObserver<O.Element> {
 
         return self[dynamicMember: keyPath]
@@ -83,30 +87,35 @@ public final class OutputWrapper<T: OutputType> {
     }
 
     /// Makes possible to get Observable from `Output`.
+    @available(swift, deprecated: 5.1, message: "Use `output.xxx`")
     public func observable<O: ObservableConvertibleType>(for keyPath: KeyPath<T, O>) -> Observable<O.Element> {
 
         return self[dynamicMember: keyPath]
     }
 
     /// Makes possible to get value from Output when generic parameter is `BehaviorRelay`.
+    @available(swift, deprecated: 5.1, message: "Use `output.xxx.value`")
     public func value<U: ValueAccessibleObservable>(for keyPath: KeyPath<T, U>) -> U.Element {
 
         return self[dynamicMember: keyPath].value
     }
 
     /// Makes possible to get value from Output when generic parameter is `BehaviorSubject`.
+    @available(swift, deprecated: 5.1, message: "Use `output.xxx.value`")
     public func value<U: ThrowableValueAccessibleObservable>(for keyPath: KeyPath<T, U>) throws -> U.Element {
 
         return try self[dynamicMember: keyPath].throwableValue()
     }
 
     /// Makes possible to get `Property<U>` from Output when generic parameter is `BehaviorRelay`.
+    @available(swift, deprecated: 5.1, message: "Use `output.xxx`")
     public func property<U: ValueAccessibleObservable>(for keyPath: KeyPath<T, U>) -> Property<U.Element> {
 
         return self[dynamicMember: keyPath]
     }
 
     /// Makes possible to get `ThrowableProperty<U>` from Output when generic parameter is `BehaviorSubject`.
+    @available(swift, deprecated: 5.1, message: "Use `output.xxx`")
     public func property<U: ThrowableValueAccessibleObservable>(for keyPath: KeyPath<T, U>) -> ThrowableProperty<U.Element> {
 
         return self[dynamicMember: keyPath]
