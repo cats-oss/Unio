@@ -11,11 +11,13 @@ import Foundation
 /// Represents computed property
 public final class Computed<Element> {
 
+    @inlinable
     public var value: Element {
         return getter()
     }
 
-    private let getter: () -> Element
+    @usableFromInline
+    let getter: () -> Element
 
     public init(getter: @escaping () -> Element) {
         self.getter = getter
