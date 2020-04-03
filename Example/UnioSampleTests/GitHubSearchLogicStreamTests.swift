@@ -31,7 +31,7 @@ final class GitHubSearchLogicStreamTests: XCTestCase {
         let repositoriesStack = BehaviorRelay<[GitHub.Repository]>(value: [])
 
         let disposable = dependency.testTarget
-            .output.repositories
+            .output.observable(for: \.repositories)
             .bind(to: repositoriesStack)
 
         dependency.searchAPIStream.searchResponse.accept(response)
@@ -48,7 +48,7 @@ final class GitHubSearchLogicStreamTests: XCTestCase {
         let errorStack = BehaviorRelay<Error?>(value: nil)
 
         let disposable = dependency.testTarget
-            .output.error
+            .output.observable(for: \.error)
             .bind(to: errorStack)
 
         dependency.searchAPIStream.searchError.accept(expected)
@@ -72,7 +72,7 @@ final class GitHubSearchLogicStreamTests: XCTestCase {
             })
 
         (1...count).forEach {
-            dependency.testTarget.input.searchText("test-search-text\($0)")
+            dependency.testTarget.input.accept("test-search-text\($0)", for: \.searchText)
         }
 
         wait(for: [expect], timeout: 0.1)
@@ -93,7 +93,7 @@ final class GitHubSearchLogicStreamTests: XCTestCase {
             })
 
         (1...count).forEach {
-            dependency.testTarget.input.searchText("test-search-text\($0)")
+            dependency.testTarget.input.accept("test-search-text\($0)", for: \.searchText)
         }
 
         wait(for: [expect], timeout: 1)
