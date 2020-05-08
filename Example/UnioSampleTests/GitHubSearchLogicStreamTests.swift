@@ -21,7 +21,7 @@ final class GitHubSearchLogicStreamTests: XCTestCase {
         dependency = Dependency()
     }
 
-    func testOutput_recieving_repositories() {
+    func testOutput_receiving_repositories() {
         
         let expected = GitHub.Repository(name: "test-name",
                                          fullName: "test-full-name",
@@ -41,7 +41,7 @@ final class GitHubSearchLogicStreamTests: XCTestCase {
         disposable.dispose()
     }
 
-    func testOutput_recieving_error() {
+    func testOutput_receiving_error() {
 
         let expected = NSError(domain: "test-domain", code: 1234, userInfo: nil)
 
