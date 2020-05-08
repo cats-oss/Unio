@@ -140,6 +140,21 @@ let t: ThrowableProperty<Bool> = output.isEnabled
 try? t.throwableValue()
 ```
 
+If a property is defined as `Computed`, be able to access computed value.
+
+```swift
+struct Output: OutputType {
+    let isEnabled: Computed<Bool>
+}
+
+var _isEnabled = false
+let output = OutputWrapper(.init(isEnabled: Computed<Bool> { _isEnabled }))
+
+output.isEnabled // false
+_isEnabled = true
+output.isEnabled // true
+```
+
 ![](https://user-images.githubusercontent.com/2082134/64858314-f7dae380-d661-11e9-9a79-3ca5c53fd90a.png)
 
 ### State
@@ -158,7 +173,7 @@ The rule of Extra is having other dependencies of [UnioStream](#uniostream).
 
 ```swift
 struct Extra: ExtraType {
-    let apiStream: GitHubSearchAPIStream()
+    let apiStream: GitHubSearchAPIStream
 }
 ```
 
