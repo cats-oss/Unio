@@ -167,6 +167,53 @@ public final class OutputWrapper<T: OutputType> {
     }
 }
 
+extension OutputWrapper where T: HasState {
+
+    /// Makes possible to get Observable from `Output`.
+    ///
+    /// - note: KeyPath Dynamic Member Lookup is avairable greater than Swift5.1
+    public subscript<O: ObservableConvertibleType>(dynamicMember keyPath: KeyPath<T.State, O>) -> Observable<O.Element> {
+        return _dependency.state[keyPath: keyPath].asObservable()
+    }
+
+    /// Makes possible to get `Property<U>` from Output when generic parameter is `BehaviorRelay`.
+    ///
+    /// - note: KeyPath Dynamic Member Lookup is avairable greater than Swift5.1
+    public subscript<O: ValueAccessibleObservable>(dynamicMember keyPath: KeyPath<T.State, O>) -> Property<O.Element> {
+        let keyPath = (\T.state).appending(path: keyPath)
+        return Property(self, for: keyPath)
+    }
+
+    /// Makes possible to get `ThrowableProperty<U>` from Output when generic parameter is `BehaviorSubject`.
+    ///
+    /// - note: KeyPath Dynamic Member Lookup is avairable greater than Swift5.1
+    public subscript<O: ThrowableValueAccessibleObservable>(dynamicMember keyPath: KeyPath<T.State, O>) -> ThrowableProperty<O.Element> {
+        let keyPath = (\T.state).appending(path: keyPath)
+        return ThrowableProperty(self, for: keyPath)
+    }
+
+    /// Makes possible to get `Property<U>` from Output.
+    ///
+    /// - note: KeyPath Dynamic Member Lookup is avairable greater than Swift5.1
+    public subscript<E>(dynamicMember keyPath: KeyPath<T.State, Property<E>>) -> Property<E> {
+
+        return _dependency.state[keyPath: keyPath]
+    }
+
+    /// Makes possible to get `ThrowableProperty<U>` from Output.
+    ///
+    /// - note: KeyPath Dynamic Member Lookup is avairable greater than Swift5.1
+    public subscript<E>(dynamicMember keyPath: KeyPath<T.State, ThrowableProperty<E>>) -> ThrowableProperty<E> {
+
+        return _dependency.state[keyPath: keyPath]
+    }
+
+    public subscript<E>(dynamicMember keyPath: KeyPath<T.State, Computed<E>>) -> E {
+
+        return _dependency.state[keyPath: keyPath].value
+    }
+}
+
 /// Makes possible to access Observable that contained by T even while hides actual properties (BehaviorRelay, BehaviorSubject and so on).
 @dynamicMemberLookup
 public final class ObservableWrapper<T> {

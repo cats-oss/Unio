@@ -13,3 +13,8 @@ public protocol StateType {}
 public struct NoState: StateType {
     public init() {}
 }
+
+public protocol HasState {
+    associatedtype State: StateType
+    var state: State { get }
+}

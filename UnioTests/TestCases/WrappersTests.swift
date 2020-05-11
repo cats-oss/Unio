@@ -209,6 +209,41 @@ final class WrappersTests: XCTestCase {
         XCTAssertEqual(testTarget[dynamicMember: \.computed], expected)
         #endif
     }
+
+    func testOutput_HasState() throws {
+        struct State: StateType {
+            let isEnabled = BehaviorRelay<Bool>(value: false)
+            let isHidden = BehaviorSubject<Bool>(value: true)
+            let show = PublishRelay<Void>()
+            let hide = PublishSubject<Void>()
+        }
+
+        struct Output: OutputType, HasState {
+            let state: State
+        }
+
+        let state = State()
+        let output = OutputWrapper(Output(state: state))
+
+        XCTAssertEqual(output.isEnabled.value, false)
+        XCTAssertEqual(try output.isHidden.throwableValue(), true)
+
+        do {
+            let show = BehaviorRelay<Void?>(value: nil)
+            let disposable = output.show.bind(to: show)
+            defer { disposable.dispose() }
+            state.show.accept(())
+            XCTAssertNotNil(show.value)
+        }
+
+        do {
+            let hide = BehaviorRelay<Void?>(value: nil)
+            let disposable = output.hide.bind(to: hide)
+            defer { disposable.dispose() }
+            state.hide.onNext(())
+            XCTAssertNotNil(hide.value)
+        }
+    }
 }
 
 extension WrappersTests {
