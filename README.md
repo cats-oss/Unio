@@ -379,7 +379,7 @@ Simply add the following line to your `Package.swift`:
 - tvOS 10.0 or greater
 - watchOS 3.0 or greater
 - macOS 10.10 or greater
-- [RxSwift](https://github.com/ReactiveX/RxSwift) 5.0 or greater
+- [RxSwift](https://github.com/ReactiveX/RxSwift) 6.0 or greater
 
 ## License
 
