@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   s.watchos.deployment_target = '3.0'
   s.source       = { :git => "https://github.com/cats-oss/Unio.git", :tag => "#{s.version}" }
   s.source_files = "Unio/**/*.{swift}"
-  s.dependency 'RxSwift', '~> 5.0'
-  s.dependency 'RxRelay', '~> 5.0'
+  s.dependency 'RxSwift', '~> 6.0'
+  s.dependency 'RxRelay', '~> 6.0'
   s.swift_version = '5.0'
 end
