@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,9 +11,9 @@
 		9D2E26CE2240D8EA00C9EDF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D2E26CD2240D8EA00C9EDF7 /* Assets.xcassets */; };
 		9D2E26D12240D8EA00C9EDF7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D2E26CF2240D8EA00C9EDF7 /* LaunchScreen.storyboard */; };
 		9D2E26EE2240D96000C9EDF7 /* Unio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2E26ED2240D96000C9EDF7 /* Unio.framework */; };
-		9D2E26F12240D98300C9EDF7 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2E26EF2240D98300C9EDF7 /* RxSwift.framework */; };
-		9D9EEC0F22816B1700DF5D97 /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D9EEC0E22816B1700DF5D97 /* RxRelay.framework */; };
-		9D9EEC1022816B8700DF5D97 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2E26F02240D98300C9EDF7 /* RxCocoa.framework */; };
+		C51136B027B38B8800E8F26C /* RxCocoa.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C51136AF27B38B8800E8F26C /* RxCocoa.xcframework */; };
+		C51136B427B38CDC00E8F26C /* RxRelay.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C51136AC27B38B7400E8F26C /* RxRelay.xcframework */; };
+		C51136B627B38CE500E8F26C /* RxSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C51136A527B38B1100E8F26C /* RxSwift.xcframework */; };
 		EDE43F2D22428D1000B157F9 /* GitHubSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE43F2B22428D1000B157F9 /* GitHubSearchViewController.swift */; };
 		EDE43F2E22428D1000B157F9 /* GitHubSearchViewStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE43F2C22428D1000B157F9 /* GitHubSearchViewStream.swift */; };
 		EDE43F3022428EE100B157F9 /* GitHubSearchLogicStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE43F2F22428EE100B157F9 /* GitHubSearchLogicStream.swift */; };
@@ -45,6 +45,9 @@
 		9D2E26EF2240D98300C9EDF7 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = ../Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		9D2E26F02240D98300C9EDF7 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = ../Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		9D9EEC0E22816B1700DF5D97 /* RxRelay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRelay.framework; path = ../Carthage/Build/iOS/RxRelay.framework; sourceTree = "<group>"; };
+		C51136A527B38B1100E8F26C /* RxSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxSwift.xcframework; path = ../Carthage/Build/RxSwift.xcframework; sourceTree = "<group>"; };
+		C51136AC27B38B7400E8F26C /* RxRelay.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxRelay.xcframework; path = ../Carthage/Build/RxRelay.xcframework; sourceTree = "<group>"; };
+		C51136AF27B38B8800E8F26C /* RxCocoa.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxCocoa.xcframework; path = ../Carthage/Build/RxCocoa.xcframework; sourceTree = "<group>"; };
 		EDE43F2B22428D1000B157F9 /* GitHubSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSearchViewController.swift; sourceTree = "<group>"; };
 		EDE43F2C22428D1000B157F9 /* GitHubSearchViewStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSearchViewStream.swift; sourceTree = "<group>"; };
 		EDE43F2F22428EE100B157F9 /* GitHubSearchLogicStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSearchLogicStream.swift; sourceTree = "<group>"; };
@@ -59,9 +62,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D9EEC1022816B8700DF5D97 /* RxCocoa.framework in Frameworks */,
-				9D9EEC0F22816B1700DF5D97 /* RxRelay.framework in Frameworks */,
-				9D2E26F12240D98300C9EDF7 /* RxSwift.framework in Frameworks */,
+				C51136B027B38B8800E8F26C /* RxCocoa.xcframework in Frameworks */,
+				C51136B627B38CE500E8F26C /* RxSwift.xcframework in Frameworks */,
+				C51136B427B38CDC00E8F26C /* RxRelay.xcframework in Frameworks */,
 				9D2E26EE2240D96000C9EDF7 /* Unio.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -124,6 +127,9 @@
 		9D2E26EC2240D96000C9EDF7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C51136AF27B38B8800E8F26C /* RxCocoa.xcframework */,
+				C51136AC27B38B7400E8F26C /* RxRelay.xcframework */,
+				C51136A527B38B1100E8F26C /* RxSwift.xcframework */,
 				9D9EEC0E22816B1700DF5D97 /* RxRelay.framework */,
 				9D2E26F02240D98300C9EDF7 /* RxCocoa.framework */,
 				9D2E26EF2240D98300C9EDF7 /* RxSwift.framework */,
@@ -142,7 +148,6 @@
 				9D2E26BF2240D8E800C9EDF7 /* Sources */,
 				9D2E26C02240D8E800C9EDF7 /* Frameworks */,
 				9D2E26C12240D8E800C9EDF7 /* Resources */,
-				9D2E26F32240D99400C9EDF7 /* carthage copy-frameworks */,
 			);
 			buildRules = (
 			);
@@ -229,30 +234,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		9D2E26F32240D99400C9EDF7 /* carthage copy-frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/../Carthage/Build/iOS/RxCocoa.framework",
-				"$(SRCROOT)/../Carthage/Build/iOS/RxSwift.framework",
-				"$(SRCROOT)/../Carthage/Build/iOS/RxRelay.framework",
-			);
-			name = "carthage copy-frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9D2E26BF2240D8E800C9EDF7 /* Sources */ = {

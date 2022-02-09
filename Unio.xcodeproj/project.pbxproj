@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,22 +19,22 @@
 		9D2E26A42240D1CA00C9EDF7 /* UnioStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E269A2240D1CA00C9EDF7 /* UnioStream.swift */; };
 		9D2E26A52240D1CA00C9EDF7 /* OutputType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E269B2240D1CA00C9EDF7 /* OutputType.swift */; };
 		9D2E26A62240D1CA00C9EDF7 /* Dependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E269C2240D1CA00C9EDF7 /* Dependency.swift */; };
-		9D2E26AA2240D1F200C9EDF7 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2E26A82240D1F200C9EDF7 /* RxSwift.framework */; };
-		9D9EEC0B228168F800DF5D97 /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D9EEC0A228168F800DF5D97 /* RxRelay.framework */; };
-		9D9EEC0C2281699000DF5D97 /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D9EEC0A228168F800DF5D97 /* RxRelay.framework */; };
-		9D9EEC0D2281699800DF5D97 /* RxRelay.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D9EEC0A228168F800DF5D97 /* RxRelay.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9DA555CB2241DE8400EC8CC3 /* BehaviorSubjectType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA555CA2241DE8400EC8CC3 /* BehaviorSubjectType.swift */; };
 		9DA555D32241FC0400EC8CC3 /* AcceptableRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA555D22241FC0400EC8CC3 /* AcceptableRelay.swift */; };
 		9DA555D52241FC6600EC8CC3 /* ValueAccessible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA555D42241FC6600EC8CC3 /* ValueAccessible.swift */; };
 		9DF9334B23FD1091003C564C /* Computed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF9334A23FD1091003C564C /* Computed.swift */; };
+		C511369E27B3898700E8F26C /* RxRelay.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C511369827B388B900E8F26C /* RxRelay.xcframework */; };
+		C51136A127B3898900E8F26C /* RxSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C511369927B388B900E8F26C /* RxSwift.xcframework */; };
+		C51136A327B38A0200E8F26C /* RxRelay.xcframework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = C511369827B388B900E8F26C /* RxRelay.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C51136A427B38A0200E8F26C /* RxSwift.xcframework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = C511369927B388B900E8F26C /* RxSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C51136B827B38D2700E8F26C /* RxRelay.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C511369827B388B900E8F26C /* RxRelay.xcframework */; };
+		C51136B927B38D2B00E8F26C /* RxSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C511369927B388B900E8F26C /* RxSwift.xcframework */; };
 		E9A6617E23839933007D4AEC /* AnyUnioStreamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A6617D23839933007D4AEC /* AnyUnioStreamTests.swift */; };
 		E9A6618223839952007D4AEC /* AnyUnioStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A6618123839952007D4AEC /* AnyUnioStream.swift */; };
 		ED4D482A23DC1B01004868D9 /* AnyLogicBasedStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4D482923DC1B01004868D9 /* AnyLogicBasedStream.swift */; };
 		ED4D482C23DC2BC2004868D9 /* SR12081Check.Streams.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4D482B23DC2BC2004868D9 /* SR12081Check.Streams.swift */; };
 		ED6897C122B184EE00B04DA0 /* PrimitiveProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6897C022B184EE00B04DA0 /* PrimitiveProperty.swift */; };
 		ED74A63D2243C2EE00D4E99C /* PrimitivePropertyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74A63C2243C2EE00D4E99C /* PrimitivePropertyTests.swift */; };
-		ED74A6402243C3DB00D4E99C /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2E26A82240D1F200C9EDF7 /* RxSwift.framework */; };
-		ED74A6432243C43400D4E99C /* RxSwift.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2E26A82240D1F200C9EDF7 /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ED74A7382243D99D00D4E99C /* WrappersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74A7372243D99D00D4E99C /* WrappersTests.swift */; };
 		ED74A73A2243E0CC00D4E99C /* DependencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74A7392243E0CC00D4E99C /* DependencyTests.swift */; };
 		ED74A73C2243E43D00D4E99C /* UnioStreamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74A73B2243E43D00D4E99C /* UnioStreamTests.swift */; };
@@ -58,8 +58,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9D9EEC0D2281699800DF5D97 /* RxRelay.framework in Copy Frameworks */,
-				ED74A6432243C43400D4E99C /* RxSwift.framework in Copy Frameworks */,
+				C51136A327B38A0200E8F26C /* RxRelay.xcframework in Copy Frameworks */,
+				C51136A427B38A0200E8F26C /* RxSwift.xcframework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -82,14 +82,14 @@
 		9D2E269A2240D1CA00C9EDF7 /* UnioStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnioStream.swift; sourceTree = "<group>"; };
 		9D2E269B2240D1CA00C9EDF7 /* OutputType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputType.swift; sourceTree = "<group>"; };
 		9D2E269C2240D1CA00C9EDF7 /* Dependency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dependency.swift; sourceTree = "<group>"; };
-		9D2E26A82240D1F200C9EDF7 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		9D62B5452362DE7C008F8793 /* Base.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
-		9D9EEC0A228168F800DF5D97 /* RxRelay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRelay.framework; path = Carthage/Build/iOS/RxRelay.framework; sourceTree = "<group>"; };
 		9DA555CA2241DE8400EC8CC3 /* BehaviorSubjectType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BehaviorSubjectType.swift; sourceTree = "<group>"; };
 		9DA555D22241FC0400EC8CC3 /* AcceptableRelay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptableRelay.swift; sourceTree = "<group>"; };
 		9DA555D42241FC6600EC8CC3 /* ValueAccessible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueAccessible.swift; sourceTree = "<group>"; };
 		9DA5623F2362DB760048F2B9 /* Unio.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Unio.xcconfig; sourceTree = "<group>"; };
 		9DF9334A23FD1091003C564C /* Computed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Computed.swift; sourceTree = "<group>"; };
+		C511369827B388B900E8F26C /* RxRelay.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxRelay.xcframework; path = Carthage/Build/RxRelay.xcframework; sourceTree = "<group>"; };
+		C511369927B388B900E8F26C /* RxSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxSwift.xcframework; path = Carthage/Build/RxSwift.xcframework; sourceTree = "<group>"; };
 		E9A6617D23839933007D4AEC /* AnyUnioStreamTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyUnioStreamTests.swift; sourceTree = "<group>"; };
 		E9A6618123839952007D4AEC /* AnyUnioStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyUnioStream.swift; sourceTree = "<group>"; };
 		ED4D482923DC1B01004868D9 /* AnyLogicBasedStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyLogicBasedStream.swift; sourceTree = "<group>"; };
@@ -107,8 +107,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D9EEC0B228168F800DF5D97 /* RxRelay.framework in Frameworks */,
-				9D2E26AA2240D1F200C9EDF7 /* RxSwift.framework in Frameworks */,
+				C511369E27B3898700E8F26C /* RxRelay.xcframework in Frameworks */,
+				C51136A127B3898900E8F26C /* RxSwift.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,8 +116,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D9EEC0C2281699000DF5D97 /* RxRelay.framework in Frameworks */,
-				ED74A6402243C3DB00D4E99C /* RxSwift.framework in Frameworks */,
+				C51136B927B38D2B00E8F26C /* RxSwift.xcframework in Frameworks */,
+				C51136B827B38D2700E8F26C /* RxRelay.xcframework in Frameworks */,
 				9D2E26832240D18500C9EDF7 /* Unio.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -180,8 +180,8 @@
 		9D2E26A72240D1F200C9EDF7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9D9EEC0A228168F800DF5D97 /* RxRelay.framework */,
-				9D2E26A82240D1F200C9EDF7 /* RxSwift.framework */,
+				C511369827B388B900E8F26C /* RxRelay.xcframework */,
+				C511369927B388B900E8F26C /* RxSwift.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
