@@ -42,9 +42,6 @@
 		9D2E26D72240D8EA00C9EDF7 /* UnioSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnioSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D2E26DD2240D8EA00C9EDF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D2E26ED2240D96000C9EDF7 /* Unio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Unio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D2E26EF2240D98300C9EDF7 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = ../Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
-		9D2E26F02240D98300C9EDF7 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = ../Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
-		9D9EEC0E22816B1700DF5D97 /* RxRelay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRelay.framework; path = ../Carthage/Build/iOS/RxRelay.framework; sourceTree = "<group>"; };
 		C51136A527B38B1100E8F26C /* RxSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxSwift.xcframework; path = ../Carthage/Build/RxSwift.xcframework; sourceTree = "<group>"; };
 		C51136AC27B38B7400E8F26C /* RxRelay.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxRelay.xcframework; path = ../Carthage/Build/RxRelay.xcframework; sourceTree = "<group>"; };
 		C51136AF27B38B8800E8F26C /* RxCocoa.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxCocoa.xcframework; path = ../Carthage/Build/RxCocoa.xcframework; sourceTree = "<group>"; };
@@ -130,9 +127,6 @@
 				C51136AF27B38B8800E8F26C /* RxCocoa.xcframework */,
 				C51136AC27B38B7400E8F26C /* RxRelay.xcframework */,
 				C51136A527B38B1100E8F26C /* RxSwift.xcframework */,
-				9D9EEC0E22816B1700DF5D97 /* RxRelay.framework */,
-				9D2E26F02240D98300C9EDF7 /* RxCocoa.framework */,
-				9D2E26EF2240D98300C9EDF7 /* RxSwift.framework */,
 				9D2E26ED2240D96000C9EDF7 /* Unio.framework */,
 			);
 			name = Frameworks;
